@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فيه استثمارك – حاسبة جدوى أكياس بلاستيك</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Tahoma, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .card { max-width: 680px; width: 100%; background: #fff; border-radius: 16px; box-shadow: 0 12px 30px rgba(0,0,0,0.1); padding: 25px; }
+        h1 { text-align: center; color: #1e3c72; margin-bottom: 5px; }
+        .sub { text-align: center; color: #555; margin-bottom: 20px; font-size: 14px; }
+        .section { background: #f7f9fc; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .row { display: flex; gap: 12px; flex-wrap: wrap; }
+        .field { flex: 1 1 45%; min-width: 180px; margin-bottom: 10px; }
+        label { font-weight: bold; display: block; margin-bottom: 4px; color: #0b3d91; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; background: #fff; }
+        button { background: #0b3d91; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .btn-outline { background: white; color: #0b3d91; border: 2px solid #0b3d91; }
+        .result-box { background: #eef2f9; padding: 15px; border-radius: 10px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; }
+        .result-item { text-align: center; flex: 1; min-width: 100px; }
+        .result-item span { display: block; font-size: 12px; color: #555; }
+        .result-item strong { font-size: 20px; color: #0b3d91; }
+        .negative { color: #b32d2d !important; }
+        .hidden { display: none; }
+        .vip-badge { background: gold; color: #000; padding: 2px 8px; border-radius: 12px; font-weight: bold; font-size: 12px; }
+        .lock-msg { background: #fff3cd; border: 1px solid #ffc107; padding: 12px; border-radius: 8px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>📊 فيه استثمارك</h1>
+    <div class="sub">حاسبة جدوى مشروع أكياس بلاستيك – نصف خط إنتاج منزلي</div>
+
+    <!-- قسم الترخيص -->
+    <div id="licenseSection" class="section">
+        <h3>🔑 تنشيط الترخيص</h3>
+        <p><button id="genFingerprintBtn">توليد بصمة جهازي</button></p>
+        <p id="fingerprintDisplay" style="word-break:break-all;"></p>
+        <div class="row">
+            <div class="field"><label>رقم الهاتف (بدون +)</label><input type="text" id="phoneInput" placeholder="249XXXXXXXXX"></div>
+            <div class="field"><label>كود التفعيل</label><input type="text" id="activationCodeInput" placeholder="XXXX-XXXX"></div>
+        </div>
+        <button id="activateBtn">تفعيل VIP</button> <button id="deactivateBtn" class="btn-outline hidden">إلغاء التفعيل</button>
+        <div id="licenseMsg" class="lock-msg">الوضع المجاني نشط. VIP يفتح كل الخيارات.</div>
+    </div>
+
+    <!-- الحقول الأساسية -->
+    <div class="section">
+        <h3>⚙️ إعدادات الإنتاج</h3>
+        <div class="row">
+            <div class="field"><label>نوع الخام</label><select id="matType"><option value="pure">بيور</option></select></div>
+            <div class="field"><label>سعر الخام (ج.س/كغم)</label><input type="number" id="rawPrice" value="11000" disabled></div>
+        </div>
+        <div class="row">
+            <div class="field"><label>وزن الجوال (كغم)</label><input type="number" id="bagWeight" value="4.1" disabled></div>
+            <div class="field"><label>سعر البيع (ج.س)</label><input type="number" id="salePrice" value="52000" disabled></div>
+        </div>
+        <div class="row">
+            <div class="field"><label>طريقة البيع</label><select id="saleMethod" disabled><option value="bag">جوالات</option></select></div>
+            <div class="field"><label>نسبة الهالك %</label><input type="number" id="waste" value="5" disabled></div>
+        </div>
+    </div>
+
+    <!-- ميزات VIP -->
+    <div id="vipFeatures" class="hidden">
+        <div class="section">
+            <h3><span class="vip-badge">VIP</span> إعدادات متقدمة</h3>
+            <div class="row">
+                <div class="field"><label>أجرة العامل/يوم</label><input type="number" id="labor" value="15000"></div>
+                <div class="field"><label>كهرباء/يوم</label><input type="number" id="electricity" value="5000"></div>
+                <div class="field"><label>تعبئة الجوال</label><input type="number" id="packCost" value="500"></div>
+                <div class="field"><label>مصاريف أخرى/يوم</label><input type="number" id="other" value="10000"></div>
+                <div class="field"><label>إيجار شهري</label><input type="number" id="rent" value="0"></div>
+                <div class="field"><label>أيام العمل</label><input type="number" id="workDays" value="26"></div>
+            </div>
+        </div>
+        <div class="section">
+            <h3>🧠 توصية الخبير</h3>
+            <select id="expertTip" onchange="applyTip()">
+                <option value="">-- اختر وصفة --</option>
+                <option value="mix_bag">أعلى ربح: مخلوط + جوال 4.1 كغ بـ 49,000</option>
+                <option value="pure_bag">أمان: بيور + جوال 4.1 كغ بـ 52,000</option>
+                <option value="mix_kg">مخلوط كيلو: بيع الكيلو بـ 12,500</option>
+            </select>
+        </div>
+        <div class="section">
+            <h3>♻️ عائد السكراب (الهالك)</h3>
+            <div class="row">
+                <div class="field"><label>سعر كيلو السكراب</label><input type="number" id="scrapPrice" value="2000"></div>
+            </div>
+            <p>العائد اليومي المتوقع: <strong id="scrapValue">0 ج.س</strong></p>
+        </div>
+        <div class="section">
+            <h3>📊 مقارنة بين نوعي الخام</h3>
+            <p>الربح الشهري (بيور): <strong id="pureComp">-</strong> | (مخلوط): <strong id="mixedComp">-</strong></p>
+        </div>
+    </div>
+
+    <!-- النتائج -->
+    <div class="result-box">
+        <div class="result-item"><span>صافي اليوم</span><strong id="dailyNet">0</strong></div>
+        <div class="result-item"><span>صافي الشهر</span><strong id="monthlyNet">0</strong></div>
+        <div class="result-item"><span>الإيراد اليومي</span><strong id="dailyRev">0</strong></div>
+        <div class="result-item"><span>هامش الربح</span><strong id="margin">0%</strong></div>
+    </div>
+</div>
+
+<script>
+    // ====== كود مشوش للحماية ======
+    const _0x4f2a = ['_gS','VIP2025','249|FINGERPRINT','match','simpleHash','btoa','substring','getItem','setItem','removeItem'];
+    const _gS = () => '@SDN-BAG-2025-EXPERT-KEY';
+
+    // بصمة الجهاز
+    function getFingerprint() {
+        return btoa(navigator.hardwareConcurrency + '|' + screen.width + '|' + navigator.language + '|' + new Date().getTimezoneOffset());
+    }
+
+    // دالة هاش بسيطة
+    function simpleHash(s) {
+        let h = 0;
+        for (let i = 0; i < s.length; i++) { h = ((h << 5) - h) + s.charCodeAt(i); h |= 0; }
+        return Math.abs(h).toString(16).padStart(8, '0');
+    }
+
+    // ====== المتغيرات العامة ======
+    let isVip = false;
+    const DOM = {
+        genFingerprintBtn: document.getElementById('genFingerprintBtn'),
+        fingerprintDisplay: document.getElementById('fingerprintDisplay'),
+        phoneInput: document.getElementById('phoneInput'),
+        activationCodeInput: document.getElementById('activationCodeInput'),
+        activateBtn: document.getElementById('activateBtn'),
+        deactivateBtn: document.getElementById('deactivateBtn'),
+        licenseMsg: document.getElementById('licenseMsg'),
+        matType: document.getElementById('matType'),
+        rawPrice: document.getElementById('rawPrice'),
+        bagWeight: document.getElementById('bagWeight'),
+        salePrice: document.getElementById('salePrice'),
+        saleMethod: document.getElementById('saleMethod'),
+        waste: document.getElementById('waste'),
+        vipFeatures: document.getElementById('vipFeatures'),
+        expertTip: document.getElementById('expertTip'),
+        scrapPrice: document.getElementById('scrapPrice'),
+        scrapValue: document.getElementById('scrapValue'),
+        pureComp: document.getElementById('pureComp'),
+        mixedComp: document.getElementById('mixedComp'),
+        dailyNet: document.getElementById('dailyNet'),
+        monthlyNet: document.getElementById('monthlyNet'),
+        dailyRev: document.getElementById('dailyRev'),
+        margin: document.getElementById('margin'),
+        labor: document.getElementById('labor'),
+        electricity: document.getElementById('electricity'),
+        packCost: document.getElementById('packCost'),
+        other: document.getElementById('other'),
+        rent: document.getElementById('rent'),
+        workDays: document.getElementById('workDays')
+    };
+
+    // ====== وظائف الترخيص ======
+    function checkStoredLicense() {
+        const stored = localStorage.getItem('fe_license');
+        if (stored) {
+            const { phone, code, fp } = JSON.parse(stored);
+            const currentFp = getFingerprint();
+            const expectedCode = generateCode(phone, currentFp, _gS());
+            if (code === expectedCode && fp === currentFp) {
+                enableVip();
+            } else {
+                localStorage.removeItem('fe_license');
+            }
+        }
+    }
+
+    function generateCode(phone, fp, secret) {
+        const input = phone + '|' + fp + secret;
+        const hash = simpleHash(input);
+        return btoa(hash).substring(0, 8);
+    }
+
+    function enableVip() {
+        isVip = true;
+        DOM.vipFeatures.classList.remove('hidden');
+        DOM.deactivateBtn.classList.remove('hidden');
+        DOM.licenseMsg.innerHTML = '<span class="vip-badge">VIP نشط</span> جميع الميزات مفتوحة.';
+        // فتح الحقول
+        DOM.rawPrice.disabled = false;
+        DOM.bagWeight.disabled = false;
+        DOM.salePrice.disabled = false;
+        DOM.saleMethod.disabled = false;
+        DOM.waste.disabled = false;
+        DOM.matType.innerHTML = '<option value="pure">بيور</option><option value="mixed">مخلوط</option>';
+        DOM.matType.addEventListener('change', handleMatChange);
+        DOM.saleMethod.addEventListener('change', () => {
+            DOM.salePrice.value = (DOM.saleMethod.value === 'kg') ? 12500 : 52000;
+            calculate();
+        });
+        // ربط الحقول المتقدمة
+        [DOM.labor, DOM.electricity, DOM.packCost, DOM.other, DOM.rent, DOM.workDays, DOM.scrapPrice].forEach(el => el.addEventListener('input', calculate));
+        calculate();
+    }
+
+    function handleMatChange() {
+        if (!isVip) return;
+        DOM.rawPrice.value = (DOM.matType.value === 'pure') ? 11000 : 7000;
+        calculate();
+    }
+
+    // ====== الحسابات ======
+    function calculate() {
+        const cap = 100; // قدرة ثابتة
+        const raw = parseFloat(DOM.rawPrice.value) || 0;
+        const bw = parseFloat(DOM.bagWeight.value) || 4.1;
+        const price = parseFloat(DOM.salePrice.value) || 0;
+        const w = parseFloat(DOM.waste.value) / 100 || 0;
+        const netKg = cap * (1 - w);
+        const bagCount = Math.floor(netKg / bw);
+        let revenue = 0;
+        if (!isVip || DOM.saleMethod.value === 'bag') {
+            revenue = bagCount * price;
+        } else {
+            revenue = netKg * price;
+        }
+
+        let dailyCost = cap * raw;
+        if (isVip) {
+            const labor = parseFloat(DOM.labor.value) || 0;
+            const elec = parseFloat(DOM.electricity.value) || 0;
+            const pack = (DOM.saleMethod.value === 'bag') ? bagCount * parseFloat(DOM.packCost.value) : 0;
+            const other = parseFloat(DOM.other.value) || 0;
+            const rentDaily = (parseFloat(DOM.rent.value) || 0) / (parseInt(DOM.workDays.value) || 26);
+            dailyCost += labor + elec + pack + other + rentDaily;
+        } else {
+            dailyCost += 15000 + 5000 + (bagCount * 500) + 10000; // افتراضي
+        }
+
+        const dailyProfit = revenue - dailyCost;
+        const days = isVip ? (parseInt(DOM.workDays.value) || 26) : 26;
+        const monthlyProfit = dailyProfit * days;
+
+        DOM.dailyNet.textContent = dailyProfit.toLocaleString('ar-EG') + ' ج.س';
+        DOM.monthlyNet.textContent = monthlyProfit.toLocaleString('ar-EG') + ' ج.س';
+        DOM.dailyRev.textContent = revenue.toLocaleString('ar-EG') + ' ج.س';
+        DOM.margin.textContent = (revenue > 0 ? (dailyProfit / revenue * 100) : 0).toFixed(1) + '%';
+        DOM.dailyNet.classList.toggle('negative', dailyProfit < 0);
+        DOM.monthlyNet.classList.toggle('negative', monthlyProfit < 0);
+
+        // VIP only
+        if (isVip) {
+            // سكراب
+            const scrapDaily = (cap * w) * parseFloat(DOM.scrapPrice.value || 0);
+            DOM.scrapValue.textContent = scrapDaily.toLocaleString('ar-EG') + ' ج.س';
+            // مقارنة
+            const calcMonthly = (r) => {
+                let rev = (DOM.saleMethod.value === 'bag') ? bagCount * price : netKg * price;
+                let c = cap * r + (parseFloat(DOM.labor.value)||0) + (parseFloat(DOM.electricity.value)||0) + ((DOM.saleMethod.value==='bag')?bagCount*parseFloat(DOM.packCost.value):0) + (parseFloat(DOM.other.value)||0) + ((parseFloat(DOM.rent.value)||0)/days);
+                return (rev - c) * days;
+            };
+            DOM.pureComp.textContent = calcMonthly(11000).toLocaleString('ar-EG') + ' ج.س';
+            DOM.mixedComp.textContent = calcMonthly(7000).toLocaleString('ar-EG') + ' ج.س';
+        }
+    }
+
+    function applyTip() {
+        if (!isVip) return;
+        const tip = DOM.expertTip.value;
+        if (tip === 'mix_bag') { DOM.matType.value='mixed'; DOM.rawPrice.value=7000; DOM.bagWeight.value=4.1; DOM.salePrice.value=49000; DOM.saleMethod.value='bag'; }
+        else if (tip === 'pure_bag') { DOM.matType.value='pure'; DOM.rawPrice.value=11000; DOM.bagWeight.value=4.1; DOM.salePrice.value=52000; DOM.saleMethod.value='bag'; }
+        else if (tip === 'mix_kg') { DOM.matType.value='mixed'; DOM.rawPrice.value=7000; DOM.saleMethod.value='kg'; DOM.salePrice.value=12500; }
+        calculate();
+    }
+
+    // ====== ربط الأحداث ======
+    DOM.genFingerprintBtn.addEventListener('click', () => {
+        DOM.fingerprintDisplay.textContent = 'البصمة: ' + getFingerprint();
+    });
+
+    DOM.activateBtn.addEventListener('click', () => {
+        const phone = DOM.phoneInput.value.trim();
+        const code = DOM.activationCodeInput.value.trim();
+        if (!phone || !code) { alert('أدخل رقم الهاتف والكود'); return; }
+        const fp = getFingerprint();
+        const expected = generateCode(phone, fp, _gS());
+        if (code === expected || code === 'VIP2025') { // كود تجريبي
+            localStorage.setItem('fe_license', JSON.stringify({ phone, code, fp }));
+            enableVip();
+        } else {
+            alert('كود تفعيل غير صحيح أو لا يتطابق مع الجهاز. تأكد من البصمة ورقم الهاتف.');
+        }
+    });
+
+    DOM.deactivateBtn.addEventListener('click', () => {
+        localStorage.removeItem('fe_license');
+        location.reload();
+    });
+
+    // تشغيل أولي
+    function init() {
+        checkStoredLicense();
+        calculate();
+        // تحديث أولي للمجاني
+        DOM.rawPrice.addEventListener('input', calculate);
+        DOM.bagWeight.addEventListener('input', calculate);
+        DOM.salePrice.addEventListener('input', calculate);
+        DOM.waste.addEventListener('input', calculate);
+        DOM.saleMethod.addEventListener('change', calculate);
+    }
+    init();
+</script>
+</body>
+</html>
