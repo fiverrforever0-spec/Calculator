@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إستثمارك | ضاعف ربحك - مشروع أكياس البلاستيك</title>
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --accent-color: #f39c12;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --bg-light: #f4f7f6;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --success-green: #27ae60;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header & Branding --- */
+        header {
+            padding: 20px 0;
+            text-align: center;
+        }
+        .brand-name {
+            font-weight: 800;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-light);
+            padding: 80px 40px;
+            border-radius: 30px;
+            text-align: center;
+            margin: 20px 0 50px 0;
+            box-shadow: 0 20px 40px rgba(30, 60, 114, 0.3);
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .btn-main {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(243, 156, 18, 0.4);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(243, 156, 18, 0.5);
+            background-color: #e67e22;
+        }
+
+        /* --- About Section --- */
+        .section-about {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            border-right: 8px solid var(--accent-color);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* --- Stats Grid --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover { transform: translateY(-5px); }
+
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .stat-value.highlight { color: var(--accent-color); }
+
+        /* --- VIP Table --- */
+        .section-white {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            min-width: 500px;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+        }
+
+        td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .check { color: var(--success-green); font-weight: bold; }
+        .cross { color: #e74c3c; }
+
+        /* --- VIP Box --- */
+        .vip-banner {
+            background: #fff9e6;
+            border: 2px dashed var(--accent-color);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .vip-tag {
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* --- Contact --- */
+        .contact-section {
+            background: var(--primary-color);
+            color: white;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .btn-contact {
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 10px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .whatsapp { background-color: #25d366; color: white; }
+        .telegram { background-color: #0088cc; color: white; }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding: 50px 20px; }
+            .section-about, .section-white { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="brand-name">إستثمارك للحلول الاستثمارية الذكية</div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>ضاعف أرباحك</h1>
+        <p>الأداة الرقمية الأولى في السودان لحساب جدوى مشروع أكياس البلاستيك بدقة متناهية. لا مكان للتخمين في عالم الاستثمار.</p>
+        <a href="https://fiverrforever0-spec.github.io/Calculator/bagcalc.html" class="btn-main" target="_blank">🚀 ابدأ تشغيل الحاسبة الآن</a>
+    </div>
+
+    <!-- About Section (Rephrased) -->
+    <div class="section-about">
+        <h2 class="section-title">💡 عن "إستثمارك"</h2>
+        <div class="about-text">
+            تأسست <strong>"إستثمارك"</strong> نتاج خبرة ميدانية عريقة تمتد لأكثر من 5 سنوات في قطاع الصناعات والمشاريع الصغيرة في السودان. 
+            خلال هذه المسيرة، كرسنا جهودنا لتطوير منظومة إدارية وتقنية متكاملة تضمن نجاح مشاريع إنتاج أكياس البلاستيك المنزلية (نصف خط الإنتاج)، 
+            ورفع كفاءتها الربحية إلى أقصى حد لضمان استدامة المشروع وحمايته من التعثر.
+            <br><br>
+            ومن قلب هذه التجارب الطويلة والمكثفة، ولدت أداة <strong>"ضاعف أرباحك"</strong>؛ الحل الذكي الذي يضع بين يدي صغار المستثمرين – حتى المبتدئين منهم – 
+            خارطة طريق دقيقة لإدارة وتشغيل مشروع إنتاجي ناجح، عبر أرقام واقعية مستمدة من السوق المحلي.
+        </div>
+    </div>
+
+    <!-- Profit Snapshot -->
+    <h2 class="section-title" style="justify-content: center;">📊 أرباح تشغيلية (مايو 2026)</h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-label">الربح اليومي</span>
+            <div class="stat-value">54,500 <small>ج.س</small></div>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">الربح الشهري</span>
+            <div class="stat-value highlight">1,417,000 <small>ج.س</small></div>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">إنتاج الجوالات</span>
+            <div class="stat-value">23 <small>جوال/يوم</small></div>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">هامش الربح</span>
+            <div class="stat-value">4.6%</div>
+        </div>
+    </div>
+
+    <!-- Comparison -->
+    <div class="section-white">
+        <h2 class="section-title">🆚 قارن بين المزايا</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>الميزة</th>
+                    <th>النسخة المجانية</th>
+                    <th>باقة VIP</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>حساب الأرباح التقديرية</td>
+                    <td><span class="check">✅</span></td>
+                    <td><span class="check">✅</span></td>
+                </tr>
+                <tr>
+                    <td>تغيير نوع الخام (مخلوط/بيور)</td>
+                    <td><span class="cross">❌</span></td>
+                    <td><span class="check">✅</span></td>
+                </tr>
+                <tr>
+                    <td>تعديل الأسعار والتكاليف بالكامل</td>
+                    <td><span class="cross">❌</span></td>
+                    <td><span class="check">✅</span></td>
+                </tr>
+                <tr>
+                    <td>وصفات الخبير الربحية</td>
+                    <td><span class="cross">❌</span></td>
+                    <td><span class="check">✅</span></td>
+                </tr>
+                <tr>
+                    <td>حساب عائد السكراب (الهالك)</td>
+                    <td><span class="cross">❌</span></td>
+                    <td><span class="check">✅</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- VIP Banner -->
+    <div class="vip-banner">
+        <div class="vip-tag">العضوية الممتازة</div>
+        <h2 style="color: var(--primary-color); margin-bottom: 15px;">كن محترفاً مع VIP</h2>
+        <p>افتح ميزات التحكم الكامل في الهالك، الكهرباء، الإيجار، وتكاليف العمالة. نسخة VIP ترفع أرباحك اليومية لأكثر من <strong style="color:var(--accent-color)">390,000 ج.س</strong> من خلال خلطات الخبير السرية.</p>
+    </div>
+
+    <!-- Steps -->
+    <div class="section-white">
+        <h2 class="section-title">🚀 كيف تحصل على الكود؟</h2>
+        <ol style="padding-right: 20px;">
+            <li>ادخل على الحاسبة وقم بتوليد <strong>"بصمة الجهاز"</strong>.</li>
+            <li>قم بتحويل قيمة الاشتراك إلى حساب <strong>2597414</strong>.</li>
+            <li>أرسل صورة الإيصال مع كود البصمة عبر الواتساب.</li>
+            <li>سيصلك كود التفعيل فوراً لفتح جميع الميزات.</li>
+        </ol>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-section">
+        <h2>تواصل مع فريق الدعم</h2>
+        <p style="margin-bottom: 25px; opacity: 0.9;">نحن هنا لمساعدتك في بدء رحلتك الاستثمارية بنجاح</p>
+        <a href="https://wa.me/249962411479" class="btn-contact whatsapp">واتساب</a>
+        <a href="https://t.me/Estithmark" class="btn-contact telegram">تليجرام</a>
+    </div>
+
+    <footer>
+        &copy; 2026 إستثمارك للحلول الاستثمارية الذكية | جميع الحقوق محفوظة<br>
+        عصام عبادي - إدارة المشاريع الصغيرة والتسويق الذكي
+    </footer>
+</div>
+
+</body>
+</html>

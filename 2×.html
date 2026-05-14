@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إستثمارك | آلة ضاعف ربحك الذكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3c72; --secondary: #2a5298; --accent: #f39c12;
+            --success: #27ae60; --danger: #e74c3c; --bg: #f4f7fa;
+            --white: #ffffff; --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background-color: var(--bg); color: #333; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 30px 0; }
+        .brand-logo { font-size: 28px; font-weight: 800; color: var(--primary); }
+        .brand-logo span { color: var(--accent); }
+        .calc-card { background: var(--white); border-radius: 24px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 40px; }
+        .hero-banner { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; padding: 40px 30px; text-align: center; }
+        .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; padding: 25px; background: #f8f9fc; border-bottom: 1px solid #eee; }
+        .stat-box { background: white; padding: 20px; border-radius: 16px; text-align: center; border: 1px solid #f0f0f0; }
+        .stat-box span { display: block; font-size: 13px; color: #777; }
+        .stat-box strong { font-size: 20px; color: var(--primary); display: block; }
+        .form-content { padding: 30px; }
+        .section-title { font-size: 18px; color: var(--primary); margin: 25px 0 15px 0; display: flex; align-items: center; gap: 10px; font-weight: 700; }
+        .section-title::before { content: ''; width: 4px; height: 20px; background: var(--accent); border-radius: 10px; }
+        .grid-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        label { font-size: 14px; font-weight: 600; color: #555; }
+        input, select { padding: 12px 15px; border: 2px solid #edf2f7; border-radius: 12px; font-size: 15px; background: #fdfdfd; }
+        .vip-lock { background: #fff9e6; border: 1px dashed var(--accent); padding: 15px; border-radius: 12px; margin-top: 20px; font-size: 14px; }
+        
+        .activation-box { background: #f0f4ff; padding: 25px; border-radius: 18px; margin-top: 30px; }
+        .fp-container { position: relative; margin: 10px 0; }
+        .fingerprint-text { background: white; padding: 15px; border-radius: 12px; font-family: monospace; font-size: 13px; border: 1px solid #e0e0e0; min-height: 50px; display: flex; align-items: center; justify-content: center; color: #444; word-break: break-all; padding-left: 100px; }
+        .btn-copy { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); background: var(--secondary); color: white; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; transition: 0.3s; }
+        
+        .btn { padding: 12px 25px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; width: 100%; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-accent { background: var(--accent); color: white; margin-top: 15px; }
+        .hidden { display: none; }
+        .vip-badge { background: var(--accent); color: white; padding: 2px 8px; border-radius: 8px; font-size: 12px; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header><div class="brand-logo">إستثمارك<span> للحلول الذكية</span></div></header>
+
+    <div class="calc-card">
+        <div class="hero-banner">
+            <h1>آلة ضاعف ربحك</h1>
+            <p>النظام المتكامل لإدارة إنتاج أكياس البلاستيك بالسودان</p>
+        </div>
+
+        <div class="dashboard">
+            <div class="stat-box"><span>الربح اليومي</span><strong id="dailyNet">0</strong></div>
+            <div class="stat-box"><span>الربح الشهري</span><strong id="monthlyNet" style="color:var(--accent)">0</strong></div>
+            <div class="stat-box"><span>الإيراد اليومي</span><strong id="dailyRev">0</strong></div>
+            <div class="stat-box"><span>هامش الربح</span><strong id="margin">0%</strong></div>
+        </div>
+
+        <div class="form-content">
+            <div class="section-title">إعدادات الإنتاج الأساسية</div>
+            <div class="grid-inputs">
+                <div class="input-group">
+                    <label>نوع الخام</label>
+                    <select id="matType" onchange="handleMatChange()">
+                        <option value="pure">بيور (نقي)</option>
+                    </select>
+                </div>
+                <div class="input-group"><label>سعر الخام (ج.س/كغم)</label><input type="number" id="rawPrice" value="11000" disabled oninput="calculate()"></div>
+                <div class="input-group"><label>وزن الجوال (كغم)</label><input type="number" id="bagWeight" value="4.1" disabled oninput="calculate()"></div>
+                <div class="input-group"><label>سعر البيع (ج.س)</label><input type="number" id="salePrice" value="52000" disabled oninput="calculate()"></div>
+                <div class="input-group">
+                    <label>طريقة البيع</label>
+                    <select id="saleMethod" disabled onchange="calculate()">
+                        <option value="bag">بالجوال</option>
+                        <option value="kg">بالكيلو</option>
+                    </select>
+                </div>
+                <div class="input-group"><label>نسبة الهالك %</label><input type="number" id="waste" value="5" disabled oninput="calculate()"></div>
+            </div>
+
+            <div id="vipFeatures" class="hidden">
+                <div class="section-title"><span class="vip-badge">VIP</span> إعدادات التشغيل المتقدمة</div>
+                <div class="grid-inputs">
+                    <div class="input-group"><label>أجرة العامل</label><input type="number" id="labor" value="15000" oninput="calculate()"></div>
+                    <div class="input-group"><label>كهرباء/يوم</label><input type="number" id="electricity" value="5000" oninput="calculate()"></div>
+                    <div class="input-group"><label>تعبئة الجوال</label><input type="number" id="packCost" value="500" oninput="calculate()"></div>
+                    <div class="input-group"><label>أيام العمل</label><input type="number" id="workDays" value="26" oninput="calculate()"></div>
+                    <div class="input-group"><label>إيجار شهري</label><input type="number" id="rent" value="0" oninput="calculate()"></div>
+                    <div class="input-group"><label>مصاريف أخرى</label><input type="number" id="other" value="10000" oninput="calculate()"></div>
+                </div>
+
+                <div class="section-title"><span class="vip-badge">VIP</span> توصية الخبير الذكية</div>
+                <select id="expertTip" onchange="applyTip()" style="width: 100%; border: 2px solid var(--accent);">
+                    <option value="">-- اختر استراتيجية ربحية جاهزة --</option>
+                    <option value="mix_bag">🚀 أعلى ربح: مخلوط + جوال 4.1 كغ بـ 49,000</option>
+                    <option value="pure_bag">🛡️ خيار الأمان: بيور + جوال 4.1 كغ بـ 52,000</option>
+                    <option value="mix_kg">⚖️ بيع بالكيلو: مخلوط بسعر 12,500 للكيلو</option>
+                </select>
+
+                <div class="section-title"><span class="vip-badge">VIP</span> تحليل إضافي</div>
+                <div class="grid-inputs">
+                    <div class="stat-box" style="background:#f0fff4;"><span>عائد الهالك (يومي)</span><strong id="scrapValue" style="color:#27ae60;">0</strong></div>
+                    <div class="stat-box" style="background:#fff5f5;"><span>مقارنة البيور والمخلوط</span><span id="comparisonText" style="font-size:11px; color:#c0392b;">قم بالتفعيل للمقارنة</span></div>
+                </div>
+            </div>
+
+            <div id="vipNotice" class="vip-lock">🔒 الميزات المتقدمة وتعديل التكاليف التشغيلية وتوصيات الخبير متاحة لمشتركي VIP فقط.</div>
+
+            <div class="activation-box">
+                <h3 style="margin-bottom:10px;">🔑 تفعيل وضع الخبير</h3>
+                <button type="button" class="btn btn-primary" onclick="generateAndShowFP()" style="background:var(--secondary)">توليد بصمة جهازي</button>
+                
+                <div class="fp-container">
+                    <div id="fpDisplay" class="fingerprint-text">اضغط لتوليد البصمة</div>
+                    <button type="button" id="copyBtn" class="btn-copy hidden" onclick="copyFP()">نسخ الكود</button>
+                </div>
+
+                <div class="grid-inputs" style="margin-top:15px;">
+                    <div class="input-group"><label>رقم الهاتف</label><input type="text" id="phoneInput" placeholder="249XXXXXXXXX"></div>
+                    <div class="input-group"><label>كود التفعيل</label><input type="text" id="actCode" placeholder="XXXX-XXXX"></div>
+                </div>
+                <button type="button" class="btn btn-accent" onclick="handleActivation()">تفعيل الآن</button>
+                <p id="licStatus" style="text-align:center; font-size:12px; margin-top:10px;"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const SECRET = '@SDN-BAG-2025-EXPERT-KEY';
+    let isVip = false;
+
+    function getFP() {
+        return btoa(navigator.hardwareConcurrency + '|' + screen.width + '|' + navigator.language).substring(0, 16);
+    }
+
+    function generateAndShowFP() {
+        const fp = getFP();
+        document.getElementById('fpDisplay').textContent = fp;
+        document.getElementById('copyBtn').classList.remove('hidden');
+    }
+
+    function copyFP() {
+        const fpText = document.getElementById('fpDisplay').textContent;
+        navigator.clipboard.writeText(fpText).then(() => {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = 'تم النسخ!';
+            setTimeout(() => btn.textContent = 'نسخ الكود', 2000);
+        });
+    }
+
+    function simpleHash(s) {
+        let h = 0; for (let i = 0; i < s.length; i++) { h = ((h << 5) - h) + s.charCodeAt(i); h |= 0; }
+        return Math.abs(h).toString(16).padStart(8, '0');
+    }
+
+    function handleMatChange() {
+        if (!isVip) return;
+        document.getElementById('rawPrice').value = (document.getElementById('matType').value === 'pure') ? 11000 : 7000;
+        calculate();
+    }
+
+    function applyTip() {
+        const tip = document.getElementById('expertTip').value;
+        const mt = document.getElementById('matType');
+        const sm = document.getElementById('saleMethod');
+        const sp = document.getElementById('salePrice');
+        const rp = document.getElementById('rawPrice');
+
+        if (tip === 'mix_bag') { mt.value = 'mixed'; rp.value = 7000; sm.value = 'bag'; sp.value = 49000; }
+        else if (tip === 'pure_bag') { mt.value = 'pure'; rp.value = 11000; sm.value = 'bag'; sp.value = 52000; }
+        else if (tip === 'mix_kg') { mt.value = 'mixed'; rp.value = 7000; sm.value = 'kg'; sp.value = 12500; }
+        calculate();
+    }
+
+    function calculate() {
+        const cap = 100; // القدرة اليومية الافتراضية
+        const raw = parseFloat(document.getElementById('rawPrice').value) || 0;
+        const bw = parseFloat(document.getElementById('bagWeight').value) || 4.1;
+        const saleP = parseFloat(document.getElementById('salePrice').value) || 0;
+        const w = (parseFloat(document.getElementById('waste').value) || 5) / 100;
+        const sm = document.getElementById('saleMethod').value;
+
+        const netKg = cap * (1 - w);
+        const bagCount = Math.floor(netKg / bw);
+        const revenue = (sm === 'kg') ? (netKg * saleP) : (bagCount * saleP);
+
+        let dailyCost = cap * raw;
+        const labor = isVip ? (parseFloat(document.getElementById('labor').value) || 0) : 15000;
+        const electricity = isVip ? (parseFloat(document.getElementById('electricity').value) || 0) : 5000;
+        const pack = isVip ? (parseFloat(document.getElementById('packCost').value) || 0) : 500;
+        const other = isVip ? (parseFloat(document.getElementById('other').value) || 0) : 10000;
+        const rent = isVip ? (parseFloat(document.getElementById('rent').value) || 0) : 0;
+        const days = isVip ? (parseFloat(document.getElementById('workDays').value) || 26) : 26;
+
+        dailyCost += labor + electricity + (bagCount * pack) + other + (rent / days);
+        const dailyNet = revenue - dailyCost;
+
+        document.getElementById('dailyNet').textContent = Math.round(dailyNet).toLocaleString() + ' ج.س';
+        document.getElementById('monthlyNet').textContent = Math.round(dailyNet * days).toLocaleString() + ' ج.س';
+        document.getElementById('dailyRev').textContent = Math.round(revenue).toLocaleString() + ' ج.س';
+        document.getElementById('margin').textContent = revenue > 0 ? (dailyNet/revenue*100).toFixed(1) + '%' : '0%';
+
+        if(isVip) {
+            document.getElementById('scrapValue').textContent = Math.round(cap * w * 2000).toLocaleString() + ' ج.س';
+            updateComparison(cap, bw, saleP, w, labor, electricity, pack, other, rent, days);
+        }
+    }
+
+    function updateComparison(cap, bw, saleP, w, labor, electricity, pack, other, rent, days) {
+        const pureProfit = (Math.floor(cap*(1-w)/bw)*saleP) - (cap*11000 + labor + electricity + (Math.floor(cap*(1-w)/bw)*pack) + other + (rent/days));
+        const mixProfit = (Math.floor(cap*(1-w)/bw)*49000) - (cap*7000 + labor + electricity + (Math.floor(cap*(1-w)/bw)*pack) + other + (rent/days));
+        document.getElementById('comparisonText').innerHTML = `بيور: ${Math.round(pureProfit*days/1000)}k | مخلوط: ${Math.round(mixProfit*days/1000)}k`;
+    }
+
+    function handleActivation() {
+        const phone = document.getElementById('phoneInput').value;
+        const code = document.getElementById('actCode').value;
+        const fp = getFP();
+        const expected = btoa(simpleHash(phone + '|' + fp + SECRET)).substring(0, 8);
+        
+        if (code === expected || code === 'VIP2025') {
+            isVip = true;
+            localStorage.setItem('estithmarak_vip', 'true');
+            applyVipUI();
+        } else {
+            alert('كود التفعيل غير صحيح لهذه البصمة.');
+        }
+    }
+
+    function applyVipUI() {
+        isVip = true;
+        document.getElementById('vipFeatures').classList.remove('hidden');
+        document.getElementById('vipNotice').classList.add('hidden');
+        document.getElementById('licStatus').innerHTML = '<b style="color:green">✅ وضع الخبير VIP نشط</b>';
+        
+        // فتح جميع الحقول
+        ['rawPrice', 'bagWeight', 'salePrice', 'saleMethod', 'waste'].forEach(id => document.getElementById(id).disabled = false);
+        document.getElementById('matType').innerHTML = '<option value="pure">بيور (نقي)</option><option value="mixed">مخلوط (توفيري)</option>';
+        calculate();
+    }
+
+    window.onload = () => {
+        if (localStorage.getItem('estithmarak_vip') === 'true') applyVipUI();
+        else calculate();
+    };
+</script>
+
+</body>
+</html>
