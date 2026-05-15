@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>🧼 منصة إستثمارك لصناعة الصابون</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: #fdf8f2; 
+            padding: 15px; 
+            max-width: 1000px; 
+            margin: auto; 
+        }
+        .main-box { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 24px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08); 
+            border: 1px solid #e0cbb8;
+        }
+        h1 {
+            color: #4a2c1b;
+            text-align: center;
+            margin-top: 0;
+            border-bottom: 3px solid #c49a6c;
+            padding-bottom: 15px;
+        }
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin: 20px 0;
+            border-bottom: 2px solid #c49a6c;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: #e8ddcf;
+            border: none;
+            padding: 12px 18px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 12px 12px 0 0;
+            cursor: pointer;
+            color: #4a2c1b;
+            transition: 0.2s;
+            border: 1px solid #c49a6c;
+            border-bottom: none;
+            margin-left: 5px;
+            flex: 0 1 auto;
+        }
+        .tab-btn.active {
+            background: white;
+            color: #8b5a2b;
+            border-bottom: 2px solid white;
+            margin-bottom: -2px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        h2 {
+            color: #5c3e2e;
+            margin: 10px 0 15px 0;
+            font-size: 1.5rem;
+            border-right: 5px solid #c49a6c;
+            padding-right: 12px;
+        }
+        h3 {
+            color: #4a2c1b;
+            margin: 20px 0 8px 0;
+            font-size: 1.2rem;
+        }
+        .desc-box {
+            background: #f4efe9;
+            padding: 12px 16px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            border-right: 5px solid #b89b7e;
+        }
+        .batch-control {
+            background: #e8ddcf;
+            padding: 15px 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        .batch-label {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #3a2c22;
+        }
+        .batch-input {
+            padding: 12px 15px;
+            font-size: 1.2rem;
+            width: 130px;
+            border: 2px solid #c49a6c;
+            border-radius: 16px;
+            background: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        .batch-unit {
+            font-weight: bold;
+            color: #5c3e2e;
+        }
+        .btn {
+            background: #8b5a2b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            border-bottom: 4px solid #5a3a1c;
+        }
+        .btn:hover {
+            background: #6b4423;
+            transform: scale(0.98);
+        }
+        .recipe-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .ing-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #faf6f0;
+            padding: 10px 15px;
+            border-radius: 14px;
+            flex-wrap: wrap;
+        }
+        .ing-label {
+            font-weight: bold;
+            min-width: 150px;
+            color: #3b2a1c;
+        }
+        .ing-input {
+            padding: 10px 12px;
+            border: 1px solid #c49a6c;
+            border-radius: 12px;
+            font-size: 1rem;
+            width: 130px;
+            background: white;
+        }
+        .ing-unit {
+            color: #5c3e2e;
+            margin-right: 5px;
+        }
+        .result-panel {
+            background: #eef3e8;
+            padding: 20px;
+            border-radius: 20px;
+            border-right: 8px solid #2e6b2e;
+            margin: 25px 0 15px;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #9bb88b;
+            font-size: 1.1rem;
+        }
+        .big-number {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #1e3d1e;
+        }
+        .quality-badge {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .note-box {
+            background: #fff9e0;
+            padding: 12px 16px;
+            border-radius: 16px;
+            border: 1px solid #e6d5b8;
+            margin: 20px 0 10px;
+        }
+        .brand-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #c49a6c;
+            text-align: center;
+            color: #3a2c22;
+        }
+        .brand-name {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #4a2c1b;
+        }
+        .brand-contact {
+            font-size: 1.3rem;
+            font-weight: bold;
+            direction: ltr;
+            background: #2e6b2e;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .sap-note {
+            font-size: 0.9rem;
+            color: #6b5a4a;
+            margin-top: 5px;
+        }
+        .flex-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .warning {
+            color: #a1421d;
+            font-weight: bold;
+            background: #ffefdb;
+            padding: 8px 15px;
+            border-radius: 30px;
+        }
+        select.ing-input {
+            width: auto;
+            min-width: 180px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-box">
+    <h1>🧪 منصة إستثمارك لصناعة الصابون</h1>
+    <p style="text-align:center; color:#5e4b3a; font-weight:bold;">👨‍🔬 ورشة تدريبية متكاملة - الآلة الحاسبة الرسمية</p>
+
+    <!-- تبويبات -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('solid')">🧼 الصابون الصلب</button>
+        <button class="tab-btn" onclick="switchTab('liquid')">🧴 الصابون السائل</button>
+        <button class="tab-btn" onclick="switchTab('paste')">🧽 الصابون المعجون</button>
+    </div>
+
+    <!-- ======================== الصابون الصلب ======================== -->
+    <div id="tab-solid" class="tab-content active">
+        <h2>🧼 صابون صلب (غسيل / استحمام)</h2>
+        <div class="desc-box">
+            <strong>📌 حسب وصفة المدرب:</strong> خلطات جاهزة بنسب مدروسة. اختر نوع الصابون وحجم الدفعة (كجم زيوت).
+        </div>
+
+        <!-- اختيار الوصفة الجاهزة -->
+        <div class="batch-control">
+            <span class="batch-label">📋 اختر الوصفة الأساسية:</span>
+            <select id="solidRecipeSelect" class="ing-input" style="width:auto; min-width:220px;" onchange="loadSolidPreset()">
+                <option value="wash" selected>🧽 خلطة الغسيل (70% شحم + 30% زيت مستعمل)</option>
+                <option value="soft">🌸 خلطة النعومة (80% نخيل + 20% استيارين)</option>
+                <option value="custom">✏️ خلطتي الخاصة (تعديل يدوي)</option>
+            </select>
+        </div>
+
+        <!-- حجم الدفعة -->
+        <div class="batch-control">
+            <span class="batch-label">⚖️ حجم الدفعة (زيوت فقط):</span>
+            <input type="number" id="solidBatchKg" class="batch-input" value="10" step="0.5" min="0.1">
+            <span class="batch-unit">كجم</span>
+            <button class="btn" onclick="scaleSolidRecipe()">🔄 تحديث الكميات</button>
+        </div>
+
+        <!-- مكونات الزيوت -->
+        <h3>🥥 مكونات الزيوت (كجم)</h3>
+        <div class="recipe-grid">
+            <div class="ing-row">
+                <span class="ing-label">🐄 شحم حيواني (ودك) - SAP 0.141</span>
+                <input type="number" id="solid_tallow" class="ing-input" value="7.0" step="0.1" min="0">
+                <span class="ing-unit">كجم</span>
+            </div>
+            <div class="ing-row">
+                <span class="ing-label">🫒 زيت قلي مستعمل - SAP 0.141</span>
+                <input type="number" id="solid_usedoil" class="ing-input" value="3.0" step="0.1" min="0">
+                <span class="ing-unit">كجم</span>
+            </div>
+            <div class="ing-row">
+                <span class="ing-label">🌴 زيت نخيل - SAP 0.144</span>
+                <input type="number" id="solid_palmoil" class="ing-input" value="0.0" step="0.1" min="0">
+                <span class="ing-unit">كجم</span>
+            </div>
+            <div class="ing-row">
+                <span class="ing-label">🧴 استيارين (حمض الشمع) - SAP 0.143</span>
+                <input type="number" id="solid_stearic" class="ing-input" value="0.0" step="0.1" min="0">
+                <span class="ing-unit">كجم</span>
+            </div>
+            <div class="ing-row">
+                <span class="ing-label">🥜 زيت فول سوداني - SAP 0.136</span>
+                <input type="number" id="solid_peanut" class="ing-input" value="0.0" step="0.1" min="0">
+                <span class="ing-unit">كجم</span>
+            </div>
+        </div>
+
+        <!-- إضافات -->
+        <h3>🧂 إضافات (اختياري)</h3>
+        <div class="ing-row">
+            <span class="ing-label">✅ ملح طعام (1% من الزيوت)</span>
+            <input type="checkbox" id="solid_addSalt" checked> <span>إضافة</span>
+        </div>
+        <div class="ing-row">
+            <span class="ing-label">✅ سليكات الصوديوم (3% من الزيوت)</span>
+            <input type="checkbox" id="solid_addSilicate"> <span>إضافة</span>
+        </div>
+        <div class="ing-row">
+            <span class="ing-label">✅ سكر (1% من الزيوت - لخلطة النعومة)</span>
+            <input type="checkbox" id="solid_addSugar"> <span>إضافة</span>
+        </div>
+
+        <!-- النتائج -->
+        <div class="result-panel">
+            <h3 style="margin-top:0;">🧾 الوصفة النهائية</h3>
+            <div class="result-item"><span>🧮 مجموع الزيوت:</span> <strong><span id="solid_totalOil">10.0</span> كجم</strong></div>
+            <div class="result-item"><span>⚖️ الصودا الكاوية (NaOH) المطلوبة:</span> <strong><span id="solid_lye">1.39</span> كجم</strong></div>
+            <div class="result-item"><span>💧 الماء المطلوب (نسبة 2.4:1):</span> <strong><span id="solid_water">3.34</span> لتر</strong></div>
+            <div class="result-item"><span>🧂 ملح مضاف:</span> <strong><span id="solid_saltAmt">0.10</span> كجم</strong></div>
+            <div class="result-item"><span>✨ سليكات:</span> <strong><span id="solid_silicateAmt">0.00</span> كجم</strong></div>
+            <div class="result-item"><span>🍬 سكر:</span> <strong><span id="solid_sugarAmt">0.00</span> كجم</strong></div>
+            <div class="result-item" style="border-bottom:none;"><span>📦 الوزن التقريبي للصابون النهائي:</span> <strong><span id="solid_finalWeight">14.8</span> كجم</strong></div>
+        </div>
+
+        <div class="note-box">
+            <strong>📋 تعليمات المدرب:</strong> صهر الدهون الصلبة أولاً. درجة حرارة الزيوت والصودا 45-55°م. إذا استخدمت استيارين، القالب يتصلب بسرعة فائقة!
+        </div>
+    </div>
+
+    <!-- ======================== الصابون السائل ======================== -->
+    <div id="tab-liquid" class="tab-content">
+        <h2>🧴 صابون سائل (جودة عالية)</h2>
+        <div class="desc-box">
+            <strong>📌 وصفة المدرب الأساسية لـ 220 لتر.</strong> يمكنك تغيير حجم الدفعة (لتر) وسيتم تحديث جميع الكميات تلقائياً.
+        </div>
+
+        <div class="batch-control">
+            <span class="batch-label">🧪 حجم الدفعة المطلوب:</span>
+            <input type="number" id="liquidBatchL" class="batch-input" value="220" step="5" min="1">
+            <span class="batch-unit">لتر</span>
+            <button class="btn" onclick="scaleLiquidRecipe()">🔄 تحديث الكميات</button>
+        </div>
+
+        <h3>🧪 مكونات الخلطة (كجم)</h3>
+        <div class="recipe-grid">
+            <div class="ing-row"><span class="ing-label">🧴 حمض سلفونيك (90%)</span><input type="number" id="liq_sulfonic" class="ing-input" value="11.0" step="0.1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧼 تكسابون (N70 - 70%)</span><input type="number" id="liq_texapon" class="ing-input" value="6.0" step="0.1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧴 كمبرلان (100%)</span><input type="number" id="liq_comperlan" class="ing-input" value="0.5" step="0.1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🫧 معزز رغوة (بيتائين 100%)</span><input type="number" id="liq_betaine" class="ing-input" value="0.85" step="0.1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧂 صودا قشور (NaOH)</span><input type="number" id="liq_caustic" class="ing-input" value="1.65" step="0.05" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🍋 ملح ليمون</span><input type="number" id="liq_citric" class="ing-input" value="0.20" step="0.01" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧪 تايلوز</span><input type="number" id="liq_tylose" class="ing-input" value="0.60" step="0.05" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧂 ملح طعام</span><input type="number" id="liq_salt" class="ing-input" value="4.0" step="0.5" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">💧 جلسرين</span><input type="number" id="liq_glycerin" class="ing-input" value="0.25" step="0.05" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧴 مادة حافظة</span><input type="number" id="liq_preservative" class="ing-input" value="0.20" step="0.05" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🌸 عطر زيتي</span><input type="number" id="liq_perfume" class="ing-input" value="0.40" step="0.05" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🎨 لون</span><input type="number" id="liq_color" class="ing-input" value="0.20" step="0.05" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">⚗️ إديتا (EDTA)</span><input type="number" id="liq_edta" class="ing-input" value="0.05" step="0.01" min="0"><span>كجم</span></div>
+        </div>
+
+        <div class="result-panel">
+            <h3>📊 تحليل المادة الفعالة والجودة</h3>
+            <div class="result-item"><span>📦 الوزن الكلي للمواد المضافة:</span> <strong><span id="liq_totalWeight">24.9</span> كجم</strong></div>
+            <div class="result-item"><span>⚡ صافي السلفونيك (90%):</span> <strong><span id="liq_netSulfonic">9.90</span> كجم</strong></div>
+            <div class="result-item"><span>⚡ صافي التكسابون (70%):</span> <strong><span id="liq_netTexapon">4.20</span> كجم</strong></div>
+            <div class="result-item"><span>⚡ صافي المعززات (100%):</span> <strong><span id="liq_netBoosters">1.35</span> كجم</strong></div>
+            <div class="result-item" style="border-bottom:2px solid #2e6b2e;"><span>🧪 مجموع صافي المادة الفعالة:</span> <strong><span id="liq_totalActive">15.45</span> كجم</strong></div>
+            <div class="result-item">
+                <span>📊 نسبة المادة الفعالة في المنتج:</span> 
+                <strong class="big-number"><span id="liq_activePercent">7.02</span>%</strong>
+            </div>
+            <div id="liq_qualityTag" class="quality-badge" style="background:#f0c45a;">🟡 اقتصادي جيد</div>
+        </div>
+
+        <div class="note-box">
+            <strong>📋 معايير الجودة (المدرب):</strong> 5-7% اقتصادي | 8-12% جيد جداً | 13-18% ممتاز (منافس). وجود السلفونيك والتكسابون معاً يعطي قوة تنظيف عالية.
+        </div>
+    </div>
+
+    <!-- ======================== الصابون المعجون ======================== -->
+    <div id="tab-paste" class="tab-content">
+        <h2>🧽 صابون معجون (منظف متعدد)</h2>
+        <div class="desc-box">
+            <strong>📌 وصفة المدرب لـ 100 كجم.</strong> المادة الفعالة الأساسية: حمض السلفونيك (90%).
+        </div>
+
+        <div class="batch-control">
+            <span class="batch-label">🧴 حجم الدفعة المطلوب:</span>
+            <input type="number" id="pasteBatchKg" class="batch-input" value="100" step="5" min="1">
+            <span class="batch-unit">كجم</span>
+            <button class="btn" onclick="scalePasteRecipe()">🔄 تحديث الكميات</button>
+        </div>
+
+        <h3>🧪 المكونات (كجم)</h3>
+        <div class="recipe-grid">
+            <div class="ing-row"><span class="ing-label">💧 ماء</span><input type="number" id="pas_water" class="ing-input" value="80" step="1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧪 CMC (مغلظ)</span><input type="number" id="pas_cmc" class="ing-input" value="6" step="0.5" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧴 حمض سلفونيك (90%)</span><input type="number" id="pas_sulfonic" class="ing-input" value="10" step="0.5" min="0"><span>لتر (~10.5 كجم)</span></div>
+            <div class="ing-row"><span class="ing-label">🧂 سليكات</span><input type="number" id="pas_silicate" class="ing-input" value="7" step="0.5" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧂 كربونات الصوديوم</span><input type="number" id="pas_carbonate" class="ing-input" value="2.5" step="0.1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧂 صودا قشور</span><input type="number" id="pas_caustic" class="ing-input" value="0.15" step="0.01" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧪 بوراكس</span><input type="number" id="pas_borax" class="ing-input" value="1.0" step="0.1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧪 تراي بولي</span><input type="number" id="pas_tripoly" class="ing-input" value="0.2" step="0.1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🍋 ملح ليمون</span><input type="number" id="pas_citric" class="ing-input" value="0.2" step="0.1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">💧 جلسرين</span><input type="number" id="pas_glycerin" class="ing-input" value="0.2" step="0.1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🌸 عطر</span><input type="number" id="pas_perfume" class="ing-input" value="0.2" step="0.1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧴 مادة حافظة</span><input type="number" id="pas_preservative" class="ing-input" value="0.2" step="0.1" min="0"><span>كجم</span></div>
+            <div class="ing-row"><span class="ing-label">🧂 ملح مذاب</span><input type="number" id="pas_saltsol" class="ing-input" value="2.0" step="0.5" min="0"><span>كجم</span></div>
+        </div>
+
+        <div class="result-panel">
+            <h3>📊 تحليل المادة الفعالة</h3>
+            <div class="result-item"><span>📦 الوزن الكلي للخلطة:</span> <strong><span id="pas_totalWeight">109.65</span> كجم</strong></div>
+            <div class="result-item"><span>🧪 وزن السلفونيك (كثافة 1.05):</span> <strong><span id="pas_sulfonicKg">10.50</span> كجم</strong></div>
+            <div class="result-item"><span>⚡ المادة الفعالة (سلفونيك × 90%):</span> <strong><span id="pas_activeAmount">9.45</span> كجم</strong></div>
+            <div class="result-item"><span>📊 نسبة المادة الفعالة:</span> <strong class="big-number"><span id="pas_activePercent">8.62</span>%</strong></div>
+            <div id="pas_qualityTag" class="quality-badge" style="background:#7fb07f;">🟢 جيد جداً</div>
+        </div>
+
+        <div class="note-box">
+            <strong>📋 ملاحظة المدرب:</strong> جودة CMC تؤثر على القوام. وجود السليكات والبوراكس يرفع الفعالية الكلية لتعادل صابوناً بنسبة 15%.
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="brand-footer">
+        <div class="brand-name">🌟 إستثمارك للحلول الاستثمارية الذكية 🌟</div>
+        <div class="brand-slogan">🧼 ورشة تدريب طريقة صناعة الصابون 🧼</div>
+        <div class="brand-contact">📞 +249 96 241 1479</div>
+        <div class="copyright">© 2026 جميع الحقوق محفوظة. آلة حساب احترافية لمصنعي الصابون.</div>
+    </div>
+</div>
+
+<script>
+    // ======================== دوال عامة ========================
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-' + tabId).classList.add('active');
+        event.target.classList.add('active');
+        if(tabId === 'solid') calculateSolidSoap();
+        else if(tabId === 'liquid') calculateLiquidSoap();
+        else if(tabId === 'paste') calculatePasteSoap();
+    }
+
+    // ======================== الصابون الصلب ========================
+    function loadSolidPreset(){
+        let preset = document.getElementById('solidRecipeSelect').value;
+        if(preset === 'wash'){
+            document.getElementById('solid_tallow').value = 7.0;
+            document.getElementById('solid_usedoil').value = 3.0;
+            document.getElementById('solid_palmoil').value = 0.0;
+            document.getElementById('solid_stearic').value = 0.0;
+            document.getElementById('solid_peanut').value = 0.0;
+            document.getElementById('solid_addSugar').checked = false;
+        } else if(preset === 'soft'){
+            document.getElementById('solid_tallow').value = 0.0;
+            document.getElementById('solid_usedoil').value = 0.0;
+            document.getElementById('solid_palmoil').value = 8.0;
+            document.getElementById('solid_stearic').value = 2.0;
+            document.getElementById('solid_peanut').value = 0.0;
+            document.getElementById('solid_addSugar').checked = true;
+        }
+        calculateSolidSoap();
+    }
+
+    function scaleSolidRecipe(){
+        let batch = parseFloat(document.getElementById('solidBatchKg').value) || 10;
+        let base = 10.0;
+        let factor = batch / base;
+        let tallow = (parseFloat(document.getElementById('solid_tallow').value) || 0) * factor;
+        let used = (parseFloat(document.getElementById('solid_usedoil').value) || 0) * factor;
+        let palm = (parseFloat(document.getElementById('solid_palmoil').value) || 0) * factor;
+        let stear = (parseFloat(document.getElementById('solid_stearic').value) || 0) * factor;
+        let peanut = (parseFloat(document.getElementById('solid_peanut').value) || 0) * factor;
+        document.getElementById('solid_tallow').value = tallow.toFixed(2);
+        document.getElementById('solid_usedoil').value = used.toFixed(2);
+        document.getElementById('solid_palmoil').value = palm.toFixed(2);
+        document.getElementById('solid_stearic').value = stear.toFixed(2);
+        document.getElementById('solid_peanut').value = peanut.toFixed(2);
+        calculateSolidSoap();
+    }
+
+    function calculateSolidSoap(){
+        let tallow = parseFloat(document.getElementById('solid_tallow').value) || 0;
+        let used = parseFloat(document.getElementById('solid_usedoil').value) || 0;
+        let palm = parseFloat(document.getElementById('solid_palmoil').value) || 0;
+        let stear = parseFloat(document.getElementById('solid_stearic').value) || 0;
+        let peanut = parseFloat(document.getElementById('solid_peanut').value) || 0;
+        let totalOil = tallow + used + palm + stear + peanut;
+        document.getElementById('solid_totalOil').innerText = totalOil.toFixed(2);
+        
+        let lye = (tallow*0.141) + (used*0.141) + (palm*0.144) + (stear*0.143) + (peanut*0.136);
+        let water = lye * 2.4;
+        let salt = document.getElementById('solid_addSalt').checked ? totalOil * 0.01 : 0;
+        let silicate = document.getElementById('solid_addSilicate').checked ? totalOil * 0.03 : 0;
+        let sugar = document.getElementById('solid_addSugar').checked ? totalOil * 0.01 : 0;
+        let finalWeight = totalOil + lye + water + salt + silicate + sugar;
+
+        document.getElementById('solid_lye').innerText = lye.toFixed(2);
+        document.getElementById('solid_water').innerText = water.toFixed(2);
+        document.getElementById('solid_saltAmt').innerText = salt.toFixed(2);
+        document.getElementById('solid_silicateAmt').innerText = silicate.toFixed(2);
+        document.getElementById('solid_sugarAmt').innerText = sugar.toFixed(2);
+        document.getElementById('solid_finalWeight').innerText = finalWeight.toFixed(2);
+    }
+
+    // ======================== الصابون السائل ========================
+    function scaleLiquidRecipe(){
+        let batch = parseFloat(document.getElementById('liquidBatchL').value) || 220;
+        let factor = batch / 220;
+        let fields = ['liq_sulfonic','liq_texapon','liq_comperlan','liq_betaine','liq_caustic','liq_citric','liq_tylose','liq_salt','liq_glycerin','liq_preservative','liq_perfume','liq_color','liq_edta'];
+        fields.forEach(id => {
+            let el = document.getElementById(id);
+            let base = parseFloat(el.getAttribute('data-base') || el.value);
+            if(!el.hasAttribute('data-base')) el.setAttribute('data-base', base);
+            el.value = (base * factor).toFixed(2);
+        });
+        calculateLiquidSoap();
+    }
+    function calculateLiquidSoap(){
+        let sulf = parseFloat(document.getElementById('liq_sulfonic').value) || 0;
+        let tex = parseFloat(document.getElementById('liq_texapon').value) || 0;
+        let comp = parseFloat(document.getElementById('liq_comperlan').value) || 0;
+        let bet = parseFloat(document.getElementById('liq_betaine').value) || 0;
+        let caus = parseFloat(document.getElementById('liq_caustic').value) || 0;
+        let cit = parseFloat(document.getElementById('liq_citric').value) || 0;
+        let tyl = parseFloat(document.getElementById('liq_tylose').value) || 0;
+        let salt = parseFloat(document.getElementById('liq_salt').value) || 0;
+        let glyc = parseFloat(document.getElementById('liq_glycerin').value) || 0;
+        let pres = parseFloat(document.getElementById('liq_preservative').value) || 0;
+        let perf = parseFloat(document.getElementById('liq_perfume').value) || 0;
+        let col = parseFloat(document.getElementById('liq_color').value) || 0;
+        let edta = parseFloat(document.getElementById('liq_edta').value) || 0;
+
+        let totalMat = sulf+tex+comp+bet+caus+cit+tyl+salt+glyc+pres+perf+col+edta;
+        let netSulf = sulf * 0.90;
+        let netTex = tex * 0.70;
+        let netBoost = (comp + bet) * 1.0;
+        let totalActive = netSulf + netTex + netBoost;
+        let batchL = parseFloat(document.getElementById('liquidBatchL').value) || 220;
+        let activePercent = (totalActive / batchL) * 100;
+
+        document.getElementById('liq_totalWeight').innerText = totalMat.toFixed(2);
+        document.getElementById('liq_netSulfonic').innerText = netSulf.toFixed(2);
+        document.getElementById('liq_netTexapon').innerText = netTex.toFixed(2);
+        document.getElementById('liq_netBoosters').innerText = netBoost.toFixed(2);
+        document.getElementById('liq_totalActive').innerText = totalActive.toFixed(2);
+        document.getElementById('liq_activePercent').innerText = activePercent.toFixed(2);
+
+        let tag = document.getElementById('liq_qualityTag');
+        if(activePercent < 7) tag.innerHTML = '🟡 فئة اقتصادية'; 
+        else if(activePercent < 12) tag.innerHTML = '🟢 جودة جيدة (ممتازة للسوق)';
+        else tag.innerHTML = '🔵 جودة فاخرة - تنافس الشركات الكبرى';
+    }
+
+    // ======================== الصابون المعجون ========================
+    function scalePasteRecipe(){
+        let batch = parseFloat(document.getElementById('pasteBatchKg').value) || 100;
+        let factor = batch / 100;
+        let fields = ['pas_water','pas_cmc','pas_sulfonic','pas_silicate','pas_carbonate','pas_caustic','pas_borax','pas_tripoly','pas_citric','pas_glycerin','pas_perfume','pas_preservative','pas_saltsol'];
+        fields.forEach(id => {
+            let el = document.getElementById(id);
+            let base = parseFloat(el.getAttribute('data-base') || el.value);
+            if(!el.hasAttribute('data-base')) el.setAttribute('data-base', base);
+            el.value = (base * factor).toFixed(2);
+        });
+        calculatePasteSoap();
+    }
+    function calculatePasteSoap(){
+        let water = parseFloat(document.getElementById('pas_water').value)||0;
+        let cmc = parseFloat(document.getElementById('pas_cmc').value)||0;
+        let sulfLtr = parseFloat(document.getElementById('pas_sulfonic').value)||0;
+        let silicate = parseFloat(document.getElementById('pas_silicate').value)||0;
+        let carbonate = parseFloat(document.getElementById('pas_carbonate').value)||0;
+        let caustic = parseFloat(document.getElementById('pas_caustic').value)||0;
+        let borax = parseFloat(document.getElementById('pas_borax').value)||0;
+        let tripoly = parseFloat(document.getElementById('pas_tripoly').value)||0;
+        let citric = parseFloat(document.getElementById('pas_citric').value)||0;
+        let glycerin = parseFloat(document.getElementById('pas_glycerin').value)||0;
+        let perfume = parseFloat(document.getElementById('pas_perfume').value)||0;
+        let preserv = parseFloat(document.getElementById('pas_preservative').value)||0;
+        let saltsol = parseFloat(document.getElementById('pas_saltsol').value)||0;
+        let sulfKg = sulfLtr * 1.05;
+        let totalWeight = water+cmc+sulfKg+silicate+carbonate+caustic+borax+tripoly+citric+glycerin+perfume+preserv+saltsol;
+        let activeAmount = sulfKg * 0.90;
+        let activePercent = (activeAmount / totalWeight) * 100;
+
+        document.getElementById('pas_totalWeight').innerText = totalWeight.toFixed(2);
+        document.getElementById('pas_sulfonicKg').innerText = sulfKg.toFixed(2);
+        document.getElementById('pas_activeAmount').innerText = activeAmount.toFixed(2);
+        document.getElementById('pas_activePercent').innerText = activePercent.toFixed(2);
+        let tag = document.getElementById('pas_qualityTag');
+        if(activePercent<7) tag.innerHTML = '🟡 منخفض - يُنصح بزيادة السلفونيك';
+        else if(activePercent<12) tag.innerHTML = '🟢 جيد جداً (معادل 15% بوجود السليكات)';
+        else tag.innerHTML = '🔵 قوي جداً';
+    }
+
+    // تحميل البيانات الأساسية
+    window.onload = function(){
+        // تعيين القيم المرجعية للسائل
+        ['liq_sulfonic','liq_texapon','liq_comperlan','liq_betaine','liq_caustic','liq_citric','liq_tylose','liq_salt','liq_glycerin','liq_preservative','liq_perfume','liq_color','liq_edta'].forEach(id => {
+            let el = document.getElementById(id);
+            el.setAttribute('data-base', el.value);
+        });
+        ['pas_water','pas_cmc','pas_sulfonic','pas_silicate','pas_carbonate','pas_caustic','pas_borax','pas_tripoly','pas_citric','pas_glycerin','pas_perfume','pas_preservative','pas_saltsol'].forEach(id => {
+            let el = document.getElementById(id);
+            el.setAttribute('data-base', el.value);
+        });
+        calculateSolidSoap();
+        calculateLiquidSoap();
+        calculatePasteSoap();
+    };
+</script>
+</body>
+</html>
