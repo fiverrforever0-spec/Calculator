@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧼 آلة حاسبة الصابون - إستثمارك للحلول الذكية</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: #fdf8f2; 
+            padding: 15px; 
+            max-width: 800px; 
+            margin: auto; 
+        }
+        .calc-box { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 16px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
+            border: 1px solid #e0cbb8;
+        }
+        h2 { 
+            color: #4a2c1b; 
+            text-align: center; 
+            margin-top: 0;
+            border-bottom: 3px solid #c49a6c; 
+            padding-bottom: 12px; 
+        }
+        h3 { color: #5c3e2e; margin: 20px 0 5px 0; font-size: 1.1rem; }
+        .oil-row { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            margin-bottom: 12px; 
+            background: #faf6f0; 
+            padding: 10px; 
+            border-radius: 12px;
+            flex-wrap: wrap;
+        }
+        .oil-select { 
+            flex: 3; 
+            min-width: 180px;
+            padding: 10px; 
+            border: 1px solid #c49a6c; 
+            border-radius: 8px; 
+            font-size: 15px;
+            background: white;
+        }
+        .oil-weight { 
+            flex: 1.5; 
+            min-width: 100px;
+            padding: 10px; 
+            border: 1px solid #c49a6c; 
+            border-radius: 8px; 
+            font-size: 15px;
+            background: white;
+        }
+        .oil-label { 
+            flex: 0.8; 
+            font-weight: bold; 
+            color: #3b2a1c;
+            min-width: 50px;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            background: #e8ddcf;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .setting-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        .setting-item {
+            flex: 1;
+            min-width: 120px;
+        }
+        label {
+            display: block;
+            font-size: 0.9rem;
+            color: #4a2c1b;
+            margin-bottom: 3px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #b89b7e;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+        }
+        button {
+            background: #8b5a2b;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 40px;
+            font-size: 20px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 20px 0 10px;
+            border-bottom: 4px solid #5a3a1c;
+        }
+        button:hover {
+            background: #6b4423;
+            transform: scale(0.99);
+        }
+        .result-box {
+            background: #eef3e8;
+            padding: 18px;
+            border-radius: 16px;
+            border-right: 8px solid #2e6b2e;
+            margin-top: 20px;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #9bb88b;
+        }
+        .result-item strong { color: #1e3d1e; }
+        .warning {
+            color: #a1421d;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+            background: #ffefdb;
+            padding: 5px;
+            border-radius: 30px;
+        }
+        .sap-reference {
+            font-size: 0.8rem;
+            color: #6b5a4a;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .note {
+            background: #fff9e0;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #e6d5b8;
+        }
+        hr { border: 0.5px solid #dccbbd; margin: 20px 0; }
+
+        /* --- تنسيق الفوتر الجديد (حقوق الملكية) --- */
+        .brand-footer {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 2px solid #c49a6c;
+            text-align: center;
+            color: #3a2c22;
+        }
+        .brand-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #4a2c1b;
+            letter-spacing: 1px;
+        }
+        .brand-slogan {
+            font-size: 1rem;
+            background: #f0e4d8;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 30px;
+            margin: 8px 0;
+        }
+        .brand-contact {
+            font-size: 1.2rem;
+            font-weight: bold;
+            direction: ltr; /* لعرض الأرقام بشكل صحيح */
+            unicode-bidi: embed;
+            background: #2e6b2e;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .copyright {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+        /* ------------------------------------ */
+    </style>
+</head>
+<body>
+
+<div class="calc-box">
+    <h2>🧴 آلة حساب الصابون (خلطة 3 زيوت)</h2>
+    <p style="text-align:center; color:#5e4b3a;">👩‍🔬 للمصنعين المحترفين - أدخل الأوزان بالجرام</p>
+
+    <!-- قسم الزيوت الثلاثة -->
+    <h3>🥥 الزيت الأول</h3>
+    <div class="oil-row">
+        <span class="oil-label">النوع:</span>
+        <select id="oil1_type" class="oil-select">
+            <!-- Vegetable Oils & Butters -->
+            <optgroup label="🌿 الزيوت والزبدة النباتية">
+                <option value="184">زيت جوز الهند (184)</option>
+                <option value="141" selected>زيت النخيل الأحمر (141)</option>
+                <option value="136">زيت الزيتون (136)</option>
+                <option value="128">زيت الخروع (128)</option>
+                <option value="136">زيت اللوز الحلو (136)</option>
+                <option value="128">زبدة الشيا (128)</option>
+                <option value="137">زبدة الكاكاو (137)</option>
+                <option value="175">زيت نوى النخيل (175)</option>
+                <option value="135">زيت الذرة (135)</option>
+                <option value="126.5">زيت بذور العنب (126.5)</option>
+                <option value="124">زيت بذور اللفت / الكانولا (124)</option>
+                <option value="138.6">زيت بذرة القطن (138.6)</option>
+                <option value="135">زيت فول الصويا (135)</option>
+                <option value="69">زيت الجوجوبا (69)</option>
+                <option value="134.5">زيت بذور القنب (134.5)</option>
+                <option value="135">زبدة المانجو (135)</option>
+                <option value="132.6">زيت كبد الحوت (132.6)</option>
+            </optgroup>
+            <!-- Animal Fats -->
+            <optgroup label="🐄 الدهون الحيوانية (الشحوم والودك)">
+                <option value="140.5">شحم البقر (140.5)</option>
+                <option value="138.3">شحم الماعز (138.3)</option>
+                <option value="140.5">شحم الضأن (140.5)</option>
+                <option value="138">دهن الخنزير (138)</option>
+                <option value="138.9">دهن الدجاج (138.9)</option>
+                <option value="136.9">دهن الأوز (136.9)</option>
+                <option value="137.9">دهن الغزال (137.9)</option>
+                <option value="143">دهن الأرانب (143)</option>
+                <option value="140">دهن الحصان (140)</option>
+                <option value="140">دهن المنك (140)</option>
+            </optgroup>
+            <!-- Waxes & Additives -->
+            <optgroup label="🕯️ الشموع والإضافات">
+                <option value="96">شمع العسل (96)</option>
+                <option value="175">حمض اللوريك (175)</option>
+                <option value="142">حمض الزيت (142)</option>
+            </optgroup>
+        </select>
+        <span class="oil-label">الوزن (غ):</span>
+        <input type="number" id="oil1_weight" class="oil-weight" value="400" step="10" min="0">
+    </div>
+
+    <h3>🧈 الزيت الثاني</h3>
+    <div class="oil-row">
+        <select id="oil2_type" class="oil-select">
+            <optgroup label="🌿 الزيوت والزبدة النباتية">
+                <option value="184" selected>زيت جوز الهند (184)</option>
+                <option value="141">زيت النخيل الأحمر (141)</option>
+                <option value="136">زيت الزيتون (136)</option>
+                <option value="128">زيت الخروع (128)</option>
+                <option value="136">زيت اللوز الحلو (136)</option>
+                <option value="128">زبدة الشيا (128)</option>
+                <option value="137">زبدة الكاكاو (137)</option>
+                <option value="175">زيت نوى النخيل (175)</option>
+                <option value="135">زيت الذرة (135)</option>
+                <option value="126.5">زيت بذور العنب (126.5)</option>
+                <option value="124">زيت بذور اللفت / الكانولا (124)</option>
+                <option value="138.6">زيت بذرة القطن (138.6)</option>
+                <option value="135">زيت فول الصويا (135)</option>
+                <option value="69">زيت الجوجوبا (69)</option>
+                <option value="134.5">زيت بذور القنب (134.5)</option>
+                <option value="135">زبدة المانجو (135)</option>
+                <option value="132.6">زيت كبد الحوت (132.6)</option>
+            </optgroup>
+            <optgroup label="🐄 الدهون الحيوانية (الشحوم والودك)">
+                <option value="140.5">شحم البقر (140.5)</option>
+                <option value="138.3">شحم الماعز (138.3)</option>
+                <option value="140.5">شحم الضأن (140.5)</option>
+                <option value="138">دهن الخنزير (138)</option>
+                <option value="138.9">دهن الدجاج (138.9)</option>
+                <option value="136.9">دهن الأوز (136.9)</option>
+                <option value="137.9">دهن الغزال (137.9)</option>
+                <option value="143">دهن الأرانب (143)</option>
+                <option value="140">دهن الحصان (140)</option>
+                <option value="140">دهن المنك (140)</option>
+            </optgroup>
+            <optgroup label="🕯️ الشموع والإضافات">
+                <option value="96">شمع العسل (96)</option>
+                <option value="175">حمض اللوريك (175)</option>
+                <option value="142">حمض الزيت (142)</option>
+            </optgroup>
+        </select>
+        <input type="number" id="oil2_weight" class="oil-weight" value="300" step="10" min="0">
+    </div>
+
+    <h3>🌿 الزيت الثالث</h3>
+    <div class="oil-row">
+        <select id="oil3_type" class="oil-select">
+            <optgroup label="🌿 الزيوت والزبدة النباتية">
+                <option value="184">زيت جوز الهند (184)</option>
+                <option value="141">زيت النخيل الأحمر (141)</option>
+                <option value="136" selected>زيت الزيتون (136)</option>
+                <option value="128">زيت الخروع (128)</option>
+                <option value="136">زيت اللوز الحلو (136)</option>
+                <option value="128">زبدة الشيا (128)</option>
+                <option value="137">زبدة الكاكاو (137)</option>
+                <option value="175">زيت نوى النخيل (175)</option>
+                <option value="135">زيت الذرة (135)</option>
+                <option value="126.5">زيت بذور العنب (126.5)</option>
+                <option value="124">زيت بذور اللفت / الكانولا (124)</option>
+                <option value="138.6">زيت بذرة القطن (138.6)</option>
+                <option value="135">زيت فول الصويا (135)</option>
+                <option value="69">زيت الجوجوبا (69)</option>
+                <option value="134.5">زيت بذور القنب (134.5)</option>
+                <option value="135">زبدة المانجو (135)</option>
+                <option value="132.6">زيت كبد الحوت (132.6)</option>
+            </optgroup>
+            <optgroup label="🐄 الدهون الحيوانية (الشحوم والودك)">
+                <option value="140.5">شحم البقر (140.5)</option>
+                <option value="138.3">شحم الماعز (138.3)</option>
+                <option value="140.5">شحم الضأن (140.5)</option>
+                <option value="138">دهن الخنزير (138)</option>
+                <option value="138.9">دهن الدجاج (138.9)</option>
+                <option value="136.9">دهن الأوز (136.9)</option>
+                <option value="137.9">دهن الغزال (137.9)</option>
+                <option value="143">دهن الأرانب (143)</option>
+                <option value="140">دهن الحصان (140)</option>
+                <option value="140">دهن المنك (140)</option>
+            </optgroup>
+            <optgroup label="🕯️ الشموع والإضافات">
+                <option value="96">شمع العسل (96)</option>
+                <option value="175">حمض اللوريك (175)</option>
+                <option value="142">حمض الزيت (142)</option>
+            </optgroup>
+        </select>
+        <input type="number" id="oil3_weight" class="oil-weight" value="300" step="10" min="0">
+    </div>
+
+    <!-- المجموع الكلي -->
+    <div class="total-row">
+        <span>🧮 مجموع الزيوت:</span>
+        <span id="totalOilDisplay">1000</span> غرام
+    </div>
+    <div id="weightWarning" class="warning"></div>
+
+    <!-- الإعدادات الإضافية -->
+    <div class="setting-row">
+        <div class="setting-item">
+            <label>🧴 الدهون الفائقة (Superfat):</label>
+            <input type="number" id="superfatInput" value="5" step="0.5" min="0" max="15"> %
+        </div>
+        <div class="setting-item">
+            <label>💧 نسبة الماء : الصودا:</label>
+            <select id="waterRatioSelect">
+                <option value="2.0">2.0 : 1 (سريع)</option>
+                <option value="2.5" selected>2.5 : 1 (موصى به)</option>
+                <option value="3.0">3.0 : 1 (أمان عالي)</option>
+            </select>
+        </div>
+    </div>
+
+    <button onclick="calculateBlend()">🧪 احسب الوصفة المتكاملة</button>
+
+    <!-- صندوق النتائج -->
+    <div class="result-box" id="resultArea" style="display:none;">
+        <h3 style="margin-top:0; text-align:center;">✅ الوصفة النهائية للتصنيع</h3>
+        <div class="result-item"><span>📊 الوزن الكلي للزيوت:</span> <strong><span id="finalOil">0</span> غرام</strong></div>
+        <div class="result-item"><span>⚖️ الصودا الكاوية (بدون خصم):</span> <strong><span id="rawLye">0.0</span> غرام</strong></div>
+        <div class="result-item"><span style="color:#b35c1e;">🔥 الصودا الكاوية (بعد خصم الدهون):</span> <strong style="color:#b35c1e;"><span id="finalLye">0.0</span> غرام</strong></div>
+        <div class="result-item"><span>💧 الماء المقطر المطلوب:</span> <strong><span id="finalWater">0.0</span> غرام</strong></div>
+        <hr>
+        <div class="note">
+            <strong>📋 تعليمات الخلط:</strong><br>
+            1. قم بوزن <span id="lyeNote">0.0</span> غرام صودا كاوية بدقة.<br>
+            2. قم بوزن <span id="waterNote">0.0</span> غرام ماء بارد أو مثلج.<br>
+            3. اسكب الصودا على الماء ببطء (وليس العكس) مع التقليب.<br>
+            4. اترك المحلول ليبرد إلى 40-50 مئوية.<br>
+            5. سخن الزيوت إلى نفس درجة الحرارة واخلط بالخلاط حتى أثر الخيط.
+        </div>
+    </div>
+    
+    <div class="sap-reference">
+        * قيم التصبن (SAP) معتمدة من جداول علمية (NaOH لكل 1000 غرام زيت).
+    </div>
+
+    <!-- BEGIN FOOTER: انسخ من هنا لوضع الحقوق -->
+    <div class="brand-footer">
+        <div class="brand-name">🌟 إستثمارك للحلول الاستثمارية الذكية 🌟</div>
+        <div class="brand-slogan">🧼 ورشة تدريب طريقة صناعة الصابون 🧼</div>
+        <div class="brand-contact">📞 +249 96 241 1479</div>
+        <div class="copyright">
+            © 2026 جميع الحقوق محفوظة. تطوير خاص لمصنعي الصابون المحترفين.
+        </div>
+    </div>
+    <!-- END FOOTER -->
+    
+</div> <!-- نهاية calc-box -->
+
+<script>
+    function calculateBlend() {
+        // 1. جلب الأوزان
+        let w1 = parseFloat(document.getElementById('oil1_weight').value) || 0;
+        let w2 = parseFloat(document.getElementById('oil2_weight').value) || 0;
+        let w3 = parseFloat(document.getElementById('oil3_weight').value) || 0;
+        let totalOil = w1 + w2 + w3;
+        
+        document.getElementById('totalOilDisplay').innerText = totalOil.toFixed(1);
+        
+        // تحذير إذا كان المجموع غير معقول
+        let warnDiv = document.getElementById('weightWarning');
+        if (totalOil <= 0) {
+            warnDiv.innerText = '⚠️ يجب أن يكون مجموع الزيوت أكبر من صفر!';
+            document.getElementById('resultArea').style.display = 'none';
+            return;
+        } else {
+            warnDiv.innerText = '';
+        }
+
+        // 2. جلب قيم SAP من الاختيارات
+        let sap1 = parseFloat(document.getElementById('oil1_type').value);
+        let sap2 = parseFloat(document.getElementById('oil2_type').value);
+        let sap3 = parseFloat(document.getElementById('oil3_type').value);
+        
+        // 3. حساب الصودا الجافة لكل زيت (القيمة مخزنة كـ NaOH لكل 1000غ)
+        let lye1 = w1 * (sap1 / 1000);
+        let lye2 = w2 * (sap2 / 1000);
+        let lye3 = w3 * (sap3 / 1000);
+        let totalRawLye = lye1 + lye2 + lye3;
+        
+        // 4. جلب الـ Superfat ونسبة الماء
+        let sfPercent = parseFloat(document.getElementById('superfatInput').value) || 5;
+        let waterMult = parseFloat(document.getElementById('waterRatioSelect').value);
+        
+        // 5. حساب الصودا بعد الخصم
+        let finalLye = totalRawLye * (1 - (sfPercent / 100));
+        let finalWater = finalLye * waterMult;
+        
+        // 6. عرض النتائج في الصندوق
+        document.getElementById('finalOil').innerText = totalOil.toFixed(1);
+        document.getElementById('rawLye').innerText = totalRawLye.toFixed(2);
+        document.getElementById('finalLye').innerText = finalLye.toFixed(2);
+        document.getElementById('finalWater').innerText = finalWater.toFixed(2);
+        
+        // تحديث التعليمات
+        document.getElementById('lyeNote').innerText = finalLye.toFixed(2);
+        document.getElementById('waterNote').innerText = finalWater.toFixed(2);
+        
+        // إظهار الصندوق
+        document.getElementById('resultArea').style.display = 'block';
+        
+        // تمرير تلقائي للنتيجة
+        document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // تشغيل الحساب تلقائياً عند تحميل الصفحة لأول مرة
+    window.onload = function() {
+        calculateBlend();
+    };
+</script>
+
+</body>
+</html>
