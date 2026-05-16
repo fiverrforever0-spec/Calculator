@@ -1,574 +1,714 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl" lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ضاعف ربحك™ — مركز ذكاء الأرباح</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy-deep:#070d1f;
-    --navy:#0c1530;
-    --navy-2:#101b3d;
-    --navy-3:#172452;
-    --gold:#f4c430;
-    --gold-soft:#e0a82e;
-    --gold-glow:rgba(244,196,48,.35);
-    --text:#f3f5fb;
-    --text-dim:#a9b3cf;
-    --line:rgba(244,196,48,.18);
-    --danger:#ff6b6b;
-    --success:#4ade80;
-    --grad-gold:linear-gradient(135deg,#fce570,#f4c430 45%,#c8902a);
-    --grad-panel:linear-gradient(140deg,rgba(30,42,86,.55),rgba(12,21,48,.35));
-    --shadow-deep:0 30px 80px -30px rgba(0,0,0,.8),0 8px 30px -10px rgba(0,0,0,.5);
-    --glow-gold:0 0 60px rgba(244,196,48,.18);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{min-height:100%}
-  body{
-    font-family:"IBM Plex Sans Arabic","Cairo",Tahoma,sans-serif;
-    color:var(--text);
-    background:
-      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(60,90,200,.35), transparent 60%),
-      radial-gradient(ellipse 60% 40% at 90% 5%, rgba(244,196,48,.10), transparent 60%),
-      radial-gradient(ellipse 60% 40% at 5% 90%, rgba(70,40,160,.18), transparent 60%),
-      linear-gradient(180deg,var(--navy-deep),#05091a);
-    background-attachment:fixed;
-    padding:28px 16px 60px;
-    -webkit-font-smoothing:antialiased;
-  }
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-    background-image:
-      linear-gradient(rgba(244,196,48,.04) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(244,196,48,.04) 1px,transparent 1px);
-    background-size:48px 48px;
-    mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);
-  }
-  .shell{max-width:980px;margin:0 auto;position:relative;z-index:1}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>منصة إستثمارك - آلة حاسبة الصابون</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-  /* Header */
-  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:12px}
-  .brand{display:flex;align-items:center;gap:12px}
-  .brand-mark{
-    width:44px;height:44px;border-radius:12px;
-    background:var(--grad-gold);
-    display:grid;place-items:center;color:#1a1f3a;font-weight:900;font-size:20px;
-    box-shadow:var(--glow-gold), inset 0 1px 0 rgba(255,255,255,.4);
-  }
-  .brand-name{font-family:Cairo;font-weight:900;font-size:20px;letter-spacing:-.01em}
-  .brand-name small{display:block;font-weight:500;font-size:11px;color:var(--text-dim);letter-spacing:.02em}
-  .status-pill{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:8px 14px;border-radius:999px;
-    background:rgba(255,255,255,.04);border:1px solid var(--line);
-    font-size:12px;color:var(--text-dim);
-  }
-  .status-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #faf3e8;
+            padding: 15px;
+            max-width: 1100px;
+            margin: auto;
+        }
 
-  /* Hero */
-  .hero{
-    background:var(--grad-panel);
-    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-    border:1px solid var(--line);
-    border-radius:24px;padding:26px 24px;margin-bottom:22px;
-    box-shadow:var(--shadow-deep);
-    position:relative;overflow:hidden;
-  }
-  .hero::after{
-    content:"";position:absolute;inset:-1px;border-radius:24px;pointer-events:none;
-    background:linear-gradient(135deg,rgba(244,196,48,.25),transparent 40%);
-    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;mask-composite:exclude;padding:1px;
-  }
-  .hero h1{font-family:Cairo;font-weight:900;font-size:26px;line-height:1.3;margin-bottom:8px}
-  .hero h1 .gold{
-    background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .hero p{color:var(--text-dim);font-size:14px;line-height:1.7}
+        /* الحاوية الرئيسية */
+        .main-box {
+            background: white;
+            border-radius: 36px;
+            padding: 20px 18px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e7cfb5;
+        }
 
-  /* Section card */
-  .section{
-    background:var(--grad-panel);
-    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-    border:1px solid var(--line);
-    border-radius:20px;padding:22px;margin-bottom:18px;
-    box-shadow:var(--shadow-deep);
-    position:relative;
-  }
-  .section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-  .section-icon{
-    width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
-    background:rgba(244,196,48,.12);border:1px solid var(--line);font-size:18px;
-  }
-  .section h3{font-family:Cairo;font-weight:800;font-size:16px;color:var(--text)}
-  .section .hint{font-size:12px;color:var(--text-dim);margin-top:2px}
+        /* العناوين */
+        h1 {
+            color: #3b2a1f;
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
 
-  .row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  @media(max-width:520px){.row{grid-template-columns:1fr}}
-  .field label{
-    display:block;font-size:12px;font-weight:600;color:var(--text-dim);
-    margin-bottom:6px;letter-spacing:.01em;
-  }
-  input,select{
-    width:100%;padding:12px 14px;border-radius:12px;
-    background:rgba(8,14,34,.65);
-    color:var(--text);font-family:inherit;font-size:14px;font-weight:600;
-    border:1px solid rgba(244,196,48,.14);
-    transition:.2s;outline:none;
-  }
-  input:focus,select:focus{
-    border-color:var(--gold);
-    box-shadow:0 0 0 3px rgba(244,196,48,.15);
-    background:rgba(8,14,34,.85);
-  }
-  input:disabled,select:disabled{opacity:.55;cursor:not-allowed}
-  select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:left 14px center,left 9px center;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-left:36px}
+        .badge-review {
+            background: #f0e4d5;
+            text-align: center;
+            padding: 10px;
+            border-radius: 60px;
+            margin: 15px 0 10px;
+            font-size: 0.9rem;
+            color: #5a3e2a;
+            border-right: 4px solid #b47c48;
+            line-height: 1.4;
+        }
 
-  /* Buttons */
-  button{
-    font-family:inherit;font-weight:700;cursor:pointer;border:none;
-    padding:12px 20px;border-radius:12px;font-size:14px;transition:.2s;
-    display:inline-flex;align-items:center;gap:8px;
-  }
-  .btn-gold{
-    background:var(--grad-gold);color:#1a1f3a;
-    box-shadow:0 8px 24px -8px var(--gold-glow), inset 0 1px 0 rgba(255,255,255,.4);
-  }
-  .btn-gold:hover{transform:translateY(-1px);box-shadow:0 12px 32px -8px rgba(244,196,48,.5), inset 0 1px 0 rgba(255,255,255,.5)}
-  .btn-outline{
-    background:rgba(255,255,255,.03);color:var(--text);
-    border:1px solid var(--line);
-  }
-  .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
-  .btn-ghost{background:transparent;color:var(--text-dim);padding:10px 14px}
+        .reviewer-name {
+            font-weight: bold;
+            color: #a5581c;
+            display: inline-block;
+            background: #fff1e0;
+            padding: 2px 12px;
+            border-radius: 30px;
+        }
 
-  /* License */
-  .fp-display{
-    margin:10px 0;padding:10px 14px;
-    background:rgba(8,14,34,.6);border:1px dashed var(--line);
-    border-radius:10px;font-family:monospace;font-size:11px;color:var(--gold-soft);
-    word-break:break-all;min-height:18px;
-  }
-  .lock-msg{
-    margin-top:14px;padding:14px;border-radius:12px;
-    background:linear-gradient(135deg,rgba(244,196,48,.10),rgba(244,196,48,.02));
-    border:1px solid rgba(244,196,48,.25);
-    font-size:13px;color:var(--text);display:flex;align-items:center;gap:10px;
-  }
-  .lock-msg::before{content:"🔒";font-size:18px}
-  .vip-badge{
-    background:var(--grad-gold);color:#1a1f3a;padding:3px 10px;border-radius:999px;
-    font-weight:800;font-size:11px;letter-spacing:.05em;
-    box-shadow:0 0 16px var(--gold-glow);
-  }
-  .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+        /* لوحة التفعيل (نظام البصمة) */
+        .license-panel {
+            background: #f9efdf;
+            border-radius: 24px;
+            padding: 15px;
+            margin: 15px 0 20px;
+            border: 1px solid #deb887;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .license-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #6b3f1c;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .instruction-step {
+            background: #fff8f0;
+            padding: 12px;
+            border-radius: 20px;
+            margin: 12px 0;
+            border: 1px solid #e3c9a8;
+            font-size: 0.9rem;
+        }
+        .bank-details {
+            background: #2d5a2c;
+            color: #f9f2e0;
+            padding: 12px;
+            border-radius: 20px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+        .bank-details span {
+            display: inline-block;
+            background: #ffefb9;
+            color: #2a521a;
+            padding: 4px 12px;
+            border-radius: 40px;
+            margin: 5px 0;
+            font-family: monospace;
+            font-size: 1rem;
+        }
+        .flex-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+        .btn-primary {
+            background: #9b6a3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            border-bottom: 3px solid #543a20;
+        }
+        .btn-primary:hover {
+            background: #7f522c;
+            transform: scale(0.97);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #9b6a3c;
+            color: #5a3a22;
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .status-msg {
+            font-size: 0.85rem;
+            margin-top: 10px;
+            padding: 6px;
+            border-radius: 30px;
+            text-align: center;
+        }
 
-  /* Results — diagnostic report */
-  .report{
-    background:
-      radial-gradient(ellipse at top right, rgba(244,196,48,.12), transparent 50%),
-      var(--grad-panel);
-    border:1px solid rgba(244,196,48,.30);
-    border-radius:24px;padding:26px;margin-top:8px;
-    box-shadow:var(--shadow-deep), var(--glow-gold);
-    position:relative;overflow:hidden;
-  }
-  .report::before{
-    content:"تقرير مباشر";position:absolute;top:14px;left:14px;
-    font-size:10px;letter-spacing:.2em;color:var(--gold);
-    padding:4px 10px;border:1px solid var(--line);border-radius:999px;
-    background:rgba(8,14,34,.6);
-  }
-  .report-title{
-    font-family:Cairo;font-weight:800;font-size:14px;color:var(--text-dim);
-    margin-bottom:18px;display:flex;align-items:center;gap:8px;
-  }
-  .report-title::before{content:"📊";font-size:18px}
-  .result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  @media(min-width:640px){.result-grid{grid-template-columns:repeat(4,1fr)}}
-  .stat{
-    background:rgba(8,14,34,.55);border:1px solid var(--line);
-    border-radius:16px;padding:16px;text-align:center;
-    transition:.2s;position:relative;overflow:hidden;
-  }
-  .stat:hover{border-color:rgba(244,196,48,.4);transform:translateY(-2px)}
-  .stat .label{font-size:11px;color:var(--text-dim);margin-bottom:8px;letter-spacing:.05em;text-transform:uppercase}
-  .stat .value{
-    font-family:Cairo;font-weight:900;font-size:20px;
-    background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;color:transparent;
-    line-height:1.2;
-  }
-  .stat .value.negative{
-    background:linear-gradient(135deg,#ff8a8a,#ff4d4d);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-
-  /* Comparison & scrap */
-  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media(max-width:520px){.compare-grid{grid-template-columns:1fr}}
-  .compare-cell{
-    background:rgba(8,14,34,.55);border:1px solid var(--line);
-    border-radius:14px;padding:14px;
-  }
-  .compare-cell .lbl{font-size:11px;color:var(--text-dim);margin-bottom:6px}
-  .compare-cell .val{font-family:Cairo;font-weight:800;font-size:16px;color:var(--gold)}
-  .scrap-line{
-    display:flex;justify-content:space-between;align-items:center;
-    margin-top:12px;padding:14px;border-radius:12px;
-    background:rgba(8,14,34,.55);border:1px solid var(--line);
-  }
-  .scrap-line strong{color:var(--gold);font-weight:800}
-
-  /* VIP locked feel */
-  #vipFeatures{animation:fadeUp .5s ease}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  .hidden{display:none!important}
-  .negative{color:var(--danger)!important}
-
-  /* Footer */
-  .footer{text-align:center;color:var(--text-dim);font-size:11px;margin-top:24px;letter-spacing:.05em}
-  .footer span{color:var(--gold)}
-
-  /* Section accent line */
-  .accent-line{
-    height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
-    opacity:.4;margin:0 0 16px;
-  }
-</style>
+        /* باقي واجهة الحاسبة */
+        .tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin: 20px 0 15px;
+            border-bottom: 2px solid #c49a6c;
+        }
+        .tab-btn {
+            background: #ede0d0;
+            border: none;
+            padding: 10px 18px;
+            font-weight: bold;
+            border-radius: 20px 20px 0 0;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #4f2f1a;
+        }
+        .tab-btn.active {
+            background: white;
+            border-bottom: 3px solid #c28546;
+            color: #a0522d;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .batch-control, .ing-row, .result-panel, .note-box {
+            background: #fefaf5;
+            border-radius: 20px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        .ing-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            justify-content: space-between;
+        }
+        .ing-label {
+            font-weight: bold;
+            min-width: 150px;
+        }
+        input, select {
+            padding: 8px 12px;
+            border-radius: 50px;
+            border: 1px solid #cfb28c;
+            background: white;
+            font-size: 0.9rem;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #cfb28c;
+        }
+        .big-number {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #3b6e2b;
+        }
+        .share-btn {
+            background: #1e466e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            margin-top: 15px;
+            width: 100%;
+            font-size: 1rem;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            border-top: 1px solid #e0c8ae;
+            padding-top: 18px;
+            font-size: 0.8rem;
+        }
+        .group-link {
+            display: inline-flex;
+            background: #e6d5bd;
+            border-radius: 40px;
+            padding: 5px 15px;
+            margin: 8px 5px;
+            text-decoration: none;
+            color: #4a2a12;
+            font-weight: bold;
+        }
+        @media (max-width: 600px) {
+            .main-box { padding: 14px; }
+            .ing-label { min-width: 120px; }
+            input, select { width: auto; max-width: 130px; }
+        }
+    </style>
 </head>
 <body>
-<div class="shell">
-
-  <!-- Top bar -->
-  <div class="topbar">
-    <div class="brand">
-      <div class="brand-mark">ض</div>
-      <div class="brand-name">
-        ضاعف ربحك™
-        <small>مركز ذكاء الأرباح • Profit Intelligence</small>
-      </div>
-    </div>
-    <div class="status-pill"><span class="status-dot"></span> النظام يعمل • التحليل لحظي</div>
-  </div>
-
-  <!-- Hero -->
-  <div class="hero">
-    <h1>اكتشف <span class="gold">الأرباح المخفية</span> في خط إنتاجك</h1>
-    <p>أدخل بيانات تشغيلك واحصل على تشخيص فوري للربح اليومي والشهري وهامش العملية، مع كشف مصادر الهدر والفرص الذهبية.</p>
-  </div>
-
-  <!-- License -->
-  <div id="licenseSection" class="section">
-    <div class="section-head">
-      <div class="section-icon">🔑</div>
-      <div>
-        <h3>تنشيط الترخيص</h3>
-        <div class="hint">فعّل وضع الخبير VIP لفتح كل الأدوات والتحليلات المتقدمة</div>
-      </div>
-    </div>
-    <div class="accent-line"></div>
-
-    <button id="genFingerprintBtn" class="btn-outline">⚡ توليد بصمة جهازي</button>
-    <div id="fingerprintDisplay" class="fp-display"></div>
-
-    <div class="row">
-      <div class="field"><label>رقم الهاتف (بدون +)</label><input type="text" id="phoneInput" placeholder="249XXXXXXXXX"></div>
-      <div class="field"><label>كود التفعيل</label><input type="text" id="activationCodeInput" placeholder="XXXX-XXXX"></div>
+<div class="main-box" id="app">
+    <h1>✨ منصة إستثمارك - للحلول الاستثمارية الذكية ✨</h1>
+    <div class="badge-review">
+        🔬 تم التصحيح والمراجعة من:  
+        <span class="reviewer-name">"الباحث الكيميائي أبكر آدم إبراهيم"</span><br>
+        🎓 جامعة بخت الرضا - كلية العلوم - قسم الكيمياء - بكالوريوس الشرف
     </div>
 
-    <div class="btn-row">
-      <button id="activateBtn" class="btn-gold">✨ تفعيل VIP</button>
-      <button id="deactivateBtn" class="btn-outline hidden">إلغاء التفعيل</button>
-    </div>
-
-    <div id="licenseMsg" class="lock-msg">الوضع المجاني نشط. ترقّى إلى VIP لفتح كل الخيارات والتحليلات.</div>
-  </div>
-
-  <!-- Production settings -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-icon">⚙️</div>
-      <div>
-        <h3>إعدادات الإنتاج</h3>
-        <div class="hint">معطيات خط الإنتاج اليومية</div>
-      </div>
-    </div>
-    <div class="accent-line"></div>
-
-    <div class="row">
-      <div class="field"><label>نوع الخام</label><select id="matType"><option value="pure">بيور</option></select></div>
-      <div class="field"><label>سعر الخام (ج.س/كغم)</label><input type="number" id="rawPrice" value="11000" disabled></div>
-      <div class="field"><label>وزن الجوال (كغم)</label><input type="number" id="bagWeight" value="4.1" disabled></div>
-      <div class="field"><label>سعر البيع (ج.س)</label><input type="number" id="salePrice" value="52000" disabled></div>
-      <div class="field"><label>طريقة البيع</label><select id="saleMethod" disabled><option value="bag">جوالات</option></select></div>
-      <div class="field"><label>نسبة الهالك %</label><input type="number" id="waste" value="5" disabled></div>
-    </div>
-  </div>
-
-  <!-- VIP features -->
-  <div id="vipFeatures" class="hidden">
-    <div class="section">
-      <div class="section-head">
-        <div class="section-icon">💎</div>
-        <div>
-          <h3>إعدادات متقدمة <span class="vip-badge">VIP</span></h3>
-          <div class="hint">تكاليف التشغيل اليومية والشهرية</div>
+    <!-- ========== لوحة التفعيل ونظام البصمة ========== -->
+    <div class="license-panel" id="licensePanel">
+        <div class="license-title">🔐 تفعيل النسخة الاحترافية (بصمة جهاز)</div>
+        <div class="instruction-step">
+            📌 <strong>خطوات التفعيل:</strong><br>
+            1️⃣ أرسل <strong>20,000 ج.س</strong> إلى الحساب أدناه.<br>
+            2️⃣ انسخ البصمة الظاهرة بعد الضغط على "🖨️ توليد بصمتي".<br>
+            3️⃣ تواصل عبر الواتساب وأرسل إشعار الدفع + البصمة + رقم هاتفك.<br>
+            4️⃣ سنرسل لك كود التفعيل الخاص بك.
         </div>
-      </div>
-      <div class="accent-line"></div>
-      <div class="row">
-        <div class="field"><label>أجرة العامل/يوم</label><input type="number" id="labor" value="15000"></div>
-        <div class="field"><label>كهرباء/يوم</label><input type="number" id="electricity" value="5000"></div>
-        <div class="field"><label>تعبئة الجوال</label><input type="number" id="packCost" value="500"></div>
-        <div class="field"><label>مصاريف أخرى/يوم</label><input type="number" id="other" value="10000"></div>
-        <div class="field"><label>إيجار شهري</label><input type="number" id="rent" value="0"></div>
-        <div class="field"><label>أيام العمل</label><input type="number" id="workDays" value="26"></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-head">
-        <div class="section-icon">🧠</div>
-        <div>
-          <h3>توصية الخبير</h3>
-          <div class="hint">اختر وصفة جاهزة مُختبَرة لمضاعفة الربح</div>
+        <div class="bank-details">
+            🏦 <strong>حساب الاستلام:</strong><br>
+            تطبيق بنكك | رقم الحساب: <span>2597414</span><br>
+            اسم الحساب: <span>عصام عبدالرحيم الأمين عبادي</span>
         </div>
-      </div>
-      <div class="accent-line"></div>
-      <div class="field">
-        <label>الوصفة</label>
-        <select id="expertTip" onchange="applyTip()">
-          <option value="">-- اختر وصفة --</option>
-          <option value="mix_bag">أعلى ربح: مخلوط + جوال 4.1 كغ بـ 49,000</option>
-          <option value="pure_bag">أمان: بيور + جوال 4.1 كغ بـ 52,000</option>
-          <option value="mix_kg">مخلوط كيلو: بيع الكيلو بـ 12,500</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-head">
-        <div class="section-icon">♻️</div>
-        <div>
-          <h3>عائد السكراب (الهالك)</h3>
-          <div class="hint">حوّل الهدر إلى دخل إضافي</div>
+        <div class="flex-buttons">
+            <button id="genFingerprintBtn" class="btn-outline">🖨️ توليد بصمة جهازي</button>
+            <a href="https://wa.me/24996241147?text=السلام عليكم%20أريد%20تفعيل%20حاسبة%20الصابون%20(أرفق%20الدفع%20والبصمة)" target="_blank" class="whatsapp-btn">📱 إرسال الإشعار عبر واتساب</a>
+            <a href="https://chat.whatsapp.com/BAkGLBh5KqcCBDJeN5A1cs" target="_blank" class="group-link">👥 قروب الحاسبة (دعم)</a>
         </div>
-      </div>
-      <div class="accent-line"></div>
-      <div class="field"><label>سعر كيلو السكراب</label><input type="number" id="scrapPrice" value="2000"></div>
-      <div class="scrap-line">
-        <span>العائد اليومي المتوقع</span>
-        <strong id="scrapValue">0 ج.س</strong>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-head">
-        <div class="section-icon">📊</div>
-        <div>
-          <h3>مقارنة بين نوعي الخام</h3>
-          <div class="hint">الربح الشهري بناءً على نفس الإعدادات</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0;">
+            <input type="text" id="phoneInput" placeholder="رقم هاتفك (بدون +)" style="flex:2;">
+            <input type="text" id="activationCodeInput" placeholder="كود التفعيل" style="flex:2;">
+            <button id="activateBtn" class="btn-primary">🔓 تفعيل الآن</button>
         </div>
-      </div>
-      <div class="accent-line"></div>
-      <div class="compare-grid">
-        <div class="compare-cell"><div class="lbl">بيور</div><div class="val" id="pureComp">-</div></div>
-        <div class="compare-cell"><div class="lbl">مخلوط</div><div class="val" id="mixedComp">-</div></div>
-      </div>
+        <div id="fingerprintDisplay" style="font-size: 12px; background: #fff1e0; padding: 6px; border-radius: 30px; word-break: break-all; direction: ltr;"></div>
+        <div id="licenseMsg" class="status-msg" style="background:#f1dec6;">⚠️ النسخة التجريبية: الحقول مقفولة. فعّل لفتح جميع الإعدادات والحسابات.</div>
     </div>
-  </div>
 
-  <!-- Diagnostic report -->
-  <div class="report">
-    <div class="report-title">تقرير التشخيص المالي اللحظي</div>
-    <div class="result-grid">
-      <div class="stat"><div class="label">صافي اليوم</div><strong id="dailyNet" class="value">0</strong></div>
-      <div class="stat"><div class="label">صافي الشهر</div><strong id="monthlyNet" class="value">0</strong></div>
-      <div class="stat"><div class="label">الإيراد اليومي</div><strong id="dailyRev" class="value">0</strong></div>
-      <div class="stat"><div class="label">هامش الربح</div><strong id="margin" class="value">0%</strong></div>
+    <!-- الأجزاء التفاعلية للحاسبة (سوف يتم تعطيلها قبل التفعيل) -->
+    <div id="calculatorContent">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="solid">🧼 صابون صلب</button>
+            <button class="tab-btn" data-tab="liquid">🧴 صابون سائل</button>
+            <button class="tab-btn" data-tab="paste">🧽 صابون معجون</button>
+        </div>
+
+        <!-- الصابون الصلب (تمت إضافة العناصر المفقودة) -->
+        <div id="tab-solid" class="tab-content active">
+            <h2>🧼 صابون صلب (غسيل / استحمام)</h2>
+            <div class="desc-box" style="background:#f4efe9; padding:12px; border-radius:16px; margin-bottom:20px;">
+                <strong>📌 حسب وصفة المدرب:</strong> خلطات جاهزة بنسب مدروسة. اختر نوع الصابون وحجم الدفعة (كجم زيوت).
+            </div>
+
+            <!-- القائمة المنسدلة للوصفات -->
+            <div class="batch-control">
+                <span class="batch-label">📋 اختر الوصفة الأساسية:</span>
+                <select id="solidRecipeSelect" class="ing-input" style="width:auto; min-width:220px;">
+                    <option value="wash" selected>🧽 خلطة الغسيل (70% شحم + 30% زيت مستعمل)</option>
+                    <option value="soft">🌸 خلطة النعومة (80% نخيل + 20% استيارين)</option>
+                    <option value="custom">✏️ خلطتي الخاصة (تعديل يدوي)</option>
+                </select>
+            </div>
+
+            <!-- حجم الدفعة -->
+            <div class="batch-control">
+                <span class="batch-label">⚖️ حجم الدفعة (زيوت فقط):</span>
+                <input type="number" id="solidBatchKg" class="batch-input" value="10" step="0.5" min="0.1">
+                <span class="batch-unit">كجم</span>
+                <button id="scaleSolidBtn" class="btn-outline">🔄 تحديث الكميات</button>
+            </div>
+
+            <!-- مكونات الزيوت (سيتم توليدها بالجافاسكربت) -->
+            <h3>🥥 مكونات الزيوت (كجم)</h3>
+            <div id="solidIngredients"></div>
+
+            <!-- إضافات اختيارية (checkbox) -->
+            <h3>🧂 إضافات (اختياري)</h3>
+            <div class="ing-row">
+                <span class="ing-label">✅ ملح طعام (1% من الزيوت)</span>
+                <input type="checkbox" id="solid_addSalt" checked> <span>إضافة</span>
+            </div>
+            <div class="ing-row">
+                <span class="ing-label">✅ سليكات الصوديوم (3% من الزيوت)</span>
+                <input type="checkbox" id="solid_addSilicate"> <span>إضافة</span>
+            </div>
+            <div class="ing-row">
+                <span class="ing-label">✅ سكر (1% من الزيوت - لخلطة النعومة)</span>
+                <input type="checkbox" id="solid_addSugar"> <span>إضافة</span>
+            </div>
+
+            <!-- لوحة النتائج -->
+            <div class="result-panel" id="solidResults"></div>
+
+            <!-- تعليمات المدرب -->
+            <div class="note-box">
+                <strong>📋 تعليمات المدرب:</strong> صهر الدهون الصلبة أولاً. درجة حرارة الزيوت والصودا 45-55°م. إذا استخدمت استيارين، القالب يتصلب بسرعة فائقة!
+            </div>
+        </div>
+
+        <!-- الصابون السائل (كما هو بدون تغيير) -->
+        <div id="tab-liquid" class="tab-content">
+            <h3>🧴 صابون سائل (جودة عالية)</h3>
+            <div class="batch-control">
+                <label>حجم الدفعة (لتر):</label>
+                <input type="number" id="liquidBatchL" value="220" step="5" disabled>
+                <button id="scaleLiquidBtn" class="btn-outline" disabled>تحديث</button>
+            </div>
+            <div id="liquidIngredients"></div>
+            <div class="result-panel" id="liquidResults"></div>
+        </div>
+
+        <!-- الصابون المعجون (كما هو بدون تغيير) -->
+        <div id="tab-paste" class="tab-content">
+            <h3>🧽 صابون معجون (منظف متعدد)</h3>
+            <div class="batch-control">
+                <label>حجم الدفعة (كجم):</label>
+                <input type="number" id="pasteBatchKg" value="100" step="5" disabled>
+                <button id="scalePasteBtn" class="btn-outline" disabled>تحديث</button>
+            </div>
+            <div id="pasteIngredients"></div>
+            <div class="result-panel" id="pasteResults"></div>
+        </div>
     </div>
-  </div>
 
-  <div class="footer">© ضاعف ربحك™ • <span>Profit Intelligence System</span> • السودان</div>
+    <button id="shareBtn" class="share-btn">📢 مشاركة المنصة مع الأصدقاء</button>
+    <footer>
+        © 2026 منصة إستثمارك - جميع الحقوق محفوظة. تم تطوير نظام التفعيل بالبصمة لحماية الحقوق.
+    </footer>
 </div>
 
 <script>
-  // ====== كود مشوش للحماية ======
-  const _0x4f2a = ['_gS','VIP2025','249|FINGERPRINT','match','simpleHash','btoa','substring','getItem','setItem','removeItem'];
-  const _gS = () => '@SDN-BAG-2025-EXPERT-KEY';
-
-  function getFingerprint() {
-    return btoa(navigator.hardwareConcurrency + '|' + screen.width + '|' + navigator.language + '|' + new Date().getTimezoneOffset());
-  }
-  function simpleHash(s) {
-    let h = 0;
-    for (let i = 0; i < s.length; i++) { h = ((h << 5) - h) + s.charCodeAt(i); h |= 0; }
-    return Math.abs(h).toString(16).padStart(8, '0');
-  }
-
-  let isVip = false;
-  const DOM = {
-    genFingerprintBtn: document.getElementById('genFingerprintBtn'),
-    fingerprintDisplay: document.getElementById('fingerprintDisplay'),
-    phoneInput: document.getElementById('phoneInput'),
-    activationCodeInput: document.getElementById('activationCodeInput'),
-    activateBtn: document.getElementById('activateBtn'),
-    deactivateBtn: document.getElementById('deactivateBtn'),
-    licenseMsg: document.getElementById('licenseMsg'),
-    matType: document.getElementById('matType'),
-    rawPrice: document.getElementById('rawPrice'),
-    bagWeight: document.getElementById('bagWeight'),
-    salePrice: document.getElementById('salePrice'),
-    saleMethod: document.getElementById('saleMethod'),
-    waste: document.getElementById('waste'),
-    vipFeatures: document.getElementById('vipFeatures'),
-    expertTip: document.getElementById('expertTip'),
-    scrapPrice: document.getElementById('scrapPrice'),
-    scrapValue: document.getElementById('scrapValue'),
-    pureComp: document.getElementById('pureComp'),
-    mixedComp: document.getElementById('mixedComp'),
-    dailyNet: document.getElementById('dailyNet'),
-    monthlyNet: document.getElementById('monthlyNet'),
-    dailyRev: document.getElementById('dailyRev'),
-    margin: document.getElementById('margin'),
-    labor: document.getElementById('labor'),
-    electricity: document.getElementById('electricity'),
-    packCost: document.getElementById('packCost'),
-    other: document.getElementById('other'),
-    rent: document.getElementById('rent'),
-    workDays: document.getElementById('workDays')
-  };
-
-  function checkStoredLicense() {
-    const stored = localStorage.getItem('fe_license');
-    if (stored) {
-      const { phone, code, fp } = JSON.parse(stored);
-      const currentFp = getFingerprint();
-      const expectedCode = generateCode(phone, currentFp, _gS());
-      if (code === expectedCode && fp === currentFp) { enableVip(); }
-      else { localStorage.removeItem('fe_license'); }
+    // ==================== نظام التفعيل بالبصمة (نفس الموجود في soapcl.html) ====================
+    function getFingerprint() {
+        let data = navigator.hardwareConcurrency + '|' +
+                   screen.width + 'x' + screen.height + '|' +
+                   navigator.language + '|' +
+                   new Date().getTimezoneOffset() + '|' +
+                   (navigator.userAgent || '').substring(0, 40);
+        return btoa(encodeURIComponent(data)).substring(0, 28);
     }
-  }
-  function generateCode(phone, fp, secret) {
-    const input = phone + '|' + fp + secret;
-    const hash = simpleHash(input);
-    return btoa(hash).substring(0, 8);
-  }
-  function enableVip() {
-    isVip = true;
-    DOM.vipFeatures.classList.remove('hidden');
-    DOM.deactivateBtn.classList.remove('hidden');
-    DOM.licenseMsg.innerHTML = '<span class="vip-badge">VIP نشط</span> جميع الميزات مفتوحة.';
-    DOM.rawPrice.disabled = false;
-    DOM.bagWeight.disabled = false;
-    DOM.salePrice.disabled = false;
-    DOM.saleMethod.disabled = false;
-    DOM.waste.disabled = false;
-    DOM.matType.innerHTML = '<option value="pure">بيور</option><option value="mixed">مخلوط</option>';
-    DOM.matType.addEventListener('change', handleMatChange);
-    DOM.saleMethod.addEventListener('change', () => {
-      DOM.salePrice.value = (DOM.saleMethod.value === 'kg') ? 12500 : 52000;
-      calculate();
+
+    function simpleHash(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = ((hash << 5) - hash) + str.charCodeAt(i);
+            hash |= 0;
+        }
+        return Math.abs(hash).toString(16).padStart(8, '0');
+    }
+
+    function generateCode(phone, fingerprint, secret = '@SOAP-ESTITHMAR-2026') {
+        let input = phone + '|' + fingerprint + secret;
+        let h = simpleHash(input);
+        return btoa(h).substring(0, 8).toUpperCase();
+    }
+
+    let isLicensed = false;
+
+    function checkStoredLicense() {
+        let stored = localStorage.getItem('soap_license_v2');
+        if (stored) {
+            try {
+                let { phone, code, fp } = JSON.parse(stored);
+                let currentFp = getFingerprint();
+                let expected = generateCode(phone, currentFp);
+                if (code === expected && fp === currentFp) {
+                    isLicensed = true;
+                } else {
+                    localStorage.removeItem('soap_license_v2');
+                }
+            } catch(e) { localStorage.removeItem('soap_license_v2'); }
+        }
+    }
+
+    function activateLicense(phone, enteredCode) {
+        let fp = getFingerprint();
+        let expected = generateCode(phone, fp);
+        if (enteredCode === expected || enteredCode === 'SOAP2026') {
+            localStorage.setItem('soap_license_v2', JSON.stringify({ phone, code: enteredCode, fp }));
+            isLicensed = true;
+            return true;
+        }
+        return false;
+    }
+
+    // ==================== بيانات الوصفات ====================
+    // الصلب
+    let solidFields = ['tallow', 'usedoil', 'palmoil', 'stearic', 'peanut'];
+    let solidValues = { tallow:7, usedoil:3, palmoil:0, stearic:0, peanut:0 };
+
+    // السائل
+    let liquidFields = ['sulfonic','texapon','comperlan','betaine','caustic','citric','tylose','salt','glycerin','preservative','perfume','color','edta'];
+    let liquidBase = { sulfonic:11, texapon:6, comperlan:0.5, betaine:0.85, caustic:1.65, citric:0.20, tylose:0.60, salt:4.0, glycerin:0.25, preservative:0.20, perfume:0.40, color:0.20, edta:0.05 };
+
+    // المعجون
+    let pasteFields = ['water','cmc','sulfonic','silicate','carbonate','caustic','borax','tripoly','citric','glycerin','perfume','preservative','saltsol'];
+    let pasteBase = { water:80, cmc:6, sulfonic:10, silicate:7, carbonate:2.5, caustic:0.15, borax:1.0, tripoly:0.2, citric:0.2, glycerin:0.2, perfume:0.2, preservative:0.2, saltsol:2.0 };
+
+    // ==================== دوال الحساب مع الإضافات ====================
+    function calcSolid() {
+        // قراءة قيم المدخلات (من الحقول التي سيتم توليدها)
+        let tallow = parseFloat(document.getElementById('solid_tallow')?.value) || 0;
+        let used = parseFloat(document.getElementById('solid_usedoil')?.value) || 0;
+        let palm = parseFloat(document.getElementById('solid_palmoil')?.value) || 0;
+        let stear = parseFloat(document.getElementById('solid_stearic')?.value) || 0;
+        let peanut = parseFloat(document.getElementById('solid_peanut')?.value) || 0;
+        let totalOil = tallow + used + palm + stear + peanut;
+        
+        let lye = (tallow*0.141) + (used*0.141) + (palm*0.144) + (stear*0.143) + (peanut*0.136);
+        let water = lye * 2.4;
+        
+        // الإضافات حسب checkbox
+        let salt = document.getElementById('solid_addSalt')?.checked ? totalOil * 0.01 : 0;
+        let silicate = document.getElementById('solid_addSilicate')?.checked ? totalOil * 0.03 : 0;
+        let sugar = document.getElementById('solid_addSugar')?.checked ? totalOil * 0.01 : 0;
+        
+        let finalWeight = totalOil + lye + water + salt + silicate + sugar;
+        
+        // عرض النتائج
+        document.getElementById('solidResults').innerHTML = `
+            <h3 style="margin-top:0;">🧾 الوصفة النهائية</h3>
+            <div class="result-item"><span>🧮 مجموع الزيوت:</span><strong>${totalOil.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>⚖️ الصودا الكاوية (NaOH) المطلوبة:</span><strong>${lye.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>💧 الماء المطلوب (نسبة 2.4:1):</span><strong>${water.toFixed(2)} لتر</strong></div>
+            <div class="result-item"><span>🧂 ملح مضاف:</span><strong>${salt.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>✨ سليكات:</span><strong>${silicate.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>🍬 سكر:</span><strong>${sugar.toFixed(2)} كجم</strong></div>
+            <div class="result-item" style="border-bottom:none;"><span>📦 الوزن التقريبي للصابون النهائي:</span><strong>${finalWeight.toFixed(2)} كجم</strong></div>
+        `;
+    }
+
+    function calcLiquid() {
+        let batchL = parseFloat(document.getElementById('liquidBatchL')?.value) || 220;
+        let factor = batchL / 220;
+        let sulf = (liquidBase.sulfonic||0)*factor, tex=(liquidBase.texapon||0)*factor, comp=(liquidBase.comperlan||0)*factor, bet=(liquidBase.betaine||0)*factor;
+        let caus=(liquidBase.caustic||0)*factor, cit=(liquidBase.citric||0)*factor, tyl=(liquidBase.tylose||0)*factor, salt=(liquidBase.salt||0)*factor;
+        let glyc=(liquidBase.glycerin||0)*factor, pres=(liquidBase.preservative||0)*factor, perf=(liquidBase.perfume||0)*factor, col=(liquidBase.color||0)*factor, edta=(liquidBase.edta||0)*factor;
+        let totalMat = sulf+tex+comp+bet+caus+cit+tyl+salt+glyc+pres+perf+col+edta;
+        let netSulf = sulf*0.9, netTex=tex*0.7, netBoost=comp+bet;
+        let totalActive = netSulf+netTex+netBoost;
+        let activePercent = (totalActive / batchL)*100;
+        let quality = activePercent<7?'🟡 اقتصادي': (activePercent<12?'🟢 جيد جداً':'🔵 ممتاز فاخر');
+        document.getElementById('liquidResults').innerHTML = `
+            <h3>📊 تحليل المادة الفعالة والجودة</h3>
+            <div class="result-item"><span>📦 الوزن الكلي للمواد المضافة:</span><strong>${totalMat.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>⚡ صافي السلفونيك (90%):</span><strong>${netSulf.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>⚡ صافي التكسابون (70%):</span><strong>${netTex.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>⚡ صافي المعززات (100%):</span><strong>${netBoost.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>🧪 مجموع صافي المادة الفعالة:</span><strong>${totalActive.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>📊 نسبة المادة الفعالة في المنتج:</span><strong class="big-number">${activePercent.toFixed(2)}%</strong></div>
+            <div class="quality-badge" style="background:#f0c45a;">${quality}</div>
+        `;
+    }
+
+    function calcPaste() {
+        let batch = parseFloat(document.getElementById('pasteBatchKg')?.value) || 100;
+        let factor = batch / 100;
+        let water = (pasteBase.water||0)*factor, cmc=(pasteBase.cmc||0)*factor, sulfLtr=(pasteBase.sulfonic||0)*factor;
+        let silicate=(pasteBase.silicate||0)*factor, carbonate=(pasteBase.carbonate||0)*factor, caustic=(pasteBase.caustic||0)*factor;
+        let borax=(pasteBase.borax||0)*factor, tripoly=(pasteBase.tripoly||0)*factor, citric=(pasteBase.citric||0)*factor;
+        let glycerin=(pasteBase.glycerin||0)*factor, perfume=(pasteBase.perfume||0)*factor, preserv=(pasteBase.preservative||0)*factor, saltsol=(pasteBase.saltsol||0)*factor;
+        let sulfKg = sulfLtr * 1.05;
+        let totalWeight = water+cmc+sulfKg+silicate+carbonate+caustic+borax+tripoly+citric+glycerin+perfume+preserv+saltsol;
+        let activeAmount = sulfKg * 0.90;
+        let activePercent = (activeAmount/totalWeight)*100;
+        let quality = activePercent<7?'🟡 منخفض - يُنصح بزيادة السلفونيك': (activePercent<12?'🟢 جيد جداً (معادل 15% بوجود السليكات)':'🔵 قوي جداً');
+        document.getElementById('pasteResults').innerHTML = `
+            <h3>📊 تحليل المادة الفعالة</h3>
+            <div class="result-item"><span>📦 الوزن الكلي للخلطة:</span><strong>${totalWeight.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>🧪 وزن السلفونيك (كثافة 1.05):</span><strong>${sulfKg.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>⚡ المادة الفعالة (سلفونيك × 90%):</span><strong>${activeAmount.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>📊 نسبة المادة الفعالة:</span><strong class="big-number">${activePercent.toFixed(2)}%</strong></div>
+            <div class="quality-badge" style="background:#7fb07f;">${quality}</div>
+        `;
+    }
+
+    // ==================== توليد الحقول الديناميكية ====================
+    function generateInputs() {
+        // صلب
+        let htmlSolid = `<div class="recipe-grid">`;
+        htmlSolid += `<div class="ing-row"><span class="ing-label">🐄 شحم حيواني (ودك) - SAP 0.141</span><input type="number" id="solid_tallow" value="${solidValues.tallow}" step="0.1" disabled><span>كجم</span></div>`;
+        htmlSolid += `<div class="ing-row"><span class="ing-label">🫒 زيت قلي مستعمل - SAP 0.141</span><input type="number" id="solid_usedoil" value="${solidValues.usedoil}" step="0.1" disabled><span>كجم</span></div>`;
+        htmlSolid += `<div class="ing-row"><span class="ing-label">🌴 زيت نخيل - SAP 0.144</span><input type="number" id="solid_palmoil" value="${solidValues.palmoil}" step="0.1" disabled><span>كجم</span></div>`;
+        htmlSolid += `<div class="ing-row"><span class="ing-label">🧴 استيارين (حمض الشمع) - SAP 0.143</span><input type="number" id="solid_stearic" value="${solidValues.stearic}" step="0.1" disabled><span>كجم</span></div>`;
+        htmlSolid += `<div class="ing-row"><span class="ing-label">🥜 زيت فول سوداني - SAP 0.136</span><input type="number" id="solid_peanut" value="${solidValues.peanut}" step="0.1" disabled><span>كجم</span></div>`;
+        htmlSolid += `</div>`;
+        document.getElementById('solidIngredients').innerHTML = htmlSolid;
+
+        // سائل
+        let liqHtml = `<div class="recipe-grid">`;
+        for(let k of liquidFields) {
+            let val = liquidBase[k]||0;
+            let nameMap = {sulfonic:'حمض سلفونيك (90%)', texapon:'تكسابون (N70 - 70%)', comperlan:'كمبرلان (100%)', betaine:'معزز رغوة (بيتائين 100%)', caustic:'صودا قشور (NaOH)', citric:'ملح ليمون', tylose:'تايلوز', salt:'ملح طعام', glycerin:'جلسرين', preservative:'مادة حافظة', perfume:'عطر زيتي', color:'لون', edta:'إديتا (EDTA)'};
+            liqHtml += `<div class="ing-row"><span class="ing-label">${nameMap[k]||k}</span><input type="number" id="liq_${k}" value="${val}" step="0.1" disabled><span>كجم</span></div>`;
+        }
+        liqHtml += `</div>`;
+        document.getElementById('liquidIngredients').innerHTML = liqHtml;
+
+        // معجون
+        let pasteHtml = `<div class="recipe-grid">`;
+        for(let p of pasteFields) {
+            let val = pasteBase[p]||0;
+            let names = {water:'ماء', cmc:'CMC (مغلظ)', sulfonic:'حمض سلفونيك (90%)', silicate:'سليكات', carbonate:'كربونات الصوديوم', caustic:'صودا قشور', borax:'بوراكس', tripoly:'تراي بولي', citric:'ملح ليمون', glycerin:'جلسرين', perfume:'عطر', preservative:'مادة حافظة', saltsol:'ملح مذاب'};
+            pasteHtml += `<div class="ing-row"><span class="ing-label">${names[p]||p}</span><input type="number" id="pas_${p}" value="${val}" step="0.1" disabled><span>${p=='sulfonic'?'لتر':'كجم'}</span></div>`;
+        }
+        pasteHtml += `</div>`;
+        document.getElementById('pasteIngredients').innerHTML = pasteHtml;
+    }
+
+    // ==================== دوال الوصفات والتحديث ====================
+    function loadSolidPreset() {
+        let preset = document.getElementById('solidRecipeSelect').value;
+        if(preset === 'wash') {
+            solidValues = { tallow:7, usedoil:3, palmoil:0, stearic:0, peanut:0 };
+            document.getElementById('solid_addSugar').checked = false;
+        } else if(preset === 'soft') {
+            solidValues = { tallow:0, usedoil:0, palmoil:8, stearic:2, peanut:0 };
+            document.getElementById('solid_addSugar').checked = true;
+        } else {
+            // custom: لا نغير القيم، فقط نقرأ الحالية
+            return;
+        }
+        // تحديث الحقول المعروضة
+        document.getElementById('solid_tallow').value = solidValues.tallow;
+        document.getElementById('solid_usedoil').value = solidValues.usedoil;
+        document.getElementById('solid_palmoil').value = solidValues.palmoil;
+        document.getElementById('solid_stearic').value = solidValues.stearic;
+        document.getElementById('solid_peanut').value = solidValues.peanut;
+        calcSolid();
+    }
+
+    function scaleSolidRecipe() {
+        let batch = parseFloat(document.getElementById('solidBatchKg').value) || 10;
+        let factor = batch / 10;
+        let tallow = (parseFloat(document.getElementById('solid_tallow').value)||0) * factor;
+        let used = (parseFloat(document.getElementById('solid_usedoil').value)||0) * factor;
+        let palm = (parseFloat(document.getElementById('solid_palmoil').value)||0) * factor;
+        let stear = (parseFloat(document.getElementById('solid_stearic').value)||0) * factor;
+        let peanut = (parseFloat(document.getElementById('solid_peanut').value)||0) * factor;
+        document.getElementById('solid_tallow').value = tallow.toFixed(2);
+        document.getElementById('solid_usedoil').value = used.toFixed(2);
+        document.getElementById('solid_palmoil').value = palm.toFixed(2);
+        document.getElementById('solid_stearic').value = stear.toFixed(2);
+        document.getElementById('solid_peanut').value = peanut.toFixed(2);
+        calcSolid();
+    }
+
+    function attachEvents() {
+        // ربط القائمة المنسدلة
+        document.getElementById('solidRecipeSelect')?.addEventListener('change', loadSolidPreset);
+        document.getElementById('scaleSolidBtn')?.addEventListener('click', () => {
+            scaleSolidRecipe();
+        });
+        // ربط أزرار التحديث للسائل والمعجون
+        document.getElementById('scaleLiquidBtn')?.addEventListener('click', () => {
+            let batch = parseFloat(document.getElementById('liquidBatchL').value);
+            let factor = batch / 220;
+            for(let k of liquidFields) {
+                let inp = document.getElementById(`liq_${k}`);
+                if(inp) inp.value = (liquidBase[k] * factor).toFixed(2);
+            }
+            calcLiquid();
+        });
+        document.getElementById('scalePasteBtn')?.addEventListener('click', () => {
+            let batch = parseFloat(document.getElementById('pasteBatchKg').value);
+            let factor = batch / 100;
+            for(let p of pasteFields) {
+                let inp = document.getElementById(`pas_${p}`);
+                if(inp) inp.value = (pasteBase[p] * factor).toFixed(2);
+            }
+            calcPaste();
+        });
+        // ربط التبويبات
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                let tabId = this.getAttribute('data-tab');
+                document.getElementById(`tab-${tabId}`).classList.add('active');
+                if(tabId==='solid') calcSolid();
+                else if(tabId==='liquid') calcLiquid();
+                else calcPaste();
+            });
+        });
+        // ربط تغييرات الإضافات (checkbox) في الصلب
+        document.getElementById('solid_addSalt')?.addEventListener('change', calcSolid);
+        document.getElementById('solid_addSilicate')?.addEventListener('change', calcSolid);
+        document.getElementById('solid_addSugar')?.addEventListener('change', calcSolid);
+        // ربط تغييرات المدخلات المباشرة
+        document.getElementById('calculatorContent')?.addEventListener('input', (e) => {
+            if(!isLicensed) return;
+            if(e.target.id && (e.target.id.startsWith('solid_') || e.target.id === 'solidBatchKg')) calcSolid();
+            if(e.target.id && e.target.id.startsWith('liq_')) calcLiquid();
+            if(e.target.id && e.target.id.startsWith('pas_')) calcPaste();
+        });
+    }
+
+    // ==================== تمكين / تعطيل الحقول حسب الترخيص ====================
+    function enableFullCalculator() {
+        document.querySelectorAll('#calculatorContent input, #calculatorContent button, #calculatorContent select').forEach(el => {
+            el.disabled = false;
+        });
+        document.getElementById('licenseMsg').innerHTML = '✅ التفعيل الكامل نشط. جميع الحقول مفتوحة واستمتع بالحسابات الدقيقة.';
+        document.getElementById('licenseMsg').style.background = '#cbe5cb';
+        calcSolid(); calcLiquid(); calcPaste();
+    }
+
+    function disableCalculator() {
+        document.querySelectorAll('#calculatorContent input, #calculatorContent button, #calculatorContent select').forEach(el => {
+            el.disabled = true;
+        });
+        document.getElementById('licenseMsg').innerHTML = '🔒 النسخة التجريبية: يجب التفعيل لاستخدام الحاسبة كاملة. أرسل المبلغ واحصل على كود التفعيل.';
+        calcSolid(); calcLiquid(); calcPaste(); // عرض نتائج افتراضية
+    }
+
+    // ==================== أحداث التفعيل والمشاركة ====================
+    document.getElementById('genFingerprintBtn')?.addEventListener('click', () => {
+        let fp = getFingerprint();
+        document.getElementById('fingerprintDisplay').innerHTML = '🔑 بصمة جهازك الحالية:<br>' + fp;
     });
-    [DOM.labor, DOM.electricity, DOM.packCost, DOM.other, DOM.rent, DOM.workDays, DOM.scrapPrice].forEach(el => el.addEventListener('input', calculate));
-    calculate();
-  }
-  function handleMatChange() {
-    if (!isVip) return;
-    DOM.rawPrice.value = (DOM.matType.value === 'pure') ? 11000 : 7000;
-    calculate();
-  }
-  function calculate() {
-    const cap = 100;
-    const raw = parseFloat(DOM.rawPrice.value) || 0;
-    const bw = parseFloat(DOM.bagWeight.value) || 4.1;
-    const price = parseFloat(DOM.salePrice.value) || 0;
-    const w = parseFloat(DOM.waste.value) / 100 || 0;
-    const netKg = cap * (1 - w);
-    const bagCount = Math.floor(netKg / bw);
-    let revenue = 0;
-    if (!isVip || DOM.saleMethod.value === 'bag') { revenue = bagCount * price; }
-    else { revenue = netKg * price; }
+    document.getElementById('activateBtn')?.addEventListener('click', () => {
+        let phone = document.getElementById('phoneInput').value.trim();
+        let code = document.getElementById('activationCodeInput').value.trim();
+        if(!phone || !code){ alert('أدخل رقم الهاتف والكود'); return; }
+        if(activateLicense(phone, code)){
+            enableFullCalculator();
+            alert('تم التفعيل بنجاح!');
+        } else {
+            alert('كود التفعيل غير صحيح لهذا الجهاز. تأكد من البصمة والدعم.');
+        }
+    });
+    document.getElementById('shareBtn')?.addEventListener('click', () => {
+        if(navigator.share){
+            navigator.share({ title: 'منصة إستثمارك - حاسبة الصابون', text: 'آلة حاسبة متكاملة لصناعة الصابون مع نظام ترخيص', url: window.location.href });
+        } else {
+            alert('اضغط على ⋯ واختر مشاركة الصفحة، أو انسخ الرابط.');
+        }
+    });
 
-    let dailyCost = cap * raw;
-    if (isVip) {
-      const labor = parseFloat(DOM.labor.value) || 0;
-      const elec = parseFloat(DOM.electricity.value) || 0;
-      const pack = (DOM.saleMethod.value === 'bag') ? bagCount * parseFloat(DOM.packCost.value) : 0;
-      const other = parseFloat(DOM.other.value) || 0;
-      const rentDaily = (parseFloat(DOM.rent.value) || 0) / (parseInt(DOM.workDays.value) || 26);
-      dailyCost += labor + elec + pack + other + rentDaily;
-    } else {
-      dailyCost += 15000 + 5000 + (bagCount * 500) + 10000;
-    }
-
-    const dailyProfit = revenue - dailyCost;
-    const days = isVip ? (parseInt(DOM.workDays.value) || 26) : 26;
-    const monthlyProfit = dailyProfit * days;
-
-    DOM.dailyNet.textContent = dailyProfit.toLocaleString('ar-EG') + ' ج.س';
-    DOM.monthlyNet.textContent = monthlyProfit.toLocaleString('ar-EG') + ' ج.س';
-    DOM.dailyRev.textContent = revenue.toLocaleString('ar-EG') + ' ج.س';
-    DOM.margin.textContent = (revenue > 0 ? (dailyProfit / revenue * 100) : 0).toFixed(1) + '%';
-    DOM.dailyNet.classList.toggle('negative', dailyProfit < 0);
-    DOM.monthlyNet.classList.toggle('negative', monthlyProfit < 0);
-
-    if (isVip) {
-      const scrapDaily = (cap * w) * parseFloat(DOM.scrapPrice.value || 0);
-      DOM.scrapValue.textContent = scrapDaily.toLocaleString('ar-EG') + ' ج.س';
-      const calcMonthly = (r) => {
-        let rev = (DOM.saleMethod.value === 'bag') ? bagCount * price : netKg * price;
-        let c = cap * r + (parseFloat(DOM.labor.value)||0) + (parseFloat(DOM.electricity.value)||0) + ((DOM.saleMethod.value==='bag')?bagCount*parseFloat(DOM.packCost.value):0) + (parseFloat(DOM.other.value)||0) + ((parseFloat(DOM.rent.value)||0)/days);
-        return (rev - c) * days;
-      };
-      DOM.pureComp.textContent = calcMonthly(11000).toLocaleString('ar-EG') + ' ج.س';
-      DOM.mixedComp.textContent = calcMonthly(7000).toLocaleString('ar-EG') + ' ج.س';
-    }
-  }
-  function applyTip() {
-    if (!isVip) return;
-    const tip = DOM.expertTip.value;
-    if (tip === 'mix_bag') { DOM.matType.value='mixed'; DOM.rawPrice.value=7000; DOM.bagWeight.value=4.1; DOM.salePrice.value=49000; DOM.saleMethod.value='bag'; }
-    else if (tip === 'pure_bag') { DOM.matType.value='pure'; DOM.rawPrice.value=11000; DOM.bagWeight.value=4.1; DOM.salePrice.value=52000; DOM.saleMethod.value='bag'; }
-    else if (tip === 'mix_kg') { DOM.matType.value='mixed'; DOM.rawPrice.value=7000; DOM.saleMethod.value='kg'; DOM.salePrice.value=12500; }
-    calculate();
-  }
-
-  DOM.genFingerprintBtn.addEventListener('click', () => {
-    DOM.fingerprintDisplay.textContent = 'البصمة: ' + getFingerprint();
-  });
-  DOM.activateBtn.addEventListener('click', () => {
-    const phone = DOM.phoneInput.value.trim();
-    const code = DOM.activationCodeInput.value.trim();
-    if (!phone || !code) { alert('أدخل رقم الهاتف والكود'); return; }
-    const fp = getFingerprint();
-    const expected = generateCode(phone, fp, _gS());
-    if (code === expected || code === 'VIP2025') {
-      localStorage.setItem('fe_license', JSON.stringify({ phone, code, fp }));
-      enableVip();
-    } else {
-      alert('كود تفعيل غير صحيح أو لا يتطابق مع الجهاز. تأكد من البصمة ورقم الهاتف.');
-    }
-  });
-  DOM.deactivateBtn.addEventListener('click', () => {
-    localStorage.removeItem('fe_license');
-    location.reload();
-  });
-
-  function init() {
-    checkStoredLicense();
-    calculate();
-    DOM.rawPrice.addEventListener('input', calculate);
-    DOM.bagWeight.addEventListener('input', calculate);
-    DOM.salePrice.addEventListener('input', calculate);
-    DOM.waste.addEventListener('input', calculate);
-    DOM.saleMethod.addEventListener('change', calculate);
-  }
-  init();
+    // ==================== التهيئة عند تحميل الصفحة ====================
+    window.onload = () => {
+        generateInputs();
+        attachEvents();
+        checkStoredLicense();
+        if(isLicensed) enableFullCalculator();
+        else disableCalculator();
+        // تعيين القيم المرجعية للسائل والمعجون (data-base)
+        for(let k of liquidFields) {
+            let el = document.getElementById(`liq_${k}`);
+            if(el) el.setAttribute('data-base', el.value);
+        }
+        for(let p of pasteFields) {
+            let el = document.getElementById(`pas_${p}`);
+            if(el) el.setAttribute('data-base', el.value);
+        }
+    };
 </script>
 </body>
 </html>

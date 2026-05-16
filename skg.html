@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keygen - منصة إستثمارك | توليد كود تفعيل حاسبة الصابون</title>
+    <style>
+        body {
+            background: #e9e2d4;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .card {
+            max-width: 600px;
+            width: 100%;
+            background: #fffef7;
+            border-radius: 40px;
+            padding: 25px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border: 1px solid #c9ad8a;
+            text-align: center;
+        }
+        h1 {
+            color: #6b3e1c;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        .sub {
+            color: #8b694a;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e1c7ab;
+            padding-bottom: 12px;
+        }
+        .field {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            color: #4b2f18;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 28px;
+            border: 1px solid #c9ad8a;
+            background: #fef8f0;
+            font-size: 1rem;
+            font-family: monospace;
+        }
+        button {
+            background: #9b6a3c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 8px 5px;
+            transition: 0.2s;
+            border-bottom: 3px solid #5a3a20;
+        }
+        button:hover {
+            background: #7f522c;
+            transform: scale(0.97);
+        }
+        .result {
+            background: #e6f0e3;
+            padding: 15px;
+            border-radius: 30px;
+            margin-top: 20px;
+            direction: ltr;
+            word-break: break-all;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1f5125;
+            border: 1px solid #9bbb8c;
+        }
+        .note {
+            background: #fff1cf;
+            padding: 12px;
+            border-radius: 24px;
+            font-size: 0.85rem;
+            margin-top: 20px;
+            text-align: right;
+        }
+        .fingerprint-demo {
+            background: #e9ddd0;
+            padding: 8px;
+            border-radius: 28px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            margin: 10px 0;
+        }
+        hr {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>🔐 Keygen - نظام التفعيل</h1>
+    <div class="sub">لحاسبة الصابون (إستثمارك) – توليد كود التفعيل للمستخدمين</div>
+
+    <div class="field">
+        <label>📱 رقم الهاتف (بدون +)</label>
+        <input type="text" id="phone" placeholder="مثال: 249912345678">
+    </div>
+
+    <div class="field">
+        <label>🖨️ بصمة جهاز المستخدم (التي أرسلها لك)</label>
+        <textarea id="fingerprint" rows="2" placeholder="الصق البصمة هنا"></textarea>
+    </div>
+
+    <div class="field">
+        <button id="generateBtn">✨ توليد كود التفعيل ✨</button>
+        <button id="demoFingerprintBtn">🧪 توليد بصمة تجريبية (للكود التجريبي)</button>
+    </div>
+
+    <div id="resultBox" class="result" style="display: none;">****</div>
+
+    <div class="note">
+        <strong>📌 تعليمات الاستخدام للمسؤول:</strong><br>
+        1- المستخدم يضغط في الحاسبة على زر "توليد بصمة جهازي" ويرسل لك النص الناتج.<br>
+        2- أدخل رقم هاتفه والبصمة كما هي في الحقول أعلاه.<br>
+        3- اضغط "توليد كود التفعيل" وانسخ الكود المكون من 8 أحرف وأرسله له.<br>
+        4- يمكن للمستخدم استخدام الكود التجريبي العام <strong>SOAP2026</strong> بدون الحاجة لهذا الملف.
+        <hr>
+        <strong>🔐 المفتاح السري المستخدم:</strong> <code>@SOAP-ESTITHMAR-2026</code><br>
+        (مطابق تماماً للخوارزمية في حاسبة الصابون)
+    </div>
+</div>
+
+<script>
+    // ========== نفس دوال البصمة والتشفير الموجودة في الحاسبة ==========
+    function simpleHash(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = ((hash << 5) - hash) + str.charCodeAt(i);
+            hash |= 0;
+        }
+        return Math.abs(hash).toString(16).padStart(8, '0');
+    }
+
+    function generateCode(phone, fingerprint, secret = '@SOAP-ESTITHMAR-2026') {
+        let input = phone + '|' + fingerprint + secret;
+        let h = simpleHash(input);
+        return btoa(h).substring(0, 8).toUpperCase();
+    }
+
+    // هذه الدالة تحاكي طريقة توليد البصمة في الحاسبة الأصلية (نفس المنطق)
+    function getDummyFingerprint(deviceInfo = 'default') {
+        // نعيد بصمة افتراضية تشبه ما يولده متصفح المستخدم
+        let data = (navigator.hardwareConcurrency || 4) + '|' +
+                   (screen.width || 1920) + 'x' + (screen.height || 1080) + '|' +
+                   (navigator.language || 'ar') + '|' +
+                   new Date().getTimezoneOffset() + '|' +
+                   (navigator.userAgent || '').substring(0, 40);
+        return btoa(encodeURIComponent(data)).substring(0, 28);
+    }
+
+    // زر التوليد الرئيسي
+    document.getElementById('generateBtn').addEventListener('click', () => {
+        let phone = document.getElementById('phone').value.trim();
+        let fp = document.getElementById('fingerprint').value.trim();
+
+        if (!phone) {
+            alert('الرجاء إدخال رقم الهاتف');
+            return;
+        }
+        if (!fp) {
+            alert('الرجاء لصق بصمة الجهاز التي أرسلها المستخدم');
+            return;
+        }
+        // التحقق من أن البصمة تحتوي على تنسيق معقول (طولها على الأقل 20)
+        if (fp.length < 20) {
+            if (!confirm('البصمة قصيرة جداً، قد تكون غير صحيحة. هل تريد المتابعة؟')) return;
+        }
+        let code = generateCode(phone, fp);
+        let resultDiv = document.getElementById('resultBox');
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = '🔑 كود التفعيل الخاص بهذا المستخدم: <br><span style="font-size: 2rem; letter-spacing: 2px;">' + code + '</span>';
+    });
+
+    // زر توليد بصمة تجريبية (يمكن للمسؤول أن يختبر الكود على نفس الجهاز)
+    document.getElementById('demoFingerprintBtn').addEventListener('click', () => {
+        let demoFp = getDummyFingerprint();
+        document.getElementById('fingerprint').value = demoFp;
+        // أيضاً يمكن ملء رقم تجريبي
+        if (!document.getElementById('phone').value) {
+            document.getElementById('phone').value = '249111222333';
+        }
+        alert('تم وضع بصمة تجريبية في الحقل. استخدم زر التوليد لترى الكود.');
+    });
+
+    // تحسين: عند تحميل الصفحة نعرض مثال إرشادي
+    window.onload = () => {
+        let exampleFp = getDummyFingerprint();
+        let exampleCode = generateCode('249912345678', exampleFp);
+        console.log('مثال: الكود لرقم 249912345678 وهذه البصمة = ' + exampleCode);
+    };
+</script>
+</body>
+</html>
