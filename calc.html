@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    <title>منصة إستثمارك - آلة حاسبة الصابون</title>
+    <title>منصة إستثمارك - آلة حاسبة الصابون (التكاليف)</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #faf3e8;
@@ -18,24 +13,19 @@
             max-width: 1100px;
             margin: auto;
         }
-
-        /* الحاوية الرئيسية */
         .main-box {
             background: white;
             border-radius: 36px;
-            padding: 20px 18px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
             border: 1px solid #e7cfb5;
         }
-
-        /* العناوين */
         h1 {
             color: #3b2a1f;
             text-align: center;
             font-size: 1.8rem;
             margin-bottom: 5px;
         }
-
         .badge-review {
             background: #f0e4d5;
             text-align: center;
@@ -43,34 +33,871 @@
             border-radius: 60px;
             margin: 15px 0 10px;
             font-size: 0.9rem;
-            color: #5a3e2a;
             border-right: 4px solid #b47c48;
-            line-height: 1.4;
         }
-
         .reviewer-name {
             font-weight: bold;
             color: #a5581c;
-            display: inline-block;
             background: #fff1e0;
             padding: 2px 12px;
             border-radius: 30px;
         }
-
-        /* لوحة التفعيل (نظام البصمة) */
+        /* لوحة التفعيل */
         .license-panel {
             background: #f9efdf;
             border-radius: 24px;
             padding: 15px;
             margin: 15px 0 20px;
             border: 1px solid #deb887;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
-        .license-title {
+        details {
+            background: #fff8f0;
+            border-radius: 20px;
+            padding: 6px 12px;
+            margin-bottom: 8px;
+        }
+        summary {
             font-weight: bold;
-            font-size: 1.2rem;
-            color: #6b3f1c;
+            cursor: pointer;
+            color: #8b5a2b;
+        }
+        .bank-details {
+            background: #2d5a2c;
+            color: #f9f2e0;
+            padding: 10px;
+            border-radius: 20px;
+            margin-top: 8px;
+            text-align: center;
+        }
+        .bank-details span {
+            background: #ffefb9;
+            color: #2a521a;
+            padding: 2px 8px;
+            border-radius: 40px;
+            font-family: monospace;
+        }
+        .flex-buttons {
             display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+            justify-content: center;
+        }
+        .btn-primary {
+            background: #9b6a3c;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #9b6a3c;
+            color: #5a3a22;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .whatsapp-btn, .group-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25D366;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .group-link {
+            background: #e6d5bd;
+            color: #4a2a12;
+        }
+        .copy-btn {
+            background: #6c8b3c;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 4px 12px;
+            margin-top: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+        .status-msg {
+            font-size: 0.8rem;
+            margin-top: 8px;
+            padding: 6px;
+            border-radius: 30px;
+            text-align: center;
+            background: #f1dec6;
+        }
+        /* التبويبات */
+        .tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin: 20px 0 15px;
+            border-bottom: 2px solid #c49a6c;
+        }
+        .tab-btn {
+            background: #ede0d0;
+            border: none;
+            padding: 8px 16px;
+            font-weight: bold;
+            border-radius: 20px 20px 0 0;
+            cursor: pointer;
+            color: #4f2f1a;
+        }
+        .tab-btn.active {
+            background: white;
+            border-bottom: 3px solid #c28546;
+            color: #a0522d;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .batch-control, .ing-row, .result-panel, .note-box {
+            background: #fefaf5;
+            border-radius: 20px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        .ing-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            justify-content: space-between;
+        }
+        .ing-label {
+            font-weight: bold;
+            min-width: 150px;
+        }
+        input, select {
+            padding: 6px 10px;
+            border-radius: 50px;
+            border: 1px solid #cfb28c;
+            background: white;
+            font-size: 0.85rem;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed #cfb28c;
+        }
+        .big-number {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3b6e2b;
+        }
+        .share-btn {
+            background: #1e466e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 40px;
+            width: 100%;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        footer {
+            margin-top: 25px;
+            text-align: center;
+            border-top: 1px solid #e0c8ae;
+            padding-top: 15px;
+            font-size: 0.75rem;
+        }
+        @media (max-width: 600px) {
+            .ing-label { min-width: 120px; }
+            input, select { max-width: 130px; }
+        }
+    </style>
+</head>
+<body>
+<div class="main-box">
+    <h1>✨ منصة إستثمارك - للحلول الاستثمارية الذكية ✨</h1>
+    <div class="badge-review">
+        🔬 تم التصحيح والمراجعة من:  
+        <span class="reviewer-name">"الباحث الكيميائي أبكر آدم إبراهيم"</span><br>
+        🎓 جامعة بخت الرضا - كلية العلوم - قسم الكيمياء - بكالوريوس الشرف
+    </div>
+
+    <!-- لوحة التفعيل المحسنة -->
+    <div class="license-panel">
+        <div class="license-title">🔐 تفعيل النسخة الاحترافية (بصمة جهاز)</div>
+        <details>
+            <summary>📌 تعليمات التفعيل</summary>
+            <div style="padding: 8px 0;">
+                1️⃣ أرسل <strong>20,000 ج.س</strong> إلى الحساب أدناه.<br>
+                2️⃣ اضغط "🖨️ توليد بصمة جهازي" ثم "📋 نسخ البصمة".<br>
+                3️⃣ تواصل عبر الواتساب وأرسل الإشعار + البصمة + رقم هاتفك.<br>
+                4️⃣ سنرسل لك كود التفعيل.
+            </div>
+        </details>
+        <details>
+            <summary>🏦 معلومات الحساب البنكي</summary>
+            <div class="bank-details">
+                تطبيق بنكك | رقم الحساب: <span>2597414</span><br>
+                اسم الحساب: <span>عصام عبدالرحيم الأمين عبادي</span>
+            </div>
+        </details>
+        <div class="flex-buttons">
+            <button id="genFingerprintBtn" class="btn-outline">🖨️ توليد بصمة جهازي</button>
+            <a href="https://wa.me/24996241147?text=السلام عليكم%20أريد%20تفعيل%20حاسبة%20الصابون" target="_blank" class="whatsapp-btn">📱 إرسال الإشعار</a>
+            <a href="https://chat.whatsapp.com/BAkGLBh5KqcCBDJeN5A1cs" target="_blank" class="group-link">👥 قروب الدعم</a>
+        </div>
+        <div id="fingerprintDisplay" style="font-size: 12px; background:#fff1e0; padding: 6px; border-radius: 30px; word-break:break-all;"></div>
+        <button id="copyFingerprintBtn" class="copy-btn" style="display:none;">📋 نسخ البصمة</button>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0;">
+            <input type="text" id="phoneInput" placeholder="رقم هاتفك (بدون +)" style="flex:2;">
+            <input type="text" id="activationCodeInput" placeholder="كود التفعيل" style="flex:2;">
+            <button id="activateBtn" class="btn-primary">🔓 تفعيل الآن</button>
+        </div>
+        <div id="licenseMsg" class="status-msg">⚠️ النسخة التجريبية: الحقول مقفولة. فعّل لفتح جميع الإعدادات.</div>
+    </div>
+
+    <!-- محتوى الحاسبة الرئيسي -->
+    <div id="calculatorContent">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="solid">🧼 صابون صلب</button>
+            <button class="tab-btn" data-tab="liquid">🧴 صابون سائل</button>
+            <button class="tab-btn" data-tab="paste">🧽 صابون معجون</button>
+            <button class="tab-btn" data-tab="market">📦 تسويق وربح</button>
+        </div>
+
+        <!-- ===================== صابون صلب ===================== -->
+        <div id="tab-solid" class="tab-content active">
+            <h2>🧼 صابون صلب (غسيل / استحمام)</h2>
+            <div class="desc-box" style="background:#f4efe9; padding:12px; border-radius:16px; margin-bottom:20px;">
+                <strong>📌 حسب وصفة المدرب:</strong> خلطات جاهزة بنسب مدروسة. اختر نوع الصابون وحجم الدفعة.
+            </div>
+            <div class="batch-control">
+                <span class="batch-label">📋 اختر الوصفة الأساسية:</span>
+                <select id="solidRecipeSelect" class="ing-input" style="width:auto; min-width:200px;">
+                    <option value="wash" selected>🧽 خلطة الغسيل (70% شحم + 30% زيت مستعمل)</option>
+                    <option value="soft">🌸 خلطة النعومة (80% نخيل + 20% استيارين)</option>
+                    <option value="custom">✏️ خلطتي الخاصة (تعديل يدوي)</option>
+                </select>
+            </div>
+            <div class="batch-control">
+                <span class="batch-label">⚖️ حجم الدفعة (زيوت فقط):</span>
+                <input type="number" id="solidBatchKg" value="10" step="0.5" min="0.1">
+                <span class="batch-unit">كجم</span>
+                <button id="scaleSolidBtn" class="btn-outline">🔄 تحديث الكميات</button>
+            </div>
+            <h3>🥥 مكونات الزيوت (كجم)</h3>
+            <div id="solidIngredients"></div>
+            <h3>🧂 إضافات (اختياري)</h3>
+            <div class="ing-row"><span class="ing-label">✅ ملح طعام (1% من الزيوت)</span><input type="checkbox" id="solid_addSalt" checked></div>
+            <div class="ing-row"><span class="ing-label">✅ سليكات الصوديوم (3% من الزيوت)</span><input type="checkbox" id="solid_addSilicate"></div>
+            <div class="ing-row"><span class="ing-label">✅ سكر (1% من الزيوت - لخلطة النعومة)</span><input type="checkbox" id="solid_addSugar"></div>
+
+            <!-- قسم التكاليف -->
+            <details>
+                <summary>💰 تحليل التكاليف (أسعار المواد)</summary>
+                <div style="margin-top:12px;" id="solidCostsFields">
+                    <!-- سيتم تعبئتها بالجافاسكربت -->
+                </div>
+            </details>
+
+            <div class="result-panel" id="solidResults"></div>
+            <div class="note-box"><strong>📋 تعليمات المدرب:</strong> صهر الدهون الصلبة أولاً. درجة حرارة الزيوت والصودا 45-55°م. إذا استخدمت استيارين، القالب يتصلب بسرعة.</div>
+        </div>
+
+        <!-- ===================== صابون سائل ===================== -->
+        <div id="tab-liquid" class="tab-content">
+            <h2>🧴 صابون سائل (جودة عالية)</h2>
+            <div class="desc-box"><strong>📌 وصفة المدرب الأساسية لـ 220 لتر.</strong> يمكنك تغيير حجم الدفعة.</div>
+            <div class="batch-control">
+                <span class="batch-label">🧪 حجم الدفعة المطلوب:</span>
+                <input type="number" id="liquidBatchL" value="220" step="5" min="1"><span>لتر</span>
+                <button id="scaleLiquidBtn" class="btn-outline">تحديث الكميات</button>
+            </div>
+            <h3>🧪 مكونات الخلطة (كجم)</h3>
+            <div id="liquidIngredients"></div>
+            <details>
+                <summary>💰 تحليل التكاليف (السائل)</summary>
+                <div id="liquidCostsFields"></div>
+            </details>
+            <div class="result-panel" id="liquidResults"></div>
+            <div class="note-box"><strong>📋 معايير الجودة:</strong> 5-7% اقتصادي | 8-12% جيد جداً | 13-18% ممتاز.</div>
+        </div>
+
+        <!-- ===================== صابون معجون ===================== -->
+        <div id="tab-paste" class="tab-content">
+            <h2>🧽 صابون معجون (منظف متعدد)</h2>
+            <div class="desc-box"><strong>📌 وصفة المدرب لـ 100 كجم.</strong></div>
+            <div class="batch-control">
+                <span class="batch-label">🧴 حجم الدفعة المطلوب:</span>
+                <input type="number" id="pasteBatchKg" value="100" step="5" min="1"><span>كجم</span>
+                <button id="scalePasteBtn" class="btn-outline">تحديث الكميات</button>
+            </div>
+            <h3>🧪 المكونات</h3>
+            <div id="pasteIngredients"></div>
+            <details>
+                <summary>💰 تحليل التكاليف (المعجون)</summary>
+                <div id="pasteCostsFields"></div>
+            </details>
+            <div class="result-panel" id="pasteResults"></div>
+            <div class="note-box"><strong>📋 ملاحظة:</strong> جودة CMC تؤثر على القوام. وجود السليكات والبوراكس يرفع الفعالية.</div>
+        </div>
+        <!-- ===================== تسويق وربح ===================== -->
+        <div id="tab-market" class="tab-content">
+            <h2>📦 حاسبة التسويق والربح</h2>
+            <div class="desc-box" style="background:#f4efe9; padding:12px; border-radius:16px; margin-bottom:16px;">
+                <strong>💡 أدخل بيانات الإنتاج والبيع لتعرف ربحك الفعلي من كل دفعة.</strong>
+            </div>
+
+            <!-- اختيار نوع المنتج -->
+            <div class="batch-control">
+                <span class="batch-label">🧪 نوع المنتج:</span>
+                <select id="mkt_type" class="ing-input" style="width:auto; min-width:180px;" onchange="calcMarket()">
+                    <option value="solid">🧼 صابون صلب</option>
+                    <option value="liquid">🧴 صابون سائل</option>
+                    <option value="paste">🧽 صابون معجون</option>
+                </select>
+            </div>
+
+            <!-- بيانات الإنتاج -->
+            <div class="batch-control" style="margin-bottom:0;">
+                <h3 style="margin-bottom:10px;">⚙️ بيانات الإنتاج</h3>
+                <div class="ing-row">
+                    <span class="ing-label">📦 وزن الدفعة الكلي (كجم)</span>
+                    <input type="number" id="mkt_batchKg" value="15" step="0.5" min="0.1" oninput="calcMarket()">
+                    <span>كجم</span>
+                </div>
+                <div class="ing-row" id="mkt_barRow">
+                    <span class="ing-label">🧼 وزن الصابونة الواحدة (جم)</span>
+                    <input type="number" id="mkt_barGram" value="125" step="5" min="1" oninput="calcMarket()">
+                    <span>جم</span>
+                </div>
+                <div class="ing-row" id="mkt_boxRow">
+                    <span class="ing-label">📫 عدد القطع في الكرتونة</span>
+                    <input type="number" id="mkt_perBox" value="72" step="1" min="1" oninput="calcMarket()">
+                    <span>قطعة</span>
+                </div>
+                <div class="ing-row" id="mkt_bottleRow" style="display:none;">
+                    <span class="ing-label">🧴 حجم العبوة (مل)</span>
+                    <input type="number" id="mkt_bottleMl" value="500" step="50" min="50" oninput="calcMarket()">
+                    <span>مل</span>
+                </div>
+            </div>
+
+            <!-- بيانات التكاليف -->
+            <div class="batch-control" style="margin-bottom:0; margin-top:12px;">
+                <h3 style="margin-bottom:10px;">💰 التكاليف</h3>
+                <div class="ing-row">
+                    <span class="ing-label">🧪 تكلفة المواد الخام (ج.س)</span>
+                    <input type="number" id="mkt_rawCost" value="0" step="500" min="0" oninput="calcMarket()">
+                    <span>ج.س</span>
+                </div>
+                <div class="ing-row">
+                    <span class="ing-label">🔥 تكلفة تشغيل / طاقة (ج.س)</span>
+                    <input type="number" id="mkt_opCost" value="0" step="100" min="0" oninput="calcMarket()">
+                    <span>ج.س</span>
+                </div>
+                <div class="ing-row">
+                    <span class="ing-label">🎨 تكلفة تغليف / طباعة (ج.س)</span>
+                    <input type="number" id="mkt_packCost" value="0" step="100" min="0" oninput="calcMarket()">
+                    <span>ج.س</span>
+                </div>
+                <div class="ing-row">
+                    <span class="ing-label">🚚 توصيل / نقل (ج.س)</span>
+                    <input type="number" id="mkt_delivCost" value="0" step="100" min="0" oninput="calcMarket()">
+                    <span>ج.س</span>
+                </div>
+            </div>
+
+            <!-- بيانات البيع -->
+            <div class="batch-control" style="margin-top:12px;">
+                <h3 style="margin-bottom:10px;">🏷️ سعر البيع</h3>
+                <div class="ing-row">
+                    <span class="ing-label" id="mkt_unitLabel">💵 سعر بيع الصابونة الواحدة (ج.س)</span>
+                    <input type="number" id="mkt_unitPrice" value="0" step="100" min="0" oninput="calcMarket()">
+                    <span>ج.س</span>
+                </div>
+                <div class="ing-row" id="mkt_boxPriceRow">
+                    <span class="ing-label">📦 أو سعر بيع الكرتونة (ج.س)</span>
+                    <input type="number" id="mkt_boxPrice" value="0" step="500" min="0" oninput="calcMarket()">
+                    <span>ج.س</span>
+                </div>
+            </div>
+
+            <div class="result-panel" id="marketResults"></div>
+        </div>
+    </div>
+
+    <button id="shareBtn" class="share-btn">📢 مشاركة المنصة مع الأصدقاء</button>
+    <footer>© 2026 منصة إستثمارك - النسخة المتكاملة (بصمة + تكاليف) - جميع الحقوق محفوظة</footer>
+</div>
+
+<script>
+    // ==================== 1. نظام التفعيل (نفس القديم) ====================
+        const _0xcfb60c=_0x2515;(function(_0x2093b5,_0x353e18){const _0x51abce=_0x2515,_0x11f1ca=_0x2093b5();while(!![]){try{const _0x4a0d76=-parseInt(_0x51abce(0x1ef))/0x1+parseInt(_0x51abce(0x200))/0x2*(parseInt(_0x51abce(0x1f9))/0x3)+-parseInt(_0x51abce(0x1f7))/0x4+-parseInt(_0x51abce(0x1f5))/0x5*(parseInt(_0x51abce(0x1fd))/0x6)+-parseInt(_0x51abce(0x1f3))/0x7+parseInt(_0x51abce(0x1f8))/0x8*(parseInt(_0x51abce(0x206))/0x9)+-parseInt(_0x51abce(0x1fc))/0xa*(-parseInt(_0x51abce(0x1ed))/0xb);if(_0x4a0d76===_0x353e18)break;else _0x11f1ca['push'](_0x11f1ca['shift']());}catch(_0x162a2e){_0x11f1ca['push'](_0x11f1ca['shift']());}}}(_0x73bc,0x86d98));function getFingerprint(){const _0x43577e=_0x2515;let _0x50084b=navigator['hardwareConcurrency']+'|'+screen[_0x43577e(0x1ee)]+'x'+screen['height']+'|'+navigator['language']+'|'+new Date()[_0x43577e(0x1ff)]()+'|'+(navigator[_0x43577e(0x1f6)]||'')['substring'](0x0,0x28);return btoa(encodeURIComponent(_0x50084b))[_0x43577e(0x1ec)](0x0,0x1c);}function _0x73bc(){const _0x40df5a=['1492812jraWYW','27448OzWLrm','66mcnoOx','stringify','setItem','2600Kkhpgc','209256cXjFSy','toUpperCase','getTimezoneOffset','84894pUHhnq','padStart','toString','soap_license_v2','@NEW-SECURE-SOAP-ESTITHMAR-2026_#!','@SOAP-ESTITHMAR-2026','1287OdQVnb','substring','40403yNkSpF','width','705254mZTFSU','removeItem','charCodeAt','abs','4508126NtqtJf','getItem','15ttYsUn','userAgent'];_0x73bc=function(){return _0x40df5a;};return _0x73bc();}function simpleHash(_0x3de254){const _0x42ef6a=_0x2515;let _0xec2332=0x0;for(let _0x1de8b7=0x0;_0x1de8b7<_0x3de254['length'];_0x1de8b7++){_0xec2332=(_0xec2332<<0x5)-_0xec2332+_0x3de254[_0x42ef6a(0x1f1)](_0x1de8b7),_0xec2332|=0x0;}return Math[_0x42ef6a(0x1f2)](_0xec2332)[_0x42ef6a(0x202)](0x10)[_0x42ef6a(0x201)](0x8,'0');}function _0x2515(_0x3cb051,_0x26b146){_0x3cb051=_0x3cb051-0x1ec;const _0x73bc6e=_0x73bc();let _0x251540=_0x73bc6e[_0x3cb051];return _0x251540;}const _NEW_SECRET=_0xcfb60c(0x204);function generateCode(_0xcb63bc,_0x21188c,_0x1c9ee8=_0xcfb60c(0x205)){const _0x4ba5b8=_0xcfb60c;let _0x28b5df=_0xcb63bc+'|'+_0x21188c+_0x1c9ee8;return btoa(simpleHash(_0x28b5df))[_0x4ba5b8(0x1ec)](0x0,0x8)[_0x4ba5b8(0x1fe)]();}let isLicensed=![];function checkStoredLicense(){const _0x42c326=_0xcfb60c;let _0x3a8792=localStorage[_0x42c326(0x1f4)](_0x42c326(0x203));if(_0x3a8792)try{let {phone:_0x2e1d8a,code:_0x503812,fp:_0x103d9a}=JSON['parse'](_0x3a8792),_0x1be02d=getFingerprint();if(_0x503812==='SOAP2026'||_0x503812===generateCode(_0x2e1d8a,_0x1be02d,_0x42c326(0x205))){isLicensed=!![];return;}_0x503812===generateCode(_0x2e1d8a,_0x1be02d,_NEW_SECRET)&&_0x103d9a===_0x1be02d?isLicensed=!![]:localStorage[_0x42c326(0x1f0)](_0x42c326(0x203));}catch(_0x375c06){localStorage[_0x42c326(0x1f0)](_0x42c326(0x203));}}function activateLicense(_0x4d69f7,_0x351d19){const _0x2f2723=_0xcfb60c;let _0x5e0bc7=getFingerprint(),_0x5dcd39=generateCode(_0x4d69f7,_0x5e0bc7,_NEW_SECRET);if(_0x351d19===_0x5dcd39||_0x351d19===generateCode(_0x4d69f7,_0x5e0bc7,'@SOAP-ESTITHMAR-2026'))return localStorage[_0x2f2723(0x1fb)]('soap_license_v2',JSON[_0x2f2723(0x1fa)]({'phone':_0x4d69f7,'code':_0x351d19,'fp':_0x5e0bc7})),isLicensed=!![],!![];return![];}
+
+
+    // ==================== 2. بيانات الوصفات الأساسية ====================
+    let solidValues = { tallow:7, usedoil:3, palmoil:0, stearic:0, peanut:0 };
+    let liquidBase = { sulfonic:11, texapon:6, comperlan:0.5, betaine:0.85, caustic:1.65, citric:0.20, tylose:0.60, salt:4.0, glycerin:0.25, preservative:0.20, perfume:0.40, color:0.20, edta:0.05 };
+    let pasteBase = { water:80, cmc:6, sulfonic:10, silicate:7, carbonate:2.5, caustic:0.15, borax:1.0, tripoly:0.2, citric:0.2, glycerin:0.2, perfume:0.2, preservative:0.2, saltsol:2.0 };
+    let liquidFields = ['sulfonic','texapon','comperlan','betaine','caustic','citric','tylose','salt','glycerin','preservative','perfume','color','edta'];
+    let pasteFields = ['water','cmc','sulfonic','silicate','carbonate','caustic','borax','tripoly','citric','glycerin','perfume','preservative','saltsol'];
+
+    function savePrices() {
+        let prices = {};
+        document.querySelectorAll('[id^="price_"]').forEach(input => { prices[input.id] = input.value; });
+        localStorage.setItem('soap_prices_v2', JSON.stringify(prices));
+    }
+    function loadPrices() {
+        let saved = localStorage.getItem('soap_prices_v2') || localStorage.getItem('soap_prices_v1');
+        if(saved) {
+            let prices = JSON.parse(saved);
+            for(let id in prices) {
+                let el = document.getElementById(id);
+                if(el) el.value = prices[id];
+            }
+        }
+    }
+
+    // ==================== 3. توليد الحقول الديناميكية ====================
+    function generateInputs() {
+        // صلب
+        let htmlSolid = `<div class="recipe-grid">`;
+        htmlSolid += `<div class="ing-row"><span class="ing-label">🐄 شحم حيواني (ودك) - SAP 0.141</span><input type="number" id="solid_tallow" value="${solidValues.tallow}" step="0.1"><span>كجم</span></div>`;
+        htmlSolid += `<div class="ing-row"><span class="ing-label">🫒 زيت قلي مستعمل - SAP 0.141</span><input type="number" id="solid_usedoil" value="${solidValues.usedoil}" step="0.1"><span>كجم</span></div>`;
+        htmlSolid += `<div class="ing-row"><span class="ing-label">🌴 زيت نخيل - SAP 0.144</span><input type="number" id="solid_palmoil" value="${solidValues.palmoil}" step="0.1"><span>كجم</span></div>`;
+        htmlSolid += `<div class="ing-row"><span class="ing-label">🧴 استيارين (حمض الشمع) - SAP 0.143</span><input type="number" id="solid_stearic" value="${solidValues.stearic}" step="0.1"><span>كجم</span></div>`;
+        htmlSolid += `<div class="ing-row"><span class="ing-label">🥜 زيت فول سوداني - SAP 0.136</span><input type="number" id="solid_peanut" value="${solidValues.peanut}" step="0.1"><span>كجم</span></div>`;
+        htmlSolid += `</div>`;
+        document.getElementById('solidIngredients').innerHTML = htmlSolid;
+
+        // حقول الأسعار للصلب
+        let costHtml = `
+            <div class="ing-row"><span class="ing-label">سعر الشحم (ج.س/كجم)</span><input type="number" id="price_tallow" value="0" step="100"></div>
+            <div class="ing-row"><span class="ing-label">سعر الزيت المستعمل</span><input type="number" id="price_usedoil" value="0" step="100"></div>
+            <div class="ing-row"><span class="ing-label">سعر زيت النخيل</span><input type="number" id="price_palmoil" value="0" step="100"></div>
+            <div class="ing-row"><span class="ing-label">سعر الاستيارين</span><input type="number" id="price_stearic" value="0" step="100"></div>
+            <div class="ing-row"><span class="ing-label">سعر الفول السوداني</span><input type="number" id="price_peanut" value="0" step="100"></div>
+            <div class="ing-row"><span class="ing-label">سعر الصودا الكاوية</span><input type="number" id="price_lye" value="0" step="100"></div>
+            <div class="ing-row"><span class="ing-label">سعر الملح/كجم</span><input type="number" id="price_salt" value="0" step="50"></div>
+            <div class="ing-row"><span class="ing-label">سعر السليكات/كجم</span><input type="number" id="price_silicate" value="0" step="50"></div>
+            <div class="ing-row"><span class="ing-label">سعر السكر/كجم</span><input type="number" id="price_sugar" value="0" step="50"></div>
+        `;
+        document.getElementById('solidCostsFields').innerHTML = costHtml;
+
+        // سائل
+        let liqHtml = `<div class="recipe-grid">`;
+        for(let k of liquidFields) {
+            let val = liquidBase[k];
+            let nameMap = {sulfonic:'حمض سلفونيك (90%)', texapon:'تكسابون (70%)', comperlan:'كمبرلان', betaine:'بيتائين', caustic:'صودا قشور', citric:'ملح ليمون', tylose:'تايلوز', salt:'ملح طعام', glycerin:'جلسرين', preservative:'حافظة', perfume:'عطر', color:'لون', edta:'إديتا'};
+            liqHtml += `<div class="ing-row"><span class="ing-label">${nameMap[k]||k}</span><input type="number" id="liq_${k}" value="${val}" step="0.1"><span>كجم</span></div>`;
+        }
+        liqHtml += `</div>`;
+        document.getElementById('liquidIngredients').innerHTML = liqHtml;
+        // أسعار السائل
+        let liqCostHtml = `
+            <div class="ing-row"><span class="ing-label">حمض سلفونيك (ج.س/كجم)</span><input type="number" id="price_liq_sulfonic" value="0" step="100" oninput="savePrices();calcLiquid()"></div>
+            <div class="ing-row"><span class="ing-label">تكسابون (ج.س/كجم)</span><input type="number" id="price_liq_texapon" value="0" step="100" oninput="savePrices();calcLiquid()"></div>
+            <div class="ing-row"><span class="ing-label">كمبرلان (ج.س/كجم)</span><input type="number" id="price_liq_comperlan" value="0" step="100" oninput="savePrices();calcLiquid()"></div>
+            <div class="ing-row"><span class="ing-label">بيتائين (ج.س/كجم)</span><input type="number" id="price_liq_betaine" value="0" step="100" oninput="savePrices();calcLiquid()"></div>
+            <div class="ing-row"><span class="ing-label">صودا قشور (ج.س/كجم)</span><input type="number" id="price_liq_caustic" value="0" step="100" oninput="savePrices();calcLiquid()"></div>
+            <div class="ing-row"><span class="ing-label">ملح ليمون (ج.س/كجم)</span><input type="number" id="price_liq_citric" value="0" step="50" oninput="savePrices();calcLiquid()"></div>
+            <div class="ing-row"><span class="ing-label">تايلوز (ج.س/كجم)</span><input type="number" id="price_liq_tylose" value="0" step="100" oninput="savePrices();calcLiquid()"></div>
+            <div class="ing-row"><span class="ing-label">ملح طعام (ج.س/كجم)</span><input type="number" id="price_liq_salt" value="0" step="50" oninput="savePrices();calcLiquid()"></div>
+            <div class="ing-row"><span class="ing-label">جلسرين (ج.س/كجم)</span><input type="number" id="price_liq_glycerin" value="0" step="100" oninput="savePrices();calcLiquid()"></div>
+            <div class="ing-row"><span class="ing-label">حافظة (ج.س/كجم)</span><input type="number" id="price_liq_preservative" value="0" step="100" oninput="savePrices();calcLiquid()"></div>
+            <div class="ing-row"><span class="ing-label">عطر (ج.س/كجم)</span><input type="number" id="price_liq_perfume" value="0" step="100" oninput="savePrices();calcLiquid()"></div>
+        `;
+        document.getElementById('liquidCostsFields').innerHTML = liqCostHtml;
+
+        // أسعار المعجون
+        let pasteCostHtml = `
+            <div class="ing-row"><span class="ing-label">ماء (ج.س/كجم)</span><input type="number" id="price_pas_water" value="0" step="10" oninput="savePrices();calcPaste()"></div>
+            <div class="ing-row"><span class="ing-label">CMC (ج.س/كجم)</span><input type="number" id="price_pas_cmc" value="0" step="100" oninput="savePrices();calcPaste()"></div>
+            <div class="ing-row"><span class="ing-label">حمض سلفونيك (ج.س/لتر)</span><input type="number" id="price_pas_sulfonic" value="0" step="100" oninput="savePrices();calcPaste()"></div>
+            <div class="ing-row"><span class="ing-label">سليكات (ج.س/كجم)</span><input type="number" id="price_pas_silicate" value="0" step="100" oninput="savePrices();calcPaste()"></div>
+            <div class="ing-row"><span class="ing-label">كربونات (ج.س/كجم)</span><input type="number" id="price_pas_carbonate" value="0" step="50" oninput="savePrices();calcPaste()"></div>
+            <div class="ing-row"><span class="ing-label">صودا قشور (ج.س/كجم)</span><input type="number" id="price_pas_caustic" value="0" step="100" oninput="savePrices();calcPaste()"></div>
+            <div class="ing-row"><span class="ing-label">بوراكس (ج.س/كجم)</span><input type="number" id="price_pas_borax" value="0" step="50" oninput="savePrices();calcPaste()"></div>
+            <div class="ing-row"><span class="ing-label">تراي بولي (ج.س/كجم)</span><input type="number" id="price_pas_tripoly" value="0" step="50" oninput="savePrices();calcPaste()"></div>
+            <div class="ing-row"><span class="ing-label">ملح ليمون (ج.س/كجم)</span><input type="number" id="price_pas_citric" value="0" step="50" oninput="savePrices();calcPaste()"></div>
+            <div class="ing-row"><span class="ing-label">جلسرين (ج.س/كجم)</span><input type="number" id="price_pas_glycerin" value="0" step="100" oninput="savePrices();calcPaste()"></div>
+            <div class="ing-row"><span class="ing-label">عطر (ج.س/كجم)</span><input type="number" id="price_pas_perfume" value="0" step="100" oninput="savePrices();calcPaste()"></div>
+            <div class="ing-row"><span class="ing-label">حافظة (ج.س/كجم)</span><input type="number" id="price_pas_preservative" value="0" step="100" oninput="savePrices();calcPaste()"></div>
+        `;
+        document.getElementById('pasteCostsFields').innerHTML = pasteCostHtml;
+
+        // معجون - مكونات
+        let pasteHtml = `<div class="recipe-grid">`;
+        for(let p of pasteFields) {
+            let val = pasteBase[p];
+            let names = {water:'ماء', cmc:'CMC', sulfonic:'حمض سلفونيك (لتر)', silicate:'سليكات', carbonate:'كربونات', caustic:'صودا قشور', borax:'بوراكس', tripoly:'تراي بولي', citric:'ملح ليمون', glycerin:'جلسرين', perfume:'عطر', preservative:'حافظة', saltsol:'ملح مذاب'};
+            pasteHtml += `<div class="ing-row"><span class="ing-label">${names[p]||p}</span><input type="number" id="pas_${p}" value="${val}" step="0.1"><span>${p=='sulfonic'?'لتر':'كجم'}</span></div>`;
+        }
+        pasteHtml += `</div>`;
+        document.getElementById('pasteIngredients').innerHTML = pasteHtml;
+        document.getElementById('pasteCostsFields').innerHTML = `<p class="note-box">سيتم إضافة أسعار المواد قريباً</p>`;
+    }
+
+    // ==================== 4. دوال الحساب الرئيسية ====================
+    function calcSolid() {
+        let tallow = parseFloat(document.getElementById('solid_tallow')?.value)||0;
+        let used = parseFloat(document.getElementById('solid_usedoil')?.value)||0;
+        let palm = parseFloat(document.getElementById('solid_palmoil')?.value)||0;
+        let stear = parseFloat(document.getElementById('solid_stearic')?.value)||0;
+        let peanut = parseFloat(document.getElementById('solid_peanut')?.value)||0;
+        let totalOil = tallow+used+palm+stear+peanut;
+        let lye = (tallow*0.141)+(used*0.141)+(palm*0.144)+(stear*0.143)+(peanut*0.136);
+        let water = lye * 2.4;
+        let salt = document.getElementById('solid_addSalt')?.checked ? totalOil*0.01 : 0;
+        let silicate = document.getElementById('solid_addSilicate')?.checked ? totalOil*0.03 : 0;
+        let sugar = document.getElementById('solid_addSugar')?.checked ? totalOil*0.01 : 0;
+        let finalWeight = totalOil + lye + water + salt + silicate + sugar;
+        let resultsHtml = `
+            <h3 style="margin-top:0;">🧾 الوصفة النهائية</h3>
+            <div class="result-item"><span>🧮 مجموع الزيوت:</span><strong>${totalOil.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>⚖️ الصودا الكاوية (NaOH):</span><strong>${lye.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>💧 الماء المطلوب (2.4:1):</span><strong>${water.toFixed(2)} لتر</strong></div>
+            <div class="result-item"><span>🧂 ملح مضاف:</span><strong>${salt.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>✨ سليكات:</span><strong>${silicate.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>🍬 سكر:</span><strong>${sugar.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>📦 الوزن التقريبي للصابون:</span><strong>${finalWeight.toFixed(2)} كجم</strong></div>
+        `;
+        // إضافة التكاليف إذا كان مفعلاً
+        if(isLicensed) {
+            let pTallow=parseFloat(document.getElementById('price_tallow')?.value)||0;
+            let pUsed=parseFloat(document.getElementById('price_usedoil')?.value)||0;
+            let pPalm=parseFloat(document.getElementById('price_palmoil')?.value)||0;
+            let pStear=parseFloat(document.getElementById('price_stearic')?.value)||0;
+            let pPeanut=parseFloat(document.getElementById('price_peanut')?.value)||0;
+            let pLye=parseFloat(document.getElementById('price_lye')?.value)||0;
+            let pSalt=parseFloat(document.getElementById('price_salt')?.value)||0;
+            let pSilicate=parseFloat(document.getElementById('price_silicate')?.value)||0;
+            let pSugar=parseFloat(document.getElementById('price_sugar')?.value)||0;
+            let costOil = (tallow*pTallow)+(used*pUsed)+(palm*pPalm)+(stear*pStear)+(peanut*pPeanut);
+            let costLye = lye * pLye;
+            let costAdd = (salt*pSalt)+(silicate*pSilicate)+(sugar*pSugar);
+            let totalCost = costOil + costLye + costAdd;
+            let costPerKg = finalWeight>0 ? totalCost/finalWeight : 0;
+            resultsHtml += `
+                <div class="result-item" style="border-top:2px solid #c49a6c;"><span>💰 تكلفة الزيوت:</span><strong>${costOil.toFixed(0)} ج.س</strong></div>
+                <div class="result-item"><span>💰 تكلفة الصودا:</span><strong>${costLye.toFixed(0)} ج.س</strong></div>
+                <div class="result-item"><span>💰 تكلفة الإضافات:</span><strong>${costAdd.toFixed(0)} ج.س</strong></div>
+                <div class="result-item"><span>💵 إجمالي تكلفة الدفعة:</span><strong>${totalCost.toFixed(0)} ج.س</strong></div>
+                <div class="result-item"><span>🏷️ تكلفة الكيلو الواحد:</span><strong>${costPerKg.toFixed(0)} ج.س/كجم</strong></div>
+            `;
+        }
+        document.getElementById('solidResults').innerHTML = resultsHtml;
+    }
+
+    function calcLiquid() {
+        let batchL = parseFloat(document.getElementById('liquidBatchL')?.value) || 220;
+        let factor = batchL / 220;
+        let sulf = (liquidBase.sulfonic||0)*factor, tex=(liquidBase.texapon||0)*factor, comp=(liquidBase.comperlan||0)*factor, bet=(liquidBase.betaine||0)*factor;
+        let caus=(liquidBase.caustic||0)*factor, cit=(liquidBase.citric||0)*factor, tyl=(liquidBase.tylose||0)*factor, salt=(liquidBase.salt||0)*factor;
+        let glyc=(liquidBase.glycerin||0)*factor, pres=(liquidBase.preservative||0)*factor, perf=(liquidBase.perfume||0)*factor, col=(liquidBase.color||0)*factor, edta=(liquidBase.edta||0)*factor;
+        let totalMat = sulf+tex+comp+bet+caus+cit+tyl+salt+glyc+pres+perf+col+edta;
+        let netSulf = sulf*0.9, netTex=tex*0.7, netBoost=comp+bet;
+        let totalActive = netSulf+netTex+netBoost;
+        let activePercent = (totalActive / batchL)*100;
+        let quality = activePercent<7?'🟡 اقتصادي': (activePercent<12?'🟢 جيد جداً':'🔵 ممتاز فاخر');
+        let html = `
+            <h3>📊 تحليل المادة الفعالة والجودة</h3>
+            <div class="result-item"><span>📦 الوزن الكلي للمواد:</span><strong>${totalMat.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>⚡ صافي السلفونيك:</span><strong>${netSulf.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>⚡ صافي التكسابون:</span><strong>${netTex.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>⚡ صافي المعززات:</span><strong>${netBoost.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>🧪 المادة الفعالة الكلية:</span><strong>${totalActive.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>📊 نسبة الفعالية:</span><strong class="big-number">${activePercent.toFixed(2)}%</strong></div>
+            <div class="quality-badge" style="background:#f0c45a;">${quality}</div>
+        `;
+        if(isLicensed) {
+            let liqPrices = {sulfonic:'price_liq_sulfonic', texapon:'price_liq_texapon', comperlan:'price_liq_comperlan', betaine:'price_liq_betaine', caustic:'price_liq_caustic', citric:'price_liq_citric', tylose:'price_liq_tylose', salt:'price_liq_salt', glycerin:'price_liq_glycerin', preservative:'price_liq_preservative', perfume:'price_liq_perfume'};
+            let liqAmounts = {sulfonic:sulf, texapon:tex, comperlan:comp, betaine:bet, caustic:caus, citric:cit, tylose:tyl, salt:salt, glycerin:glyc, preservative:pres, perfume:perf};
+            let totalCostLiq = 0;
+            for(let k in liqPrices) { let p=parseFloat(document.getElementById(liqPrices[k])?.value)||0; totalCostLiq += (liqAmounts[k]||0)*p; }
+            let costPerLiter = batchL>0 ? totalCostLiq/batchL : 0;
+            html += `
+                <div class="result-item" style="border-top:2px solid #c49a6c;"><span>💵 إجمالي تكلفة الدفعة:</span><strong>${totalCostLiq.toFixed(0)} ج.س</strong></div>
+                <div class="result-item"><span>🏷️ تكلفة اللتر الواحد:</span><strong>${costPerLiter.toFixed(0)} ج.س/لتر</strong></div>
+            `;
+        }
+        document.getElementById('liquidResults').innerHTML = html;
+    }
+
+    function calcPaste() {
+        let batch = parseFloat(document.getElementById('pasteBatchKg')?.value) || 100;
+        let factor = batch / 100;
+        let water = (pasteBase.water||0)*factor, cmc=(pasteBase.cmc||0)*factor, sulfLtr=(pasteBase.sulfonic||0)*factor;
+        let silicate=(pasteBase.silicate||0)*factor, carbonate=(pasteBase.carbonate||0)*factor, caustic=(pasteBase.caustic||0)*factor;
+        let borax=(pasteBase.borax||0)*factor, tripoly=(pasteBase.tripoly||0)*factor, citric=(pasteBase.citric||0)*factor;
+        let glycerin=(pasteBase.glycerin||0)*factor, perfume=(pasteBase.perfume||0)*factor, preserv=(pasteBase.preservative||0)*factor, saltsol=(pasteBase.saltsol||0)*factor;
+        let sulfKg = sulfLtr * 1.05;
+        let totalWeight = water+cmc+sulfKg+silicate+carbonate+caustic+borax+tripoly+citric+glycerin+perfume+preserv+saltsol;
+        let activeAmount = sulfKg * 0.90;
+        let activePercent = (activeAmount/totalWeight)*100;
+        let quality = activePercent<7?'🟡 منخفض': (activePercent<12?'🟢 جيد جداً':'🔵 قوي جداً');
+        let html = `
+            <h3>📊 تحليل المادة الفعالة</h3>
+            <div class="result-item"><span>📦 الوزن الكلي للخلطة:</span><strong>${totalWeight.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>🧪 وزن السلفونيك (كثافة 1.05):</span><strong>${sulfKg.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>⚡ المادة الفعالة:</span><strong>${activeAmount.toFixed(2)} كجم</strong></div>
+            <div class="result-item"><span>📊 نسبة الفعالية:</span><strong class="big-number">${activePercent.toFixed(2)}%</strong></div>
+            <div class="quality-badge" style="background:#7fb07f;">${quality}</div>
+        `;
+        if(isLicensed) {
+            let pasteAmounts = {water, cmc, sulfonic:sulfLtr, silicate, carbonate, caustic, borax, tripoly, citric, glycerin, perfume, preservative:preserv};
+            let totalCostPaste = 0;
+            for(let k in pasteAmounts) {
+                let p = parseFloat(document.getElementById(`price_pas_${k}`)?.value)||0;
+                totalCostPaste += (pasteAmounts[k]||0) * p;
+            }
+            let costPerKgPaste = totalWeight>0 ? totalCostPaste/totalWeight : 0;
+            html += `
+                <div class="result-item" style="border-top:2px solid #c49a6c;"><span>💵 إجمالي تكلفة الدفعة:</span><strong>${totalCostPaste.toFixed(0)} ج.س</strong></div>
+                <div class="result-item"><span>🏷️ تكلفة الكيلو الواحد:</span><strong>${costPerKgPaste.toFixed(0)} ج.س/كجم</strong></div>
+            `;
+        }
+        document.getElementById('pasteResults').innerHTML = html;
+    }
+
+    // ==================== 5.1 حاسبة التسويق والربح ====================
+    function calcMarket() {
+        let type = document.getElementById('mkt_type')?.value || 'solid';
+        let batchKg = parseFloat(document.getElementById('mkt_batchKg')?.value)||0;
+        let rawCost = parseFloat(document.getElementById('mkt_rawCost')?.value)||0;
+        let opCost  = parseFloat(document.getElementById('mkt_opCost')?.value)||0;
+        let packCost= parseFloat(document.getElementById('mkt_packCost')?.value)||0;
+        let delivCost=parseFloat(document.getElementById('mkt_delivCost')?.value)||0;
+        let totalCost = rawCost + opCost + packCost + delivCost;
+        let costPerKg = batchKg>0 ? totalCost/batchKg : 0;
+
+        // إظهار / إخفاء حقول حسب النوع
+        let isLiqPaste = (type==='liquid'||type==='paste');
+        document.getElementById('mkt_barRow').style.display = isLiqPaste ? 'none' : 'flex';
+        document.getElementById('mkt_boxRow').style.display = isLiqPaste ? 'none' : 'flex';
+        document.getElementById('mkt_bottleRow').style.display = isLiqPaste ? 'flex' : 'none';
+        document.getElementById('mkt_boxPriceRow').style.display = isLiqPaste ? 'none' : 'flex';
+
+        let html = `<h3 style="margin-top:0;">📊 نتائج التسويق والربح</h3>`;
+        html += `<div class="result-item"><span>💸 إجمالي التكاليف:</span><strong>${totalCost.toFixed(0)} ج.س</strong></div>`;
+        html += `<div class="result-item"><span>⚖️ تكلفة الكيلو:</span><strong>${costPerKg.toFixed(0)} ج.س/كجم</strong></div>`;
+
+        if(type === 'solid') {
+            let barGram = parseFloat(document.getElementById('mkt_barGram')?.value)||125;
+            let perBox  = parseFloat(document.getElementById('mkt_perBox')?.value)||72;
+            let unitPrice = parseFloat(document.getElementById('mkt_unitPrice')?.value)||0;
+            let boxPrice  = parseFloat(document.getElementById('mkt_boxPrice')?.value)||0;
+            // إذا أدخل سعر الكرتونة، احسب سعر الحبة
+            if(boxPrice>0 && unitPrice===0) unitPrice = boxPrice/perBox;
+            let totalUnits = batchKg>0 && barGram>0 ? Math.floor((batchKg*1000)/barGram) : 0;
+            let totalBoxes = perBox>0 ? Math.floor(totalUnits/perBox) : 0;
+            let remainder  = totalUnits % perBox;
+            let costPerBar = barGram>0 ? costPerKg*(barGram/1000) : 0;
+            let revenue    = totalUnits * unitPrice;
+            let profit     = revenue - totalCost;
+            let margin     = revenue>0 ? (profit/revenue)*100 : 0;
+            let profitPerBar = unitPrice - costPerBar;
+            let marginColor = margin<0?'#e74c3c':(margin<20?'#e67e22':'#27ae60');
+            document.getElementById('mkt_unitLabel').textContent = '💵 سعر بيع الصابونة الواحدة (ج.س)';
+            html += `
+                <div class="result-item"><span>🧼 عدد الصابونات المتوقع:</span><strong>${totalUnits} حبة</strong></div>
+                <div class="result-item"><span>📦 عدد الكراتين الكاملة:</span><strong>${totalBoxes} كرتونة + ${remainder} حبة</strong></div>
+                <div class="result-item"><span>💲 تكلفة الصابونة الواحدة:</span><strong>${costPerBar.toFixed(0)} ج.س</strong></div>
+            `;
+            if(unitPrice>0) {
+                html += `
+                    <div class="result-item"><span>💵 إيراد الدفعة:</span><strong>${revenue.toFixed(0)} ج.س</strong></div>
+                    <div class="result-item"><span>📈 ربح الدفعة:</span><strong style="color:${marginColor}">${profit.toFixed(0)} ج.س</strong></div>
+                    <div class="result-item"><span>🏷️ ربح الصابونة الواحدة:</span><strong style="color:${marginColor}">${profitPerBar.toFixed(0)} ج.س</strong></div>
+                    <div class="result-item"><span>📊 هامش الربح:</span><strong class="big-number" style="color:${marginColor}">${margin.toFixed(1)}%</strong></div>
+                    <div class="quality-badge" style="background:${marginColor};color:white;">${margin<0?'🔴 خسارة':(margin<20?'🟡 هامش منخفض':(margin<40?'🟢 جيد':'🔵 ممتاز'))}</div>
+                `;
+            }
+        } else {
+            // سائل أو معجون
+            let bottleMl = parseFloat(document.getElementById('mkt_bottleMl')?.value)||500;
+            let unitPrice = parseFloat(document.getElementById('mkt_unitPrice')?.value)||0;
+            let totalUnits = batchKg>0 && bottleMl>0 ? Math.floor((batchKg*1000)/bottleMl) : 0;
+            let costPerBottle = batchKg>0 && totalUnits>0 ? totalCost/totalUnits : 0;
+            let revenue = totalUnits * unitPrice;
+            let profit  = revenue - totalCost;
+            let margin  = revenue>0 ? (profit/revenue)*100 : 0;
+            let marginColor = margin<0?'#e74c3c':(margin<20?'#e67e22':'#27ae60');
+            document.getElementById('mkt_unitLabel').textContent = `💵 سعر بيع العبوة ${bottleMl}مل (ج.س)`;
+            html += `
+                <div class="result-item"><span>🧴 عدد العبوات المتوقع:</span><strong>${totalUnits} عبوة</strong></div>
+                <div class="result-item"><span>💲 تكلفة العبوة الواحدة:</span><strong>${costPerBottle.toFixed(0)} ج.س</strong></div>
+            `;
+            if(unitPrice>0) {
+                html += `
+                    <div class="result-item"><span>💵 إيراد الدفعة:</span><strong>${revenue.toFixed(0)} ج.س</strong></div>
+                    <div class="result-item"><span>📈 ربح الدفعة:</span><strong style="color:${marginColor}">${profit.toFixed(0)} ج.س</strong></div>
+                    <div class="result-item"><span>📊 هامش الربح:</span><strong class="big-number" style="color:${marginColor}">${margin.toFixed(1)}%</strong></div>
+                    <div class="quality-badge" style="background:${marginColor};color:white;">${margin<0?'🔴 خسارة':(margin<20?'🟡 هامش منخفض':(margin<40?'🟢 جيد':'🔵 ممتاز'))}</div>
+                `;
+            }
+        }
+        document.getElementById('marketResults').innerHTML = html;
+    }
+
+    // ==================== 5. دوال التحكم: الوصفات، التحديث، التبويبات ====================
+    function loadSolidPreset() {
+        let preset = document.getElementById('solidRecipeSelect').value;
+        if(preset === 'wash') {
+            solidValues = { tallow:7, usedoil:3, palmoil:0, stearic:0, peanut:0 };
+            document.getElementById('solid_addSugar').checked = false;
+        } else if(preset === 'soft') {
+            solidValues = { tallow:0, usedoil:0, palmoil:8, stearic:2, peanut:0 };
+            document.getElementById('solid_addSugar').checked = true;
+        } else { return; }
+        document.getElementById('solid_tallow').value = solidValues.tallow;
+        document.getElementById('solid_usedoil').value = solidValues.usedoil;
+        document.getElementById('solid_palmoil').value = solidValues.palmoil;
+        document.getElementById('solid_stearic').value = solidValues.stearic;
+        document.getElementById('solid_peanut').value = solidValues.peanut;
+        calcSolid();
+    }
+    function scaleSolidRecipe() {
+        let batch = parseFloat(document.getElementById('solidBatchKg').value) || 10;
+        let factor = batch / 10;
+        let tallow = (parseFloat(document.getElementById('solid_tallow').value)||0) * factor;
+        let used = (parseFloat(document.getElementById('solid_usedoil').value)||0) * factor;
+        let palm = (parseFloat(document.getElementById('solid_palmoil').value)||0) * factor;
+        let stear = (parseFloat(document.getElementById('solid_stearic').value)||0) * factor;
+        let peanut = (parseFloat(document.getElementById('solid_peanut').value)||0) * factor;
+        document.getElementById('solid_tallow').value = tallow.toFixed(2);
+        document.getElementById('solid_usedoil').value = used.toFixed(2);
+        document.getElementById('solid_palmoil').value = palm.toFixed(2);
+        document.getElementById('solid_stearic').value = stear.toFixed(2);
+        document.getElementById('solid_peanut').value = peanut.toFixed(2);
+        calcSolid();
+    }
+    function scaleLiquid() {
+        let batch = parseFloat(document.getElementById('liquidBatchL').value) || 220;
+        let factor = batch / 220;
+        for(let k of liquidFields) {
+            let inp = document.getElementById(`liq_${k}`);
+            if(inp) inp.value = (liquidBase[k] * factor).toFixed(2);
+        }
+        calcLiquid();
+    }
+    function scalePaste() {
+        let batch = parseFloat(document.getElementById('pasteBatchKg').value) || 100;
+        let factor = batch / 100;
+        for(let p of pasteFields) {
+            let inp = document.getElementById(`pas_${p}`);
+            if(inp) inp.value = (pasteBase[p] * factor).toFixed(2);
+        }
+        calcPaste();
+    }
+
+    function attachEvents() {
+        document.getElementById('solidRecipeSelect')?.addEventListener('change', loadSolidPreset);
+        document.getElementById('scaleSolidBtn')?.addEventListener('click', scaleSolidRecipe);
+        document.getElementById('scaleLiquidBtn')?.addEventListener('click', scaleLiquid);
+        document.getElementById('scalePasteBtn')?.addEventListener('click', scalePaste);
+        // التبويبات
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                let tabId = this.getAttribute('data-tab');
+                document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.getElementById(`tab-${tabId}`).classList.add('active');
+                this.classList.add('active');
+                if(tabId === 'solid') calcSolid();
+                else if(tabId === 'liquid') calcLiquid();
+                else if(tabId === 'paste') calcPaste();
+                else if(tabId === 'market') calcMarket();
+            });
+        });
+        // ربط تغييرات المدخلات
+        document.getElementById('calculatorContent')?.addEventListener('input', (e) => {
+            if(!isLicensed) return;
+            if(e.target.id && (e.target.id.startsWith('solid_') || e.target.id.includes('price_') || e.target.id === 'solidBatchKg')) calcSolid();
+            if(e.target.id && e.target.id.startsWith('liq_')) calcLiquid();
+            if(e.target.id && e.target.id.startsWith('pas_')) calcPaste();
+        });
+        document.getElementById('solid_addSalt')?.addEventListener('change', calcSolid);
+        document.getElementById('solid_addSilicate')?.addEventListener('change', calcSolid);
+        document.getElementById('solid_addSugar')?.addEventListener('change', calcSolid);
+        // حفظ الأسعار تلقائياً
+        document.querySelectorAll('[id^="price_"]').forEach(inp => inp.addEventListener('input', () => { savePrices(); if(isLicensed) calcSolid(); }));
+    }
+
+    // ==================== 6. تمكين / تعطيل الحقول ====================
+    function enableFullCalculator() {
+        document.querySelectorAll('#calculatorContent input, #calculatorContent button, #calculatorContent select').forEach(el => el.disabled = false);
+        document.getElementById('licenseMsg').innerHTML = '✅ التفعيل الكامل نشط. جميع الحقول مفتوحة (بما فيها التكاليف).';
+        document.getElementById('licenseMsg').style.background = '#cbe5cb';
+        calcSolid(); calcLiquid(); calcPaste(); calcMarket();
+        loadPrices();   // استعادة الأسعار المحفوظة
+    }
+    function disableCalculator() {
+        document.querySelectorAll('#calculatorContent input, #calculatorContent button, #calculatorContent select').forEach(el => el.disabled = true);
+        document.getElementById('licenseMsg').innerHTML = '🔒 النسخة التجريبية: يجب التفعيل لاستخدام الحاسبة كاملة.';
+        calcSolid(); calcLiquid(); calcPaste(); calcMarket(); // تعرض نتائج افتراضية
+    }
+
+    // ==================== 7. أحداث التفعيل والمشاركة ====================
+    document.getElementById('genFingerprintBtn')?.addEventListener('click', () => {
+        let fp = getFingerprint();
+        document.getElementById('fingerprintDisplay').innerHTML = fp;
+        document.getElementById('copyFingerprintBtn').style.display = 'inline-block';
+    });
+    document.getElementById('copyFingerprintBtn')?.addEventListener('click', () => {
+        let text = document.getElementById('fingerprintDisplay').innerText;
+        navigator.clipboard.writeText(text).then(() => alert('✅ تم نسخ البصمة')).catch(()=>alert('انسخ يدوياً'));
+    });
+    document.getElementById('activateBtn')?.addEventListener('click', () => {
+        let phone = document.getElementById('phoneInput').value.trim();
+        let code = document.getElementById('activationCodeInput').value.trim();
+        if(!phone || !code) { alert('أدخل رقم الهاتف والكود'); return; }
+        if(activateLicense(phone, code)) { enableFullCalculator(); alert('تم التفعيل بنجاح!'); }
+        else alert('كود التفعيل غير صحيح لهذا الجهاز.');
+    });
+    document.getElementById('shareBtn')?.addEventListener('click', () => {
+        if(navigator.share) navigator.share({ title: 'منصة إستثمارك', text: 'آلة حاسبة متكاملة لصناعة الصابون', url: window.location.href });
+        else alert('اضغط ⋯ واختر مشاركة الصفحة');
+    });
+
+    // ==================== 8. التهيئة النهائية ====================
+    window.onload = () => {
+        generateInputs();
+        attachEvents();
+        checkStoredLicense();
+        if(isLicensed) enableFullCalculator();
+        else disableCalculator();
+        // تعيين القيم المرجعية للسائل والمعجون (data-base) – للتحجيم
+        for(let k of liquidFields) {
+            let el = document.getElementById(`liq_${k}`);
+            if(el) el.setAttribute('data-base', liquidBase[k]);
+        }
+        for(let p of pasteFields) {
+            let el = document.getElementById(`pas_${p}`);
+            if(el) el.setAttribute('data-base', pasteBase[p]);
+        }
+        loadPrices(); // في حالة كان مفعلاً سابقاً
+    };
+</script>
+<script>
+// منع القائمة المنسدلة للزر الأيمن الفأرة
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// منع اختصارات لوحة المفاتيح الخاصة بالنسخ وعرض المطورين
+document.onkeydown = function(e) {
+    if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 85 || e.keyCode === 117)) {
+        return false;
+    }
+};
+</script>
+
+</body>
+</html>            display: flex;
             align-items: center;
             gap: 8px;
             margin-bottom: 12px;
