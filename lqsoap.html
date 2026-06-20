@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"حاسبة الصابون السائل" من إستثمارك</title>
+    <style>
+        :root {
+            --primary-color: #0b5345;
+            --secondary-color: #117a65;
+            --accent-color: #f39c12;
+            --bg-color: #f4f6f6;
+            --text-color: #2c3e50;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        header h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 26px;
+        }
+        header p {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin: 5px 0 0 0;
+        }
+        .section {
+            background: #fdfefe;
+            border: 1px solid #e5e8e8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            margin-top: 0;
+            color: var(--secondary-color);
+            border-right: 4px solid var(--secondary-color);
+            padding-right: 10px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .btn {
+            flex: 1;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: var(--primary-color);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: right;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .badge {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .badge-success { background-color: #d4efdf; color: #196f3d; }
+        .badge-warning { background-color: #fcf3cf; color: #b7950b; }
+        .badge-danger { background-color: #f9e7e7; color: #922b21; }
+        
+        .prices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .steps-list {
+            padding-right: 20px;
+            line-height: 1.8;
+        }
+        .steps-list li {
+            margin-bottom: 12px;
+        }
+        .alert-box {
+            background-color: #fcf3cf;
+            border-right: 5px solid #f39c12;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .print-btn {
+            background-color: var(--accent-color);
+            color: #000;
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 18px;
+        }
+        .print-btn:hover {
+            background-color: #d35400;
+            color: #fff;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #7f8c8d;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* إعدادات الطباعة لملف PDF منسق */
+        @media print {
+            body { background: white; color: black; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            .btn-group, .input-panel, .print-btn { display: none !important; }
+            .section { border: none; padding: 10px 0; page-break-inside: avoid; }
+            th { background-color: #0b5345 !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .badge { border: 1px solid #333; background: none !important; color: black !important; }
+            .copyright-notice { display: block !important; text-align: center; margin-top: 30px; font-weight: bold; border-top: 2px dashed #000; padding-top: 15px; }
+            .financial-summary-box { background: none !important; border: 1px solid #000 !important; }
+        }
+        .copyright-notice { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>"حاسبة الصابون السائل" من إستثمارك</h1>
+        <p>إدارة المشاريع الصغيرة والاستثمارات الناشئة والتسويق الذكي</p>
+    </header>
+
+    <!-- 1. قسم الحجم المطلوب -->
+    <div class="section input-panel">
+        <h3>1. تحديد حجم الخلطة المطلوب تصنيعها</h3>
+        <div class="btn-group">
+            <button class="btn" onclick="setVolume(10)">10 لتر</button>
+            <button class="btn" onclick="setVolume(100)">100 لتر</button>
+            <button class="btn" onclick="setVolume(220)">220 لتر</button>
+        </div>
+        <div class="form-group">
+            <label for="volumeInput">أو أدخل حجماً مخصصاً باللتر:</label>
+            <input type="number" id="volumeInput" value="10" min="1" oninput="calculate()">
+        </div>
+    </div>
+
+    <!-- 2. قسم أسعار المواد الخام الفعلي من متجر تيرو -->
+    <div class="section input-panel">
+        <h3>2. أسعار المواد الخام الحالية (جنيه سوداني / للكيلو أو العبوة)</h3>
+        <div class="prices-grid">
+            <div class="form-group">
+                <label>السلفونيك:</label>
+                <input type="number" id="p-sulfonic" value="23000" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>التكسابون:</label>
+                <input type="number" id="p-texapon" value="18000" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>التايلوز:</label>
+                <input type="number" id="p-tylose" value="29000" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>صودا قشور:</label>
+                <input type="number" id="p-soda" value="5500" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>كمبرلان:</label>
+                <input type="number" id="p-comperlan" value="18000" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>معزز الرغوة:</label>
+                <input type="number" id="p-foam" value="13000" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>الإيدتيا (EDTA):</label>
+                <input type="number" id="p-edta" value="21000" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>الجلسرين:</label>
+                <input type="number" id="p-glycerin" value="17000" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>الفورمالين:</label>
+                <input type="number" id="p-formalin" value="10000" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>الملح:</label>
+                <input type="number" id="p-salt" value="1000" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>ألوان دلتا:</label>
+                <input type="number" id="p-color" value="32000" oninput="calculate()">
+            </div>
+            <div class="form-group">
+                <label>العطور الهندية:</label>
+                <input type="number" id="p-perfume" value="40000" oninput="calculate()">
+            </div>
+        </div>
+        <div class="form-group" style="margin-top: 15px; max-width: 300px;">
+            <label style="color: var(--primary-color);">سعر بيع لتر الصابون المتوقع (جنيه):</label>
+            <input type="number" id="sellPrice" value="3000" oninput="calculate()">
+        </div>
+    </div>
+
+    <!-- 3. تقرير المقادير والجدوى (المرنة والقابلة للطباعة) -->
+    <div class="section">
+        <h3>3. التقرير الفني والمالي للخلطة</h3>
+        <p>الحجم الإجمالي المستهدف للتشغيلة: <strong id="currentVolume" style="color: var(--secondary-color);">10</strong> لتر</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>المادة الخام</th>
+                    <th>الكمية المطلوبة للخلطة</th>
+                    <th>التكلفة الفعلية (جنيه)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>حمض السلفونيك (90%)</td><td id="m-sulfonic">0</td><td id="c-sulfonic">0</td></tr>
+                <tr><td>تكسابون (70%)</td><td id="m-texapon">0</td><td id="c-texapon">0</td></tr>
+                <tr><td>صودا قشور (حتى التعادل)</td><td id="m-soda">0</td><td id="c-soda">0</td></tr>
+                <tr><td>تايلوز (مغلظ قوام)</td><td id="m-tylose">0</td><td id="c-tylose">0</td></tr>
+                <tr><td>كمبرلان (KDK)</td><td id="m-comperlan">0</td><td id="c-comperlan">0</td></tr>
+                <tr><td>معزز رغوة (بيتانين)</td><td id="m-foam">0</td><td id="c-foam">0</td></tr>
+                <tr><td>إيدتا (EDTA)</td><td id="m-edta">0</td><td id="c-edta">0</td></tr>
+                <tr><td>جلسرين نقرّي</td><td id="m-glycerin">0</td><td id="c-glycerin">0</td></tr>
+                <tr><td>ملح طعام ناعم</td><td id="m-salt">0</td><td id="c-salt">0</td></tr>
+                <tr><td>مادة حافظة (فورمالين)</td><td id="m-formalin">0</td><td id="c-formalin">0</td></tr>
+                <tr><td>ألوان دلتا</td><td id="m-color">0</td><td id="c-color">0</td></tr>
+                <tr><td>عطور هندية مركزة</td><td id="m-perfume">0</td><td id="c-perfume">0</td></tr>
+                <tr><td>الماء النظيف النقّي</td><td>لتكملة الحجم الكلي</td><td style="color: green;">مجاني</td></tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 15px;">
+            <strong>تقييم جودة المنتج الفعلي:</strong>
+            <div><div id="qualityBadge" class="badge">جاري الحساب...</div></div>
+        </div>
+
+        <div class="financial-summary-box" style="background: #eaeded; padding: 15px; border-radius: 8px; margin-top: 15px;">
+            <p style="margin: 5px 0;">تكلفة تشغيلة المواد الخام الإجمالية: <strong id="totalCost" style="color:#922b21;">0</strong> جنيه سوداني</p>
+            <p style="margin: 5px 0;">إجمالي العائد المالي عند البيع: <strong id="totalRevenue" style="color:#196f3d;">0</strong> جنيه سوداني</p>
+            <p style="margin: 10px 0 0 0; font-size: 18px; border-top: 1px solid #ccc; padding-top: 10px;">
+                صافي الأرباح المتوقعة: <strong id="totalProfit" style="color:#117a65;">0</strong> جنيه سوداني
+            </p>
+        </div>
+    </div>
+
+    <!-- 4. قسم دليل خطوات الخلط والتسلسل الصحيح (الجديد) -->
+    <div class="section" id="guideSection">
+        <h3>4. دليل خطوات الخلط الاحترافي (التسلسل الصحيح للمبتدئين)</h3>
+        <p style="font-size: 14px; color: #566573; margin-top: -10px;">لضمان نجاح التشغيلة وعدم تعكر الصابون أو تكتله، اتبع هذا الترتيب حرفياً:</p>
+        
+        <ol class="steps-list">
+            <li><strong>الإذابة المسبقة (قبل العمل بـ 2-3 ساعات):</strong> 
+                ذوّب كمية <b>التكسابون</b> بالكامل في إناء بلاستيكي مستقل مع إضافة قليل من الملح لتسريع عملية الذوبان. وفي إناء بلاستيكي آخر، ذوّب <b>الصودا القشور</b> في ماء واتركها جانباً لتبرد تماماً قبل الاستخدام.
+            </li>
+            <li><strong>تجهيز المحلول المائي الأساسي:</strong> 
+                املأ وعاء التصنيع الرئيسي بحوالي ثلثي كمية الماء النظيف المطلوبة، ثم أضف مادة الـ <b>إيدتا (EDTA)</b> وحرك جيداً لمعالجة أملاح الماء.
+            </li>
+            <li><strong>إضافة التايلوز (منطقة الخطر):</strong> 
+                رش بودرة <b>التايلوز</b> بالتدريج ببطء شديد في الماء مع <b>التحريك السريع والمستمر دون توقف</b>؛ لأن إضافته دفعة واحدة أو ببطء في التقليب سيؤدي إلى تكتله فوراً وفشل القوام الشفاف.
+            </li>
+            <li><strong>إضافة حمض السلفونيك:</strong> 
+                أضف كمية <b>السلفونيك</b> كاملة إلى محلول التايلوز اللزج وحرك جيداً حتى يمتزج الخليط تماماً.
+            </li>
+            <li><strong>عملية التعادل الحرجة (pH):</strong> 
+                ابدأ بإضافة محلول <b>الصودا القشور البارد</b> (الذي تم تجهيزه في الخطوة 1) تدريجياً وببطء شديد مع التحريك. استخدم ورق الـ <b>pH</b> باستمرار حتى يتحول لون الورقة إلى <b>الأخضر تماماً (درجة 7)</b>.
+            </li>
+            <li><strong>إضافة قاعدة القوام والمحسنات:</strong> 
+                بعد إتمام التعادل بنجاح، أضف <b>التكسابون المذاب</b> مسبقاً، يليه <b>الكمبرلان</b> ببطء ثم <b>معزز الرغوة</b> مع التحريك المستمر، وستلاحظ ارتفاع لزوجة وقوام الصابون تدريجياً.
+            </li>
+            <li><strong>ضبط اللزوجة واللمسات الأخيرة:</strong> 
+                أضف كمية <b>الملح</b> المتبقية بالتدريج الشديد (توقف إذا تماسك القوام كالعسل)، ثم أضف <b>الجلسرين</b> و<b>المادة الحافظة (الفورمالين)</b>، وأخيراً أضف <b>اللون والعطر</b> المذابين جانباً. أكمل سعة الوعاء بالماء حتى علامة الحجم المطلوبة.
+            </li>
+        </ol>
+
+        <div class="alert-box">
+            ⚠️ <b>تنبيهات مهمة للمبتدئين لمنع تشقق الجلد أو تعكر المنتج:</b><br>
+            • إذا تحول ورق الـ pH للون الأحمر فالحموضة عالية (أضف صودا)، وإذا تحول للأزرق فالقلوية عالية (أضف سلفونيك). لابد من اللون الأخضر النظيف.<br>
+            • تجنب استخدام الأواني أو أدوات التقليب المصنوعة من الألومنيوم تماماً لأنها تتفاعل مع المواد الخام؛ استخدم البلاستيك أو الخشب دائماً.
+        </div>
+    </div>
+
+    <!-- زر الطباعة وتصدير PDF -->
+    <button class="btn print-btn" onclick="window.print()">🖨️ طباعة دليل التشغيل ودراسة الجدوى (PDF)</button>
+
+    <!-- الهوية وحفظ الحقوق في الفوتر المطبوع -->
+    <div class="copyright-notice">
+        <p>جميع الحقوق محفوظة © عصام عبادي - إدارة المشاريع الصغيرة والاستثمارات الناشئة والتسويق الذكي</p>
+        <p>العلامة التجارية المستهدفة: إستثمارك ® | هاتف: +249962411479 | بريد: isamamin@gmail.com</p>
+    </div>
+
+    <footer>
+        مقدمة من إستثمارك للحلول الاستثمارية الذكية - ٠٩٦٢٤١١٤٧٩ - isamamin@gmail.com
+    </footer>
+</div>
+
+<script>
+    const base100 = {
+        sulfonic: 5.5,   
+        texapon: 3.15,   
+        tylose: 0.315,   
+        soda: 0.750,     
+        comperlan: 0.250,
+        foam: 0.250,     
+        edta: 0.020,     
+        glycerin: 0.120, 
+        formalin: 0.100, 
+        salt: 1.250,     
+        color: 0.020,    
+        perfume: 0.250   
+    };
+
+    function setVolume(val) {
+        document.getElementById('volumeInput').value = val;
+        calculate();
+    }
+
+    function formatWeight(kg) {
+        if (kg >= 1) {
+            return kg.toFixed(3) + " كيلو جرام";
+        } else {
+            return Math.round(kg * 1000) + " جرام";
+        }
+    }
+
+    function calculate() {
+        let vol = parseFloat(document.getElementById('volumeInput').value);
+        if (isNaN(vol) || vol <= 0) vol = 10;
+
+        document.querySelectorAll('#currentVolume').forEach(el => el.innerText = vol);
+
+        let F = vol / 100;
+
+        let wSulfonic = base100.sulfonic * F;
+        let wTexapon = base100.texapon * F;
+        let wTylose = base100.tylose * F;
+        let wSoda = base100.soda * F;
+        let wComperlan = base100.comperlan * F;
+        let wFoam = base100.foam * F;
+        let wEdta = base100.edta * F;
+        let wGlycerin = base100.glycerin * F;
+        let wFormalin = base100.formalin * F;
+        let wSalt = base100.salt * F;
+        let wColor = base100.color * F;
+        let wPerfume = base100.perfume * F;
+
+        document.getElementById('m-sulfonic').innerText = formatWeight(wSulfonic);
+        document.getElementById('m-texapon').innerText = formatWeight(wTexapon);
+        document.getElementById('m-tylose').innerText = formatWeight(wTylose);
+        document.getElementById('m-soda').innerText = formatWeight(wSoda);
+        document.getElementById('m-comperlan').innerText = formatWeight(wComperlan);
+        document.getElementById('m-foam').innerText = formatWeight(wFoam);
+        document.getElementById('m-edta').innerText = formatWeight(wEdta);
+        document.getElementById('m-glycerin').innerText = formatWeight(wGlycerin);
+        document.getElementById('m-formalin').innerText = formatWeight(wFormalin);
+        document.getElementById('m-salt').innerText = formatWeight(wSalt);
+        document.getElementById('m-color').innerText = formatWeight(wColor);
+        document.getElementById('m-perfume').innerText = formatWeight(wPerfume);
+
+        let pSulfonic = parseFloat(document.getElementById('p-sulfonic').value) || 0;
+        let pTexapon = parseFloat(document.getElementById('p-texapon').value) || 0;
+        let pTylose = parseFloat(document.getElementById('p-tylose').value) || 0;
+        let pSoda = parseFloat(document.getElementById('p-soda').value) || 0;
+        let pComperlan = parseFloat(document.getElementById('p-comperlan').value) || 0;
+        let pFoam = parseFloat(document.getElementById('p-foam').value) || 0;
+        let pEdta = parseFloat(document.getElementById('p-edta').value) || 0;
+        let pGlycerin = parseFloat(document.getElementById('p-glycerin').value) || 0;
+        let pFormalin = parseFloat(document.getElementById('p-formalin').value) || 0;
+        let pSalt = parseFloat(document.getElementById('p-salt').value) || 0;
+        let pColor = parseFloat(document.getElementById('p-color').value) || 0;
+        let pPerfume = parseFloat(document.getElementById('p-perfume').value) || 0;
+        let sellPrice = parseFloat(document.getElementById('sellPrice').value) || 0;
+
+        let cSulfonic = wSulfonic * pSulfonic;
+        let cTexapon = wTexapon * pTexapon;
+        let cTylose = wTylose * pTylose;
+        let cSoda = wSoda * pSoda;
+        let cComperlan = wComperlan * pComperlan;
+        let cFoam = wFoam * pFoam;
+        let cEdta = wEdta * pEdta;
+        let cGlycerin = wGlycerin * pGlycerin;
+        let cFormalin = wFormalin * pFormalin;
+        let cSalt = wSalt * pSalt;
+        let cColor = wColor * pColor;
+        let cPerfume = wPerfume * pPerfume;
+
+        document.getElementById('c-sulfonic').innerText = Math.round(cSulfonic).toLocaleString() + " ج";
+        document.getElementById('c-texapon').innerText = Math.round(cTexapon).toLocaleString() + " ج";
+        document.getElementById('c-tylose').innerText = Math.round(cTylose).toLocaleString() + " ج";
+        document.getElementById('c-soda').innerText = Math.round(cSoda).toLocaleString() + " ج";
+        document.getElementById('c-comperlan').innerText = Math.round(cComperlan).toLocaleString() + " ج";
+        document.getElementById('c-foam').innerText = Math.round(cFoam).toLocaleString() + " ج";
+        document.getElementById('c-edta').innerText = Math.round(cEdta).toLocaleString() + " ج";
+        document.getElementById('c-glycerin').innerText = Math.round(cGlycerin).toLocaleString() + " ج";
+        document.getElementById('c-formalin').innerText = Math.round(cFormalin).toLocaleString() + " ج";
+        document.getElementById('c-salt').innerText = Math.round(cSalt).toLocaleString() + " ج";
+        document.getElementById('c-color').innerText = Math.round(cColor).toLocaleString() + " ج";
+        document.getElementById('c-perfume').innerText = Math.round(cPerfume).toLocaleString() + " ج";
+
+        let totalCost = cSulfonic + cTexapon + cTylose + cSoda + cComperlan + cFoam + cEdta + cGlycerin + cFormalin + cSalt + cColor + cPerfume;
+        let totalRevenue = vol * sellPrice;
+        let totalProfit = totalRevenue - totalCost;
+
+        document.getElementById('totalCost').innerText = Math.round(totalCost).toLocaleString();
+        document.getElementById('totalRevenue').innerText = Math.round(totalRevenue).toLocaleString();
+        document.getElementById('totalProfit').innerText = Math.round(totalProfit).toLocaleString();
+
+        let netSulfonic = wSulfonic * 0.90;
+        let netTexapon = wTexapon * 0.70;
+        let netEnhancers = (wComperlan + wFoam) * 1.00;
+        let activePercentage = ((netSulfonic + netTexapon + netEnhancers) / vol) * 100;
+
+        let badge = document.getElementById('qualityBadge');
+        if (activePercentage >= 13 && activePercentage <= 18) {
+            badge.className = "badge badge-success";
+            badge.innerText = `⭐⭐⭐ منتج فوق الممتاز (جودة شركات كبرى ومنافسة عالية) - النسبة: ${activePercentage.toFixed(2)}%`;
+        } else if (activePercentage >= 8 && activePercentage < 13) {
+            badge.className = "badge badge-success";
+            badge.innerText = `⭐⭐ منتج تجاري ممتاز (جودة عالية تفوق العادي) - النسبة: ${activePercentage.toFixed(2)}%`;
+        } else if (activePercentage >= 5 && activePercentage < 8) {
+            badge.className = "badge badge-warning";
+            badge.innerText = `⭐ منتج فئة اقتصادية شعبية - النسبة: ${activePercentage.toFixed(2)}%`;
+        } else {
+            badge.className = "badge badge-danger";
+            badge.innerText = `⚠️ تنبيه: المادة الفعالة منخفضة وسوقية جداً - النسبة: ${activePercentage.toFixed(2)}%`;
+        }
+    }
+
+    window.onload = calculate;
+</script>
+
+</body>
+</html>
