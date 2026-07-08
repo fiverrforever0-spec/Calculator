@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>سوق إستثمارك للخامات | قريباً</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background-color: #f4f6f6; padding: 50px; }
+        .box { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        h1 { color: #0b5345; }
+        .btn-fb { background: #1877f2; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>سوق إستثمارك للخامات 🏭</h1>
+        <p>نعمل حالياً على تجهيز جدول أسعار الخامات المحدث وعناوين الموردين المعتمدين في السودان.</p>
+        <p><b>قريباً جداً ستتمكن من مقارنة الأسعار والطلب مباشرة!</b></p>
+        
+        <hr style="margin: 30px 0;">
+        
+        <h3>ادعم إستثمارك لتقديم الأفضل</h3>
+        <p>تابعنا على فيسبوك لتصلك تحديثات إطلاق السوق ومفاجآت للمصنعين:</p>
+        <a href="https://www.facebook.com/share/1Q9AYDtkx2/" class="btn-fb" target="_blank">تابعنا على فيسبوك 👍</a>
+    </div>
+</body>
+</html>
