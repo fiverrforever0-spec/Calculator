@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>"حاسبة الصابون السائل" من إستثمارك</title>
+   <script>
+    // 1. منع النقر الأيمن لمنع "عرض المصدر" بسهولة
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // 2. منع تحديد النصوص (Copy-Paste)
+    document.onselectstart = function() { return false; };
+
+    // 3. قفل الصفحة على نطاقك الخاص (Domain Lock)
+    // إذا حاول شخص رفعها على رابط آخر، ستتوقف الحاسبة عن العمل
+    (function() {
+        var allowedDomain = "fiverrforever0-spec.github.io"; // رابط موقعك
+        if (window.location.hostname !== "" && window.location.hostname !== allowedDomain) {
+            document.body.innerHTML = "<h1>عذراً، هذا المحتوى محمي بحقوق الملكية الفكرية لـ 'إستثمارك'</h1>";
+        }
+    })();
+</script>
+
     <style>
         :root {
             --primary-color: #0b5345;
