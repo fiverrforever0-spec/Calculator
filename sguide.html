@@ -1,0 +1,513 @@
+﻿<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الانطلاقة - صناعة الصابون</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f4f7f6;
+            color: #1e2a3a;
+            padding: 20px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .container {
+            background: white;
+            padding: 25px 20px;
+            border-radius: 24px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        h1 {
+            font-size: 26px;
+            color: #0b3b2c;
+            border-right: 6px solid #2a9d8f;
+            padding-right: 15px;
+            margin-bottom: 5px;
+        }
+        .subhead {
+            color: #2a9d8f;
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 20px;
+            padding-right: 21px;
+        }
+        .progress-wrap {
+            background: #e9ecef;
+            border-radius: 30px;
+            height: 10px;
+            margin: 20px 0 25px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 10px;
+            background: #2a9d8f;
+            width: 0%;
+            transition: width 0.3s;
+            border-radius: 30px;
+        }
+        .progress-text {
+            font-size: 14px;
+            color: #495057;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        section {
+            background: #f8fafc;
+            border-radius: 18px;
+            padding: 18px 16px;
+            margin-bottom: 22px;
+            border: 1px solid #e2e8f0;
+            transition: 0.2s;
+        }
+        section.completed {
+            border-right: 5px solid #2a9d8f;
+            background: #f0faf8;
+        }
+        h2 {
+            font-size: 18px;
+            color: #0b3b2c;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        h2 .badge {
+            background: #2a9d8f;
+            color: white;
+            font-size: 13px;
+            padding: 0 12px;
+            border-radius: 30px;
+            font-weight: normal;
+        }
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin: 8px 0;
+        }
+        .flex-row label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #2a9d8f;
+            cursor: pointer;
+        }
+        input[type="text"], input[type="number"], input[type="tel"] {
+            border: 1px solid #d1d9e6;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 15px;
+            background: white;
+            width: 100%;
+            max-width: 280px;
+            transition: 0.2s;
+        }
+        input:focus {
+            outline: 2px solid #2a9d8f;
+            border-color: transparent;
+        }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th {
+            background: #e2e8f0;
+            color: #1e2a3a;
+            padding: 10px 8px;
+            border: 1px solid #cbd5e1;
+            text-align: center;
+        }
+        td {
+            border: 1px solid #cbd5e1;
+            padding: 6px 4px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        td input {
+            max-width: 100%;
+            border: none;
+            background: transparent;
+            padding: 6px 4px;
+            text-align: center;
+            font-size: 14px;
+            width: 100%;
+        }
+        td input:focus {
+            outline: 2px solid #2a9d8f;
+            background: white;
+            border-radius: 6px;
+        }
+        .highlight-box {
+            background: #e6f7f4;
+            padding: 14px 16px;
+            border-radius: 16px;
+            margin: 12px 0;
+            border-right: 4px solid #2a9d8f;
+        }
+        .note {
+            color: #5a6b7c;
+            font-size: 14px;
+            background: #f1f3f5;
+            padding: 10px 14px;
+            border-radius: 12px;
+            margin: 8px 0;
+        }
+        .btn {
+            background: #2a9d8f;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background: #1f7a6f;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 600px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            body { padding: 10px; }
+            .container { padding: 15px 12px; }
+        }
+        .tag {
+            display: inline-block;
+            background: #264653;
+            color: white;
+            font-size: 12px;
+            padding: 2px 12px;
+            border-radius: 20px;
+        }
+        .text-muted { color: #6c7a89; }
+        .mt-10 { margin-top: 10px; }
+    </style>
+</head>
+<body>
+<div class="container" id="app">
+
+
+    <h1>🧼 دليل الانطلاقة العملية</h1>
+    <div class="subhead">صناعة الصابون – الإصدار الأول | استثمارك للحلول الاستثمارية الذكية</div>
+    <p style="color:#2c3e50; font-size:15px; margin-bottom:5px;">من أول يوم تدريب... إلى أول عملية بيع</p>
+
+
+    <!-- عداد التقدم -->
+    <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="progress-text" id="progressText">0% مكتمل</div>
+
+
+    <!-- بيانات المتدرب -->
+    <section>
+        <h2>📋 بياناتي</h2>
+        <div class="grid-2">
+            <label>الاسم <input type="text" id="trainee_name" placeholder="اكتب اسمك"></label>
+            <label>المدينة <input type="text" id="trainee_city" placeholder="الخرطوم / أم درمان ..."></label>
+            <label>رقم الهاتف <input type="tel" id="trainee_phone" placeholder="09xxxxxxxx"></label>
+            <label>تاريخ البدء <input type="text" id="trainee_date" placeholder="مثال: 12-7-2026"></label>
+        </div>
+    </section>
+
+
+    <!-- الخطوة 1: الموقع والمورد -->
+    <section id="step1">
+        <h2>📍 الخطوة 1: موقعي والمورد <span class="badge">نفذت <input type="checkbox" id="chk_step1"></span></h2>
+        <label>المدينة: <input type="text" id="city_detail" placeholder="حدد مدينتك بدقة"></label>
+        <div class="table-wrap">
+            <table>
+                <tr><th>اسم المورد</th><th>رقم الهاتف</th><th>الموقع</th><th>ملاحظات</th></tr>
+                <tr><td><input type="text" id="sup1_name" placeholder="اسم"></td><td><input type="text" id="sup1_phone" placeholder="رقم"></td><td><input type="text" id="sup1_loc" placeholder="مكانه"></td><td><input type="text" id="sup1_note" placeholder="ملاحظة"></td></tr>
+                <tr><td><input type="text" id="sup2_name" placeholder="اسم"></td><td><input type="text" id="sup2_phone" placeholder="رقم"></td><td><input type="text" id="sup2_loc" placeholder="مكانه"></td><td><input type="text" id="sup2_note" placeholder="ملاحظة"></td></tr>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- الخطوة 2: اختيار المنتج -->
+    <section id="step2">
+        <h2>🧪 الخطوة 2: اختيار المنتج <span class="badge">نفذت <input type="checkbox" id="chk_step2"></span></h2>
+        <div class="flex-row">
+            <label><input type="checkbox" id="prod_solid"> ✅ صابون صلب (الأفضل للمبتدئ)</label>
+            <label><input type="checkbox" id="prod_liquid"> 🧴 صابون سائل</label>
+            <label><input type="checkbox" id="prod_paste"> 🫧 معجون</label>
+        </div>
+        <div class="highlight-box">
+            <strong>نصيحة:</strong> ابدأ بالصلب أولاً، أسهل في التحضير، أقل حساسية للأخطاء، ومواده متوفرة.
+        </div>
+    </section>
+
+
+    <!-- الخطوة 3: الوصفة -->
+    <section id="step3">
+        <h2>📝 الخطوة 3: الوصفة التدريبية <span class="badge">نفذت <input type="checkbox" id="chk_step3"></span></h2>
+        <p>الوصفات التفصيلية تُعطى في <strong>الورشة التدريبية</strong> حفاظاً على الحقوق.</p>
+        <p><span class="tag">صلب</span> <span class="tag">سائل</span> <span class="tag">معجون</span></p>
+        <label>التكلفة التقديرية لأول تجربة (5 كجم صلب): <input type="text" id="cost_estimate" placeholder="مثال: 35,000"></label>
+    </section>
+
+
+    <!-- الخطوة 4: الأدوات -->
+    <section id="step4">
+        <h2>🛠 الخطوة 4: تجهيز الأدوات <span class="badge">نفذت <input type="checkbox" id="chk_step4"></span></h2>
+        <div class="grid-2">
+            <label><input type="checkbox" id="tool_scale"> ميزان</label>
+            <label><input type="checkbox" id="tool_bucket"> جردل بلاستيك 16 لتر</label>
+            <label><input type="checkbox" id="tool_mixer"> أداة تقليب يدوية</label>
+            <label><input type="checkbox" id="tool_mold"> قالب خشبي (للمعجون لا يحتاج)</label>
+            <label><input type="checkbox" id="tool_cutter"> قطاعة خشبية</label>
+            <label><input type="checkbox" id="tool_safety"> قفازات + نظارات</label>
+        </div>
+        <div class="note">⏱ كل المنتجات تحتاج نفس الأدوات الأساسية (جردل، تقليب يدوي). وقت الإنتاج من ٣٠ دقيقة إلى ساعتين.</div>
+    </section>
+
+
+    <!-- الخطوة 5: القالب -->
+    <section id="step5">
+        <h2>🪵 الخطوة 5: تجهيز القالب الخشبي <span class="badge">نفذت <input type="checkbox" id="chk_step5"></span></h2>
+        <div class="grid-2">
+            <label>المقاسات (الطول×العرض×الارتفاع): <input type="text" id="mold_size" placeholder="مثال: 50×30×10 سم"></label>
+            <label>عدد القطع: <input type="text" id="mold_pieces" placeholder="مثال: 20"></label>
+            <label>تكلفة التصنيع: <input type="text" id="mold_cost" placeholder="جنيه سوداني"></label>
+            <label>ينفذه عند نجار: <input type="text" id="mold_carpenter" placeholder="اسم النجار أو ورشة"></label>
+        </div>
+        <div class="note">المعجون لا يحتاج قالباً، يوضع مباشرة في حاويات.</div>
+    </section>
+
+
+    <!-- الخطوة 6: القطاعة -->
+    <section id="step6">
+        <h2>✂️ الخطوة 6: تجهيز القطاعة <span class="badge">نفذت <input type="checkbox" id="chk_step6"></span></h2>
+        <div class="grid-2">
+            <label>نوع السلك: <input type="text" id="cutter_wire" placeholder="سلك حديد / استانلس"></label>
+            <label>المسافات بين الأسلاك: <input type="text" id="cutter_dist" placeholder="مثال: 8 سم"></label>
+        </div>
+    </section>
+
+
+    <!-- الخطوة 7: الإنتاج -->
+    <section id="step7">
+        <h2>⚗️ الخطوة 7: الإنتاج (قائمة التحقق) <span class="badge">نفذت <input type="checkbox" id="chk_step7"></span></h2>
+        <div class="grid-2">
+            <label><input type="checkbox" id="prod_w1"> وزنت المواد بدقة</label>
+            <label><input type="checkbox" id="prod_w2"> لبست وسائل السلامة</label>
+            <label><input type="checkbox" id="prod_w3"> خلطت بالترتيب الصحيح</label>
+            <label><input type="checkbox" id="prod_w4"> صبت في القالب</label>
+            <label><input type="checkbox" id="prod_w5"> غطيت القالب</label>
+            <label><input type="checkbox" id="prod_w6"> انتظرت المدة المحددة (____ ساعة)</label>
+        </div>
+        <label>تاريخ الإنتاج: <input type="text" id="prod_date" placeholder="يوم/شهر/سنة"></label>
+    </section>
+
+
+    <!-- الخطوة 8: التقطيع والتعبئة + الربح -->
+    <section id="step8">
+        <h2>📦 الخطوة 8: التقطيع، التعبئة والربح <span class="badge">نفذت <input type="checkbox" id="chk_step8"></span></h2>
+        <div class="highlight-box">
+            <strong>📊 نموذج الربح (صلب - 5 كجم زيوت):</strong><br>
+            الإنتاج: كرتونة ونصف تقريباً.<br>
+            الكرتونة الواحدة: <strong>40 قطعة</strong>.<br>
+            سعر البيع: <strong>50,000 - 55,000</strong> جنيه للكرتونة.<br>
+            التكلفة التقديرية: حسب أسعار السوق (يسجلها المتدرب).
+        </div>
+        <div class="grid-2">
+            <label>وزن القطعة (جرام): <input type="text" id="cut_weight" placeholder="مثال: 180"></label>
+            <label>عدد القطع بالكرتونة: <input type="text" id="box_count" value="40"></label>
+            <label>سعر بيع الكرتونة: <input type="text" id="box_price" placeholder="50,000"></label>
+            <label>صافي الربح المقدر: <input type="text" id="profit_est" placeholder="يحسب لاحقاً"></label>
+        </div>
+    </section>
+
+
+    <!-- الخطوة 9: التسويق -->
+    <section id="step9">
+        <h2>📢 الخطوة 9: كيف تسوق أول إنتاج؟ <span class="badge">نفذت <input type="checkbox" id="chk_step9"></span></h2>
+        <div class="flex-row">
+            <label><input type="checkbox" id="mkt_family"> الأهل والجيران</label>
+            <label><input type="checkbox" id="mkt_shops"> البقالات والمحلات</label>
+            <label><input type="checkbox" id="mkt_samples"> عينات مجانية + سعر</label>
+        </div>
+    </section>
+
+
+    <!-- ملحق السائل -->
+    <section>
+        <h2>🧴 ملحق: الصابون السائل</h2>
+        <ul style="list-style: none; padding: 0; font-size:15px;">
+            <li>✅ <strong>بداية مقترحة:</strong> 10 لتر (تكلفة 220 لتر ≈ 500 ألف، يعني 10 لتر ≈ 23 ألف).</li>
+            <li>✅ <strong>الوصفة:</strong> حسب الورشة (تُعطى في التدريب).</li>
+            <li>✅ <strong>الأدوات:</strong> نفس أدوات الصلب (جردل 16 لتر، تقليب يدوي).</li>
+            <li>✅ <strong>الوقت:</strong> 30 دقيقة – ساعتين.</li>
+            <li>✅ <strong>الربح:</strong> الكرتونة تربح حوالي <strong>3,000</strong> جنيه (حسب السوق).</li>
+            <li>✅ <strong>نصيحة:</strong> أتقن الصلب أولاً ثم انتقل للسائل.</li>
+        </ul>
+    </section>
+
+
+    <!-- ملحق المعجون -->
+    <section>
+        <h2>🫧 ملحق: المعجون</h2>
+        <ul style="list-style: none; padding: 0; font-size:15px;">
+            <li>✅ لا يحتاج قالباً خالص.</li>
+            <li>✅ الوصفة حسب الورشة.</li>
+            <li>✅ الأدوات: نفس الجردل والتقليب.</li>
+            <li>✅ التفاصيل التجارية (التكلفة، التسعير) غير مكتملة حالياً – يُفضل الرجوع للمدرب.</li>
+        </ul>
+    </section>
+
+
+    <!-- المشاكل والحلول -->
+    <section id="step10">
+        <h2>🩺 الخطوة 10: مشاكل وحلول سريعة <span class="badge">نفذت <input type="checkbox" id="chk_step10"></span></h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>المشكلة</th><th>السبب المحتمل</th><th>الحل</th></tr>
+                <tr><td>الصابون لين</td><td>نقص صودا / ماء زائد</td><td>راجع النسب بدقة</td></tr>
+                <tr><td>تشققات</td><td>تبريد سريع / خلط قوي</td><td>اخلط بهدوء، برّد ببطء</td></tr>
+                <tr><td>رغوة قليلة</td><td>نوع الزيت أو نقص مادة فعالة</td><td>استشر المدرب</td></tr>
+                <tr><td>التصق بالقالب</td><td>لم يدهن بالزيت</td><td>ادهن القالب قبل الصب</td></tr>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- سجل الإنتاج والمبيعات -->
+    <section>
+        <h2>📊 سجل الإنتاج والمبيعات</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>التاريخ</th><th>المنتج</th><th>الكمية</th><th>التكلفة</th><th>البيع</th><th>الربح</th></tr>
+                <tr><td><input type="text" id="log1_date"></td><td><input type="text" id="log1_prod"></td><td><input type="text" id="log1_qty"></td><td><input type="text" id="log1_cost"></td><td><input type="text" id="log1_sell"></td><td><input type="text" id="log1_profit"></td></tr>
+                <tr><td><input type="text" id="log2_date"></td><td><input type="text" id="log2_prod"></td><td><input type="text" id="log2_qty"></td><td><input type="text" id="log2_cost"></td><td><input type="text" id="log2_sell"></td><td><input type="text" id="log2_profit"></td></tr>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- سجل العملاء -->
+    <section>
+        <h2>👥 سجل العملاء</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>الاسم</th><th>رقم الهاتف</th><th>الكمية</th><th>تاريخ الشراء</th></tr>
+                <tr><td><input type="text" id="cust1_name"></td><td><input type="text" id="cust1_phone"></td><td><input type="text" id="cust1_qty"></td><td><input type="text" id="cust1_date"></td></tr>
+                <tr><td><input type="text" id="cust2_name"></td><td><input type="text" id="cust2_phone"></td><td><input type="text" id="cust2_qty"></td><td><input type="text" id="cust2_date"></td></tr>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- خاتمة -->
+    <section style="border: 2px solid #2a9d8f; background: #ffffff;">
+        <h2 style="color:#0b3b2c;">🚀 لا تتوقف هنا</h2>
+        <p><strong>لو بعت أول كرتونة</strong> → ارجع لنا نساعدك تكبر.<br>
+        <strong>لو داير تنتج أكثر</strong> → نساعدك في المعدات.<br>
+        <strong>لو داير مصنع</strong> → نساعدك في خطوط الإنتاج.</p>
+        <div class="highlight-box" style="background:#264653; color:white; border-color:#2a9d8f;">
+            💡 تذكر: البداية الحقيقية هي التعلم. لا تدع رقم كبير يوقف حلم صغير. ابدأ بالصلب، ثم طوّر.
+        </div>
+        <p style="text-align:center; font-size:13px; color:#6c7a89;">© استثمارك للحلول الاستثمارية الذكية – جميع الحقوق محفوظة</p>
+    </section>
+
+
+</div>
+
+
+<script>
+    (function() {
+        // حفظ واسترجاع البيانات من localStorage
+        const inputs = document.querySelectorAll('input[type="text"], input[type="tel"], input[type="number"]');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+
+        function saveAll() {
+            const data = {};
+            inputs.forEach(inp => { data[inp.id] = inp.value; });
+            checkboxes.forEach(chk => { data[chk.id] = chk.checked ? 'true' : 'false'; });
+            localStorage.setItem('soap_guide_data', JSON.stringify(data));
+            updateProgress();
+        }
+
+
+        function loadAll() {
+            const stored = localStorage.getItem('soap_guide_data');
+            if (!stored) return;
+            try {
+                const data = JSON.parse(stored);
+                inputs.forEach(inp => { if (data[inp.id] !== undefined) inp.value = data[inp.id]; });
+                checkboxes.forEach(chk => { if (data[chk.id] !== undefined) chk.checked = data[chk.id] === 'true'; });
+            } catch(e) {}
+            updateProgress();
+        }
+
+
+        function updateProgress() {
+            // الخطوات الرئيسية: chk_step1 إلى chk_step10
+            const steps = ['chk_step1','chk_step2','chk_step3','chk_step4','chk_step5','chk_step6','chk_step7','chk_step8','chk_step9','chk_step10'];
+            let done = 0;
+            steps.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.checked) done++;
+                // تلوين الأقسام
+                const section = el ? el.closest('section') : null;
+                if (section) {
+                    if (el && el.checked) section.classList.add('completed');
+                    else section.classList.remove('completed');
+                }
+            });
+            const pct = Math.round((done / steps.length) * 100);
+            const bar = document.getElementById('progressBar');
+            const text = document.getElementById('progressText');
+            if (bar) bar.style.width = pct + '%';
+            if (text) text.innerText = pct + '% مكتمل (' + done + '/' + steps.length + ' خطوة)';
+        }
+
+
+        // ربط الأحداث
+        inputs.forEach(inp => { inp.addEventListener('input', saveAll); });
+        checkboxes.forEach(chk => { chk.addEventListener('change', saveAll); });
+
+
+        // تحميل أولي
+        window.addEventListener('DOMContentLoaded', loadAll);
+
+
+        // حفظ كل 5 ثواني احتياطي
+        setInterval(saveAll, 5000);
+
+
+        // جعل التحديث فوري عند تغيير أي حقل
+        window.saveAll = saveAll;
+        window.updateProgress = updateProgress;
+    })();
+</script>
+
+
+</body>
+</html>
