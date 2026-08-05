@@ -165,6 +165,11 @@
             .print-btn, .activation-box { display: none !important; }
             th { background-color: #0b5345 !important; color: white !important; -webkit-print-color-adjust: exact; }
         }
+        body {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+        }
     </style>
 </head>
 <body>
@@ -500,6 +505,49 @@
         }
     };
 </script>
+    <script>
+    // 1. منع النقر بالزر الأيمن للماوس (حماية من حفظ الصفحة أو فحص العناصر)
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        alert('مفعلات الحماية النشطة لحماية حقوق الملكية الفكرية - إستثمارك ®');
+    });
+
+    // 2. منع اختصارات لوحة المفاتيح الخاصة بالمبرمجين وعرض المصدر
+    document.addEventListener('keydown', function(e) {
+        // F12
+        if (e.keyCode == 123) {
+            e.preventDefault();
+            return false;
+        }
+        // Ctrl+Shift+I أو Ctrl+Shift+J أو Ctrl+Shift+C (فتح أدوات المطور)
+        if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) {
+            e.preventDefault();
+            return false;
+        }
+        // Ctrl+U (عرض مصدر الصفحة View Source)
+        if (e.ctrlKey && e.keyCode == 85) {
+            e.preventDefault();
+            return false;
+        }
+        // Ctrl+S (حفظ الصفحة)
+        if (e.ctrlKey && e.keyCode == 83) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // 3. كشف محاولة فتح أدوات المطورين (DevTools Detection) وإعادة توجيه الصفحة أو إغلاقها
+    setInterval(function() {
+        let startTime = performance.now();
+        debugger;
+        let endTime = performance.now();
+        if (endTime - startTime > 100) {
+            // في حال حاول فتح الـ Debugger يتم مسح المحتوى أو تنبيهه
+            document.body.innerHTML = "<h2 style='text-align:center; margin-top:20vh; color:red;'>⚠️ تم رصد محاولة وصول غير مخصصة. نظام الحماية مفعل.</h2>";
+        }
+    }, 1000);
+</script>
+
 
 </body>
 </html>
