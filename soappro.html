@@ -302,6 +302,12 @@
         <button class="btn print-btn" onclick="window.print()">🖨️ طباعة التقرير الفني والمالي الاحترافي (PDF)</button>
 
     </div>
+    <div class="form-group">
+    <label>بصمة جهازك الثابتة:</label>
+    <input type="text" id="deviceFingerprint" readonly style="background: #eee; cursor: pointer;" onclick="copyFingerprint()">
+    <button type="button" class="btn" style="margin-top: 5px; background: #d4ac0d; color: #000;" onclick="copyFingerprint()">📋 اضغط هنا لنسخ بصمة جهازك</button>
+</div>
+
 
     <footer>
         جميع الحقوق محفوظة © عصام عبادي - إستثمارك للحلول الاستثمارية الذكية<br>
@@ -314,7 +320,11 @@
     
 </script>
     <script>
-    
+    // 1. منع النقر بالزر الأيمن للماوس (حماية من حفظ الصفحة أو فحص العناصر)
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        alert('مفعلات الحماية النشطة لحماية حقوق الملكية الفكرية - إستثمارك ®');
+    });
 
     // 2. منع اختصارات لوحة المفاتيح الخاصة بالمبرمجين وعرض المصدر
     document.addEventListener('keydown', function(e) {
