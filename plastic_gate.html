@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>حافظة حسابات مشروع الأكياس | إستثمارك</title>
+
+  <meta name="description"
+        content="احصل على حافظة حسابات مشروع صناعة الأكياس البلاستيكية من إستثمارك.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --brand: #111111;
+      --accent: #19c37d;
+      --accent-dark: #0e9f64;
+      --text: #171717;
+      --muted: #777;
+      --bg: #f7f8fa;
+      --white: #ffffff;
+      --border: #e8e8e8;
+    }
+
+    body {
+      font-family:
+        Arial,
+        "Tahoma",
+        sans-serif;
+
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 22px 14px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+
+      background: var(--white);
+
+      border: 1px solid var(--border);
+
+      border-radius: 24px;
+
+      padding: 28px 20px 22px;
+
+      box-shadow:
+        0 10px 35px rgba(0,0,0,0.06);
+
+      text-align: center;
+    }
+
+    /* الشريط العلوي */
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--brand);
+      color: #fff;
+
+      padding: 7px 16px;
+
+      border-radius: 50px;
+
+      font-size: 13px;
+      font-weight: bold;
+
+      margin-bottom: 20px;
+    }
+
+    .icon {
+      width: 70px;
+      height: 70px;
+
+      margin: 0 auto 18px;
+
+      border-radius: 20px;
+
+      background: #f1fdf7;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 34px;
+    }
+
+    h1 {
+      font-size: 24px;
+      line-height: 1.5;
+
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+
+      font-size: 15px;
+
+      line-height: 1.8;
+
+      margin-bottom: 22px;
+    }
+
+    /* صندوق الحافظة */
+
+    .file-box {
+      background: #fafafa;
+
+      border: 1px solid var(--border);
+
+      border-radius: 17px;
+
+      padding: 17px;
+
+      text-align: right;
+
+      margin-bottom: 20px;
+    }
+
+    .file-title {
+      font-weight: bold;
+      font-size: 15px;
+
+      margin-bottom: 6px;
+    }
+
+    .file-description {
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.7;
+    }
+
+    /* الخطوات */
+
+    .steps {
+      text-align: right;
+
+      margin-bottom: 18px;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+
+      gap: 10px;
+
+      margin-bottom: 13px;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+
+      width: 28px;
+      height: 28px;
+
+      border-radius: 50%;
+
+      background: #f0f0f0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .step strong {
+      display: block;
+
+      font-size: 14px;
+
+      margin-bottom: 3px;
+    }
+
+    .step span {
+      color: var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.6;
+    }
+
+    /* الأزرار */
+
+    .btn {
+      width: 100%;
+
+      min-height: 52px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      font-size: 15px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      text-decoration: none;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      transition: 0.2s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .facebook-btn {
+      background: #1877f2;
+
+      color: #fff;
+
+      margin-bottom: 10px;
+    }
+
+    .facebook-btn:hover {
+      background: #0f6bdd;
+    }
+
+    .download-btn {
+      background: var(--accent);
+
+      color: #fff;
+
+      opacity: 0.45;
+
+      pointer-events: none;
+    }
+
+    .download-btn.active {
+      opacity: 1;
+
+      pointer-events: auto;
+    }
+
+    .download-btn:hover {
+      background: var(--accent-dark);
+    }
+
+    /* رسالة المتابعة */
+
+    .follow-note {
+      display: none;
+
+      background: #f1fdf7;
+
+      border: 1px solid #d8f4e7;
+
+      color: #126c47;
+
+      border-radius: 13px;
+
+      padding: 12px;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+      margin: 10px 0 14px;
+    }
+
+    .follow-note.show {
+      display: block;
+    }
+
+    /* الفوتر */
+
+    .footer {
+      margin-top: 22px;
+
+      padding-top: 16px;
+
+      border-top: 1px solid var(--border);
+
+      color: #999;
+
+      font-size: 11px;
+
+      line-height: 1.7;
+    }
+
+    .footer strong {
+      color: #555;
+    }
+
+    /* شاشة صغيرة جداً */
+
+    @media (max-width: 360px) {
+
+      .card {
+        padding: 23px 15px 18px;
+        border-radius: 20px;
+      }
+
+      h1 {
+        font-size: 21px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+
+    }
+
+  </style>
+
+  <!-- Google Analytics -->
+  <!--
+    ضع كود Google Analytics الخاص بك هنا.
+    لا تستخدم هذا الـ ID كمثال في النسخة النهائية.
+  -->
+
+  <!--
+  <script async
+    src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX">
+  </script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag(){
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  -->
+
+</head>
+
+<body>
+
+<div class="page">
+
+  <main class="card">
+
+    <!-- الهوية -->
+
+    <div class="brand">
+      إستثمارك للحلول الاستثمارية الذكية
+    </div>
+
+    <div class="icon">
+      📊
+    </div>
+
+    <h1>
+      حافظة حسابات مشروع الأكياس البلاستيكية
+    </h1>
+
+    <p class="subtitle">
+      حافظة تساعدك ترتب حسابات المشروع
+      وتفهم التكلفة والبيع والربح بصورة أوضح.
+    </p>
+
+
+    <!-- معلومات الملف -->
+
+    <div class="file-box">
+
+      <div class="file-title">
+        📁 الحافظة جاهزة
+      </div>
+
+      <div class="file-description">
+        قبل ما تأخذ الحافظة، تابع إستثمارك
+        عشان توصلك الأدوات والحاسبات والمحتوى
+        الجديد الخاص بالمشاريع الصغيرة.
+      </div>
+
+    </div>
+
+
+    <!-- الخطوات -->
+
+    <div class="steps">
+
+      <div class="step">
+
+        <div class="step-number">
+          1
+        </div>
+
+        <div>
+
+          <strong>
+            تابع إستثمارك على فيسبوك
+          </strong>
+
+          <span>
+            اضغط الزر وادخل صفحة إستثمارك.
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          2
+        </div>
+
+        <div>
+
+          <strong>
+            ارجع للصفحة
+          </strong>
+
+          <span>
+            بعد ما تعمل متابعة، ارجع هنا واضغط أخذ الحافظة.
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- زر فيسبوك -->
+
+    <a
+      id="facebookBtn"
+      class="btn facebook-btn"
+      href="https://www.facebook.com/YOUR_PAGE"
+      target="_blank"
+      rel="noopener noreferrer">
+
+      👍 تابع إستثمارك على فيسبوك
+
+    </a>
+
+
+    <!-- رسالة تظهر بعد الضغط -->
+
+    <div
+      id="followNote"
+      class="follow-note">
+
+      ممتاز 👌
+      لو عملت متابعة لإستثمارك، خليك قريب.
+      الحافظة أصبحت متاحة ليك الآن.
+
+    </div>
+
+
+    <!-- زر الحافظة -->
+
+    <a
+      id="downloadBtn"
+      class="btn download-btn"
+      href="plasticback.html">
+
+      📥 أخذ الحافظة
+
+    </a>
+
+
+    <!-- الفوتر -->
+
+    <div class="footer">
+
+      أداة تقديرية تساعدك في دراسة المشروع
+      قبل اتخاذ القرار.
+
+      <br>
+
+      <strong>
+        إستثمارك للحلول الاستثمارية الذكية
+      </strong>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<script>
+
+  /*
+  =====================================================
+  إعدادات الصفحة
+  =====================================================
+  */
+
+  const FACEBOOK_URL =
+    "https://www.facebook.com/share/1Bh8Z6eaGM/";
+
+  const CALCULATOR_URL =
+    "plasticback.html";
+
+
+  /*
+  =====================================================
+  عناصر الصفحة
+  =====================================================
+  */
+
+  const facebookBtn =
+    document.getElementById("facebookBtn");
+
+  const downloadBtn =
+    document.getElementById("downloadBtn");
+
+  const followNote =
+    document.getElementById("followNote");
+
+
+  /*
+  =====================================================
+  Google Analytics Event
+  =====================================================
+  */
+
+  function trackEvent(eventName, parameters = {}) {
+
+    if (typeof gtag === "function") {
+
+      gtag(
+        "event",
+        eventName,
+        parameters
+      );
+
+    }
+
+    console.log(
+      "Analytics:",
+      eventName,
+      parameters
+    );
+
+  }
+
+
+  /*
+  =====================================================
+  عند الضغط على فيسبوك
+  =====================================================
+  */
+
+  facebookBtn.addEventListener(
+    "click",
+    function () {
+
+      trackEvent(
+        "facebook_follow_click",
+        {
+          source: "plastic_calculator_gate"
+        }
+      );
+
+      /*
+        نعتبر أن المستخدم ذهب لفيسبوك.
+        لا ندعي أننا تحققنا من المتابعة.
+      */
+
+      setTimeout(
+        function () {
+
+          downloadBtn.classList.add("active");
+
+          followNote.classList.add("show");
+
+        },
+        800
+      );
+
+    }
+  );
+
+
+  /*
+  =====================================================
+  عند الضغط على الحافظة
+  =====================================================
+  */
+
+  downloadBtn.addEventListener(
+    "click",
+    function () {
+
+      trackEvent(
+        "calculator_access",
+        {
+          source: "plastic_calculator_gate"
+        }
+      );
+
+    }
+  );
+
+
+  /*
+  =====================================================
+  تحديث الروابط
+  =====================================================
+  */
+
+  facebookBtn.href =
+    FACEBOOK_URL;
+
+  downloadBtn.href =
+    CALCULATOR_URL;
+
+
+  /*
+  =====================================================
+  Page View
+  =====================================================
+  */
+
+  trackEvent(
+    "plastic_gate_view",
+    {
+      page: "plastic_calculator_gate"
+    }
+  );
+
+</script>
+
+</body>
+</html>
