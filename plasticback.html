@@ -125,6 +125,9 @@ const rollKg=n('rollKg'),rawPrice=n('rawPrice'),bagsPerRoll=n('bagsPerRoll');
 const waste=Math.min(100,n('waste')),wholesale=n('wholesale'),retail=n('retailPack'),retailHigh=n('retailPackHigh'),retailRoll=n('retailRoll');
 const laborKg=n('laborKg'),extras=n('transport')+n('electricity')+n('rent')+n('other');
 if(!rollKg||!rawPrice||!bagsPerRoll){alert('أدخل وزن الرول وسعر الخام وعدد الأكياس في اللفة.');return}
+    gtag('event', 'plastic_calculator_calculated', {
+  calculator_name: 'Plastic Calculator'
+});
 
 /* القاعدة المرجعية: 1 كجم = 80 لفة × 30 كيس = 2400 كيس.
    عند تغيير عدد الأكياس في اللفة، يعاد حساب عدد اللفات من إجمالي 2400 كيس/كجم. */
