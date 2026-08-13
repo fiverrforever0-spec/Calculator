@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>حاسبة أرباح صابون الحجر | إستثمارك</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f6f7f9;color:#18202a;font-family:Tahoma,Arial,sans-serif}
+.wrap{max-width:720px;margin:auto;padding:18px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:20px;margin-bottom:14px;box-shadow:0 5px 20px #00000008}
+h1{font-size:25px;margin:4px 0 8px}
+h2{font-size:18px;margin:0 0 14px}
+.sub{color:#667085;line-height:1.8;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#475467}
+input{width:100%;padding:13px;border:1px solid #d0d5dd;border-radius:10px;font-size:16px;outline:none}
+input:focus{border-color:#667085}
+.result{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.box{background:#f8fafc;border-radius:12px;padding:14px}
+.box span{display:block;color:#667085;font-size:12px;margin-bottom:6px}
+.box strong{font-size:20px}
+.highlight{background:#111827;color:white}
+.highlight span{color:#d0d5dd}
+.highlight strong{font-size:23px}
+.note{font-size:13px;color:#667085;line-height:1.8}
+.cta{display:block;text-align:center;text-decoration:none;background:#111827;color:#fff;padding:14px;border-radius:12px;font-weight:700;margin-top:14px}
+.small{font-size:12px;color:#98a2b3;text-align:center;margin-top:12px}
+@media(max-width:560px){.grid,.result{grid-template-columns:1fr}h1{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="card">
+    <h1>حاسبة أرباح صابون الحجر (اللوح الصلب)</h1>
+    <p class="sub">قبل ما تشتري خط إنتاج صابون… احسب أرقام مشروعك بنفسك.</p>
+    <div class="grid">
+      <div>
+        <label>عدد الكراتين</label>
+        <input id="cartons" type="number" value="55" min="1">
+      </div>
+      <div>
+        <label>عدد القطع في الكرتونة</label>
+        <input id="pieces" type="number" value="40" min="1">
+      </div>
+      <div>
+        <label>وزن القطعة (جرام)</label>
+        <input id="weight" type="number" value="150" min="1">
+      </div>
+      <div>
+        <label>إجمالي تكلفة الإنتاج</label>
+        <input id="totalCost" type="number" value="2405000" min="0">
+      </div>
+      <div>
+        <label>سعر بيع الكرتونة</label>
+        <input id="sellPrice" type="number" value="60000" min="0">
+      </div>
+      <div>
+        <label>تكلفة الكرتونة المستهدفة (اختياري)</label>
+        <input id="targetCost" type="number" value="40000" min="0">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>نتيجتك</h2>
+    <div class="result">
+      <div class="box">
+        <span>تكلفة الكرتونة الحالية</span>
+        <strong id="costPerCarton">—</strong>
+      </div>
+      <div class="box">
+        <span>ربح الكرتونة</span>
+        <strong id="profitPerCarton">—</strong>
+      </div>
+      <div class="box highlight">
+        <span>إجمالي الربح</span>
+        <strong id="totalProfit">—</strong>
+      </div>
+      <div class="box">
+        <span>هامش الربح من سعر البيع</span>
+        <strong id="margin">—</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>لو خفضت تكلفة الكرتونة</h2>
+    <div class="result">
+      <div class="box">
+        <span>التكلفة المستهدفة</span>
+        <strong id="target">—</strong>
+      </div>
+      <div class="box">
+        <span>الربح/كرتونة</span>
+        <strong id="targetProfit">—</strong>
+      </div>
+      <div class="box">
+        <span>إجمالي الربح</span>
+        <strong id="targetTotalProfit">—</strong>
+      </div>
+      <div class="box">
+        <span>الزيادة في الربح</span>
+        <strong id="extraProfit">—</strong>
+      </div>
+    </div>
+    <p class="note">الأرقام تقديرية وتعتمد على أسعار الخامات، العمالة، الكهرباء/الوقود، التعبئة وسعر البيع وقت الحساب.</p>
+  </div>
+
+  <div class="card">
+    <h2>والخط الإنتاجي؟</h2>
+    <p class="sub">الحسبة دي عشان تعرف اقتصاديات المنتج أولاً. بعد ما تعرف الربح، الخطوة التالية هي معرفة الخط المناسب ليك: الطاقة الإنتاجية، المساحة، الكهرباء، الخامات والتكلفة.</p>
+    <a class="cta" href="#" onclick="alert('https://wa.me/249962411479');return false;">عايز أعرف خط إنتاج الصابون المناسب لي</a>
+    <div class="small">إستثمارك للحلول الاستثمارية الذكية</div>
+  </div>
+
+</div>
+
+<script>
+const ids=["cartons","pieces","weight","totalCost","sellPrice","targetCost"];
+ids.forEach(id=>document.getElementById(id).addEventListener("input",calc));
+
+function money(n){
+  return new Intl.NumberFormat("ar-SD",{maximumFractionDigits:0}).format(Math.max(0,n))+" ج";
+}
+function calc(){
+  const cartons=+document.getElementById("cartons").value||0;
+  const totalCost=+document.getElementById("totalCost").value||0;
+  const sell=+document.getElementById("sellPrice").value||0;
+  const target=+document.getElementById("targetCost").value||0;
+
+  const c=cartons?totalCost/cartons:0;
+  const p=sell-c;
+  const total=p*cartons;
+  const margin=sell?(p/sell)*100:0;
+  const tp=sell-target;
+  const tt=tp*cartons;
+  const extra=tt-total;
+
+  document.getElementById("costPerCarton").textContent=money(c);
+  document.getElementById("profitPerCarton").textContent=money(p);
+  document.getElementById("totalProfit").textContent=money(total);
+  document.getElementById("margin").textContent=(isFinite(margin)?margin:0).toFixed(1)+"%";
+  document.getElementById("target").textContent=money(target);
+  document.getElementById("targetProfit").textContent=money(tp);
+  document.getElementById("targetTotalProfit").textContent=money(tt);
+  document.getElementById("extraProfit").textContent=money(extra);
+}
+calc();
+</script>
+</body>
+</html>
