@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧼 الحاسبة الشاملة للصابون والمنظفات</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--card2:#26334a;--tx:#e2e8f0;--mut:#94a3b8;--ac:#14b8a6;--ac2:#f59e0b;--bad:#ef4444;--ok:#22c55e}
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Segoe UI",Tahoma,Arial,sans-serif}
+body{background:var(--bg);color:var(--tx);line-height:1.7;padding-bottom:60px}
+header{text-align:center;padding:26px 12px 14px;background:linear-gradient(135deg,#134e4a,#0f172a)}
+header h1{font-size:1.6rem;color:#5eead4}
+header p{color:var(--mut);font-size:.9rem;margin-top:6px}
+nav.tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:14px;background:#0b1120;position:sticky;top:0;z-index:50;border-bottom:1px solid #334155}
+nav.tabs button{background:var(--card);color:var(--tx);border:1px solid #334155;padding:9px 16px;border-radius:10px;cursor:pointer;font-size:.92rem;transition:.2s}
+nav.tabs button:hover{border-color:var(--ac)}
+nav.tabs button.on{background:var(--ac);color:#04201d;font-weight:700;border-color:var(--ac)}
+main{max-width:1050px;margin:auto;padding:18px}
+section.tab{display:none}section.tab.on{display:block;animation:f .25s}
+@keyframes f{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.card{background:var(--card);border:1px solid #334155;border-radius:14px;padding:18px;margin-bottom:16px}
+.card h2{font-size:1.12rem;color:#5eead4;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h3{font-size:1rem;color:var(--ac2);margin:12px 0 8px}
+.hint{font-size:.82rem;color:var(--mut)}
+.row{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.row select{flex:2;min-width:180px}.row input.wt{width:110px}
+.pct{min-width:64px;text-align:center;background:#0b1120;border-radius:8px;padding:4px 6px;font-size:.85rem;color:var(--ac)}
+input,select,textarea{background:#0b1120;border:1px solid #334155;color:var(--tx);padding:8px 10px;border-radius:9px;font-size:.95rem}
+input:focus,select:focus{outline:none;border-color:var(--ac)}
+button.b{background:var(--ac);color:#04201d;border:none;padding:9px 18px;border-radius:9px;cursor:pointer;font-weight:700;font-size:.92rem}
+button.g{background:#334155;color:var(--tx)}button.d{background:#7f1d1d;color:#fecaca;padding:6px 11px}
+button:hover{filter:brightness(1.15)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.kv{display:flex;justify-content:space-between;background:var(--card2);border-radius:10px;padding:10px 14px}
+.kv b{color:#5eead4}.kv b.warn{color:var(--ac2)}
+.qbar{margin:10px 0}
+.qbar .lbl{display:flex;justify-content:space-between;font-size:.85rem}
+.track{position:relative;height:14px;background:#0b1120;border-radius:7px;overflow:hidden;border:1px solid #334155}
+.band{position:absolute;top:0;height:100%;background:rgba(34,197,94,.22);border-inline:1px solid var(--ok)}
+.mark{position:absolute;top:-2px;width:5px;height:calc(100% + 4px);background:var(--ac2);border-radius:3px;box-shadow:0 0 6px var(--ac2)}
+ul.warns li{background:#450a0a;border-inline-start:4px solid var(--bad);padding:8px 12px;border-radius:8px;margin-bottom:6px;font-size:.88rem;list-style:none}
+table.db{width:100%;border-collapse:collapse;font-size:.85rem}
+table.db th,table.db td{padding:7px 9px;border-bottom:1px solid #334155;text-align:right}
+table.db th{background:#0b1120;color:#5eead4;position:sticky;top:52px}
+.chip{display:inline-block;background:#134e4a;color:#99f6e4;border-radius:20px;padding:1px 9px;font-size:.72rem;margin:1px}
+.recipe{background:var(--card2);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid #334155}
+.recipe h4{color:#5eead4;margin-bottom:4px}
+.oilpill{display:inline-block;background:#0b1120;border:1px solid #334155;border-radius:20px;padding:2px 11px;margin:2px;font-size:.8rem}
+.steps li{font-size:.88rem;margin-inline-start:18px}
+footer{text-align:center;color:var(--mut);font-size:.78rem;padding:20px}
+@media print{nav,.noprint{display:none!important}body{background:#fff;color:#000}.card{border-color:#999}}
+</style>
+</head>
+<body>
+<header>
+<h1>🧼 الحاسبة الشاملة للصابون والمنظفات</h1>
+<p>قاعدة بيانات 57+ زيتًا • حساب NaOH/KOH دقيق • خصائص الصابونة • وصفات مثبتة • منظفات منزلية</p>
+</header>
+<body>
+<header>
+<h1>🧼 الحاسبة الشاملة للصابون والمنظفات</h1>
+<p>قاعدة بيانات 57+ زيتًا • حساب NaOH/KOH دقيق • خصائص الصابونة • وصفات مثبتة • منظفات منزلية</p>
+</header>
+<nav class="tabs noprint">
+<button class="on" data-t="solid">🧱 صابون صلب NaOH</button>
+<button data-t="liquid">💧 صابون سائل KOH</button>
+<button data-t="db">📚 قاعدة بيانات الزيوت</button>
+<button data-t="rec">📜 الوصفات الجاهزة</button>
+<button data-t="det">🏠 المنظفات المنزلية</button>
+<button data-t="mold">📐 حاسبة القالب</button>
+<button data-t="cost">💰 التكلفة والتسعير</button>
+<button data-t="label">🏷️ مولّد الملصق</button>
+<button data-t="safe">⚠️ السلامة والدليل</button>
+</nav>
+<main>
+
+<!-- ══════════ صابون صلب ══════════ -->
+<section class="tab on" id="tab-solid">
+<div class="card">
+<h2>⚙️ إعدادات الدفعة</h2>
+<div class="row"><label>الوحدة:</label>
+<select id="s_unit"><option value="g">جرام</option><option value="oz">أونصة</option></select>
+<label>سوبرفات ٪:</label><input type="number" id="s_sf" value="5" min="0" max="20" step="0.5" style="width:80px">
+<label>نقاء NaOH ٪:</label><input type="number" id="s_pur" value="98" min="80" max="100" style="width:80px"></div>
+<div class="row"><label>وضع الماء:</label>
+<select id="s_wm"><option value="conc">تركيز المحلول القلوي</option><option value="pct">نسبة من وزن الزيوت</option><option value="ratio">نسبة قلوى : ماء</option></select>
+<input type="number" id="s_wv" value="33" min="20" max="60" step="0.5" style="width:80px">
+<label>نسبة العطر ٪:</label><input type="number" id="s_eo" value="4" min="0" max="10" step="0.5" style="width:80px"></div>
+<div class="hint">التركيز المعتاد 28–38٪ (الأفضل للمبتدئ 33٪). نسبة الماء التقليدية 38٪ من الزيوت.</div>
+</div>
+<div class="card">
+<h2>🫒 الزيوت <span class="hint">(الوزن مصدر الحقيقة — النسب تتحدث تلقائيًا)</span></h2>
+<div id="s_rows"></div>
+<button class="b g" onclick="addRow('s')">➕ إضافة زيت</button>
+<div class="row" style="margin-top:12px"><label>إجمالي جديد:</label><input type="number" id="s_totIn" value="1000" style="width:110px"><button class="b g" onclick="rescale('s')">⚖️ توازن</button>
+<select id="s_recSel"></select><button class="b" onclick="loadRec('s')">📥 تحميل وصفة</button></div>
+</div>
+<div class="card" id="s_res"></div>
+</section>
+
+<!-- ══════════ صابون سائل ══════════ -->
+<section class="tab" id="tab-liquid">
+<div class="card">
+<h2>⚙️ إعدادات العجينة (KOH)</h2>
+<div class="row"><label>سوبرفات ٪:</label><input type="number" id="k_sf" value="2" min="0" max="10" step="0.5" style="width:75px">
+<label>نقاء KOH ٪:</label><input type="number" id="k_pur" value="90" min="80" max="100" style="width:75px">
+<label>تركيز محلول الطبخ ٪:</label><input type="number" id="k_conc" value="30" min="20" max="40" step="1" style="width:75px">
+<label>تركيز المنتج النهائي ٪:</label><input type="number" id="k_final" value="25" min="10" max="40" step="1" style="width:75px"></div>
+<div class="hint">KOH = SAP(NaOH) × 1.403. التخفيف النموذجي 1:2 إلى 1:3 عجينة:ماء.</div>
+</div>
+<div class="card">
+<h2>🫙 الزيوت</h2>
+<div id="k_rows"></div>
+<button class="b g" onclick="addRow('k')">➕ إضافة زيت</button>
+<div class="row" style="margin-top:12px"><label>إجمالي جديد:</label><input type="number" id="k_totIn" value="1000" style="width:110px"><button class="b g" onclick="rescale('k')">⚖️ توازن</button>
+<select id="k_recSel"></select><button class="b" onclick="loadRec('k')">📥 تحميل وصفة</button></div>
+</div>
+<div class="card" id="k_res"></div>
+</section>
+<!-- ══════════ قاعدة البيانات ══════════ -->
+<section class="tab" id="tab-db">
+<div class="card"><h2>📚 قاعدة بيانات الزيوت والزيوت الصلبة</h2>
+<input type="text" id="dbq" placeholder="🔍 ابحث بالاسم العربي أو الإنجليزي..." style="width:100%;max-width:420px;margin-bottom:10px">
+<div style="overflow:auto;max-height:70vh"><table class="db" id="dbTable"></table></div>
+<p class="hint" style="margin-top:8px">قيم SAP متوسطات صناعية (±2٪ حسب المصدر والمحصول). INS وخصائص محسوبة من التركيب الأحماضي الفعلي.</p></div>
+</section>
+
+<!-- ══════════ الوصفات ══════════ -->
+<section class="tab" id="tab-rec"><div id="recList"></div></section>
+
+<!-- ══════════ المنظفات ══════════ -->
+<section class="tab" id="tab-det"><div id="detList"></div></section>
+
+<!-- ══════════ القالب ══════════ -->
+<section class="tab" id="tab-mold">
+<div class="card"><h2>📐 حجم القالب ← كمية الزيوت</h2>
+<div class="row"><label>الطول سم:</label><input type="number" id="m_L" value="26" style="width:85px">
+<label>العرض سم:</label><input type="number" id="m_W" value="9" style="width:85px">
+<label>الارتفاع سم:</label><input type="number" id="m_H" value="7" style="width:85px">
+<button class="b" onclick="moldCalc()">احسب</button></div>
+<div id="m_res"></div>
+<p class="hint">المعادلة المعيارية: الزيوت(غ) ≈ الحجم(cm³) × 0.7 — المكافئ الدولي: بوصة³ × 0.4 أونصة.</p></div>
+</section>
+
+<!-- ══════════ السلامة ══════════ -->
+<section class="tab" id="tab-safe">
+<div class="card"><h2>⚠️ السلامة مع القلوي</h2>
+<ul class="steps">
+<li>ارتدي نظارات واقية وقفازات دائمًا؛ اعمل في تهوية جيدة.</li>
+<li>اسكب <b>القلوي على الماء</b> وليس العكس، تدريجيًا مع التحريك.</li>
+<li>استخدم أوعية ستانلس/بلاستيك HDPE رقم 5 — <b>لا ألمنيوم أبدًا</b>.</li>
+<li>عند التلامس: اغسل بالماء الجاري 15+ دقيقة (الخل ليس علاجًا فعليًا).</li>
+<li>درجة حرارة المزج المثالية 38–43°م (مع الحليب: تحت 30°م).</li>
+<li>ضع ملصق "قلوي" على كل وعاء، وبعيدًا عن الأطفال.</li>
+</ul></div>
+<div class="card"><h2>📖 مصطلحات أساسية</h2>
+<ul class="steps">
+<li><b>SAP:</b> كمية القلوي اللازمة لتصبين 1غ زيت.</li>
+<li><b>سوبرفات:</b> دهون حرة غير مصبوغة (5–8٪ للعناية، 0–2٪ للغسيل).</li>
+<li><b>التتبّع Trace:</b> مرحلة تماسك الخليط قبل الصب.</li>
+<li><b>طور الجل Gel:</b> حرارة داخلية تكمل التصبين (يمكن منعه بالتبريد).</li>
+<li><b>التزنخ DOS:</b> فساد زيتي — يسببه لينولينيك عالٍ/سوبرفات عالية/تخزين سيئ.</li>
+<li><b>التعتيق:</b> 4–6 أسابيع (القشتالي 8–12 أسبوعًا) لتبخر الماء ولطف القلوي.</li>
+</ul></div>
+<div class="card"><h2>💡 نصائح احترافية</h2>
+<ul class="steps">
+<li>لاكتلات الصوديوم 2–3٪ من الزيوت = صابونة أصلب وألطف (خصوصًا مع الحليب).</li>
+<li>السكر 1 ملعقة/كغ زيت = رغوة أكبر. الملح 1 ملعقة/كغ = تماسك أسرع (بعد التتبع).</li>
+<li>حمض الستريك 0.5٪ يمنع "صدأ" الصابون في الماء العسر.</li>
+<li>في الصابون السائل: انتظر مرحلة "التصفية" (الوضوح) قبل التعبئة؛ يساعدها التجميد ثم الإذابة.</li>
+</ul></div>
+</section>
+<section class="tab" id="tab-cost">
+<div class="card">
+<h2>💰 التكلفة والتسعير — بالجنيه السوداني</h2>
+<div class="row"><label>احسب تكلفة:</label>
+<select id="cp_src" onchange="setSrc(this.value)">
+<option value="s">🧱 الصابون الصلب (تبويب NaOH)</option>
+<option value="k">💧 الصابون السائل (تبويب KOH)</option></select></div>
+<p class="hint">✍️ اكتب الأسعار بأي صيغة تناسبك — المحرك يفهمها كلها تلقائيًا.</p>
+
+<h3>1️⃣ أسعار المواد الخام (لكل كيلوغرام)</h3>
+<div class="grid2">
+<div class="kv"><span>NaOH / كغم</span><input type="text" id="cp_naoh" placeholder="مثال: 8.000" style="width:130px"></div>
+<div class="kv"><span>KOH / كغم</span><input type="text" id="cp_koh" placeholder="مثال: 9.500" style="width:130px"></div>
+<div class="kv"><span>الماء / لتر (اختياري)</span><input type="text" id="cp_water" placeholder="0" style="width:130px"></div>
+<div class="kv"><span>العطر / كغم</span><input type="text" id="cp_eo" placeholder="مثال: 40.000" style="width:130px"></div>
+</div>
+
+<h3>2️⃣ سعر كل زيت في الدفعة الحالية</h3>
+<div class="row"><label>سعر عام لأي زيت لم تُدخل سعره:</label>
+<input type="text" id="cp_oilG" placeholder="مثال: 6.000" style="width:140px"></div>
+<div id="cp_oils"></div>
+<button class="b g" onclick="buildOilPrices();calcCost()">🔄 تحديث قائمة الزيوت</button>
+
+<h3>3️⃣ الإضافات والتعبئة</h3>
+<div class="grid2">
+<div class="kv"><span>إضافات ثابتة (لاكتات/عسل/طين/فحم)</span><input type="text" id="cp_add" placeholder="مثال: 5.000" style="width:130px"></div>
+<div class="kv"><span>تعبئة القطعة الواحدة</span><input type="text" id="cpp_piece" placeholder="مثال: 250" style="width:130px"></div>
+<div class="kv"><span>وزن القطعة (غ)</span><input type="number" id="cp_barW" value="100" style="width:90px"></div>
+<div class="kv"><span>عدد القطع (فارغ = تقدير تلقائي)</span><input type="number" id="cp_pieces" placeholder="تلقائي" style="width:110px"></div>
+</div>
+<button class="b noprint" onclick="calcCost()">💵 احسب التكلفة الآن</button>
+</div>
+
+<div class="card"><h2>📊 تفصيل التكلفة</h2><div id="cp_res"></div></div>
+
+<div class="card"><h2>🏷️ التسعير التجاري</h2>
+<div class="grid2">
+<div class="kv"><span>هامش الربح فوق التكلفة ٪</span><input type="number" id="cp_margin" value="60" style="width:90px"></div>
+<div class="kv"><span>خصم الجملة ٪</span><input type="number" id="cp_ws" value="15" style="width:90px"></div>
+</div>
+<div id="cp_price"></div>
+</div>
+</section>
+<section class="tab" id="tab-label">
+<div class="card">
+<h2>🏷️ مولّد ملصقات المنتج</h2>
+<div class="row"><label>المصدر:</label>
+<select id="lb_src"><option value="s">🧱 صابون صلب</option><option value="k">💧 صابون سائل</option></select>
+<label>النوع:</label><select id="lb_type"><option value="hand">صابون طبيعي يدوي</option><option value="lux">صابون فاخر</option><option value="wash">صابون غسيل</option></select></div>
+<div class="grid2">
+<div class="kv"><span>اسم العلامة التجارية</span><input type="text" id="lb_brand" placeholder="مثال: نعمة" style="width:160px"></div>
+<div class="kv"><span>اسم المنتج</span><input type="text" id="lb_name" placeholder="مثال: زيتون وحليب" style="width:160px"></div>
+<div class="kv"><span>العطر / الإضافة المميزة</span><input type="text" id="lb_scent" placeholder="مثال: لافندر وعسل" style="width:160px"></div>
+<div class="kv"><span>مناسب لـ</span><select id="lb_skin"><option>جميع أنواع البشرة</option><option>البشرة الجافة والحساسة</option><option>البشرة الدهنية</option><option>الوجه والجسم</option><option>الشعر والجسم</option></select></div>
+<div class="kv"><span>الوزن الصافي (غ)</span><input type="number" id="lb_wt" value="100" style="width:90px"></div>
+<div class="kv"><span>تاريخ الإنتاج</span><input type="date" id="lb_date" style="width:150px"></div>
+<div class="kv"><span>مدة الصلاحية</span><select id="lb_shelf"><option value="6">6 أشهر</option><option value="12" selected>12 شهرًا</option><option value="18">18 شهرًا</option><option value="24">24 شهرًا</option></select></div>
+<div class="kv"><span>رقم التشغيلة</span><div class="row"><input type="text" id="lb_batch" readonly style="width:140px"><button class="b g" onclick="newBatch()">🔄</button></div></div>
+<div class="kv"><span>اسم المنتِج / الجهة</span><input type="text" id="lb_maker" placeholder="ورشة ..." style="width:160px"></div>
+<div class="kv"><span>هاتف / عنوان</span><input type="text" id="lb_contact" placeholder="09xxxxxxxx - الخرطوم" style="width:170px"></div>
+<div class="kv"><span>سعر البيع على الملصق</span><div class="row"><input type="text" id="lb_price" placeholder="1.500" style="width:110px"><button class="b g" onclick="pullPrice()">📥 من حاسبة التكلفة</button></div></div>
+</div>
+<button class="b" onclick="buildLabel()">✨ توليد الملصق</button>
+</div>
+<div id="lbl_out"></div>
+</section>
+<footer>⚠️ لأغراض تعليمية وإنتاج منزلي/تجاري مسؤول — قِس pH المنتج النهائي (آمن 8–10) واختبر على رقعة جلد.<br>ox-alpha © الحاسبة الشاملة للصابون والمنظفات</footer>
+</main>
+
+<script>
+/* ═══════════════ قاعدة البيانات ═══════════════ */
+const OILS=[
+{id:"olive",n:"زيت الزيتون",e:"Olive",sap:.134,f:{m:.1,p:12,s:2,o:70,l2:15,l3:1},t:"أساس القشتالي؛ ترطيب عالٍ وتعتيق طويل"},
+{id:"oliveP",n:"زيت الزيتون (تفل)",e:"Olive Pomace",sap:.134,f:{m:.1,p:13,s:2,o:68,l2:16,l3:1},t:"تتبّع أسرع؛ اقتصادي"},
+{id:"coco",n:"جوز الهند 76°",e:"Coconut 76",sap:.178,f:{l:48,m:18,p:9,s:3,o:8,l2:2},t:"تنظيف ورغوة قوية؛ فوق 30٪ يجفف"},
+{id:"fcoco",n:"جوز الهند المجزأ MCT",e:"Fractionated Coconut",sap:.148,f:{o:5,l2:3},t:"خفيف ثابت؛ لا يضيف صلابة"},
+{id:"palm",n:"زيت النخيل",e:"Palm",sap:.141,f:{m:1,p:44,s:5,o:40,l2:10},t:"صلابة وكريمي؛ اختر RSPO"},
+{id:"pk",n:"نواة النخيل",e:"Palm Kernel",sap:.156,f:{l:47,m:15,p:8,s:2,o:13,l2:6},t:"بديل جوز الهند"},
+{id:"bab",n:"الباباسو",e:"Babassu",sap:.175,f:{l:44,m:17,p:8,o:9,l2:2},t:"كجوز الهند وأنعم"},
+{id:"mur",n:"زبدة المورومورو",e:"Murumuru",sap:.152,f:{l:41,m:32,p:6,o:4,l2:2},t:"رغوة مخملية كثيفة"},
+{id:"shea",n:"زبدة الشيا",e:"Shea Butter",sap:.128,f:{p:5,s:40,o:45,l2:5},t:"ترطيب + صلابة معتدلة"},
+{id:"sho",n:"زيت الشيا السائل",e:"Shea Oil",sap:.128,f:{p:4,s:32,o:48,l2:6},t:"نسخة سائلة من الشيا"},
+{id:"cb",n:"زبدة الكاكاو",e:"Cocoa Butter",sap:.137,f:{p:27,s:34,o:34,l2:3},t:"صلابة قوية"},
+{id:"mb",n:"زبدة المانجو",e:"Mango Butter",sap:.128,f:{p:8,s:38,o:46,l2:4},t:"مرطبة بلا رائحة"},
+{id:"kok",n:"زبدة الكوكون",e:"Kokum",sap:.130,f:{p:3,s:50,o:40,l2:3},t:"صلابة دون قسوة"},
+{id:"sal",n:"زبدة السال",e:"Sal",sap:.131,f:{p:6,s:44,o:39,l2:3},t:"ثابتة وصلبة"},
+{id:"ill",n:"زبدة الإليبي",e:"Illipe",sap:.131,f:{p:17,s:40,o:42},t:"أقسى من الشيا"},
+{id:"cas",n:"زيت الخروع",e:"Castor",sap:.129,f:{r:90,o:4,l2:4,p:1,s:1},t:"رغوة ثابتة؛ ≤10٪"},
+{id:"alm",n:"اللوز الحلو",e:"Sweet Almond",sap:.136,f:{m:1,p:8,s:2,o:68,l2:17},t:"لطيف للوجه"},
+{id:"avo",n:"الأفوكادو",e:"Avocado",sap:.133,f:{m:.2,p:11,s:2,o:63,l2:12,l3:1},t:"ترطيب عميق"},
+{id:"arg",n:"الأركان",e:"Argan",sap:.137,f:{p:12,s:5,o:45,l2:35},t:"فاخر للبشرة والشعر"},
+{id:"joba",n:"الجوجوبا (شمع)",e:"Jojoba",sap:.066,f:{p:3,s:1,o:80,l2:8},t:"ثابت؛ ممتاز للشامبو"},
+{id:"gp",n:"بذور العنب",e:"Grapeseed",sap:.129,f:{p:8,s:3,o:17,l2:70},t:"خفيف؛ ثبات منخفض"},
+{id:"sun",n:"عباد الشمس",e:"Sunflower",sap:.135,f:{p:6,s:4,o:24,l2:65},t:"اقتصادي"},
+{id:"sunho",n:"عباد الشمس أوليك",e:"HO Sunflower",sap:.134,f:{p:4,s:4,o:82,l2:9},t:"ثبات أعلى"},
+{id:"can",n:"الكانولا",e:"Canola",sap:.132,f:{p:4,s:1,o:61,l2:21,l3:10},t:"اقتصادي"},
+{id:"soy",n:"الصويا",e:"Soybean",sap:.135,f:{p:10,s:4,o:26,l2:51,l3:7},t:"لطيف؛ يزنخ"},
+{id:"rice",n:"نخالة الأرز",e:"Rice Bran",sap:.128,f:{p:17,s:2,o:42,l2:33},t:"توازن وسعر ممتاز"},
+{id:"ses",n:"السمسم",e:"Sesame",sap:.133,f:{p:9,s:4,o:43,l2:43},t:"عناية برائحة مميزة"},
+{id:"corn",n:"الذرة",e:"Corn",sap:.136,f:{p:11,s:2,o:30,l2:56},t:"شائع"},
+{id:"pnut",n:"الفول السوداني",e:"Peanut",sap:.136,f:{p:12,s:3,o:48,l2:31},t:"⚠️ حساسية المكسرات"},
+{id:"cot",n:"بذر القطن",e:"Cottonseed",sap:.139,f:{p:25,s:2,o:18,l2:52},t:"كريمي"},
+{id:"hemp",n:"القنّب",e:"Hemp Seed",sap:.138,f:{p:7,s:2,o:12,l2:55,l3:20},t:"أوميغا عالٍ؛ ثبات منخفض"},
+{id:"wal",n:"الجوز",e:"Walnut",sap:.138,f:{p:6,s:1,o:28,l2:55,l3:10},t:"⚠️ حساسية؛ يزنخ"},
+{id:"haz",n:"البندق",e:"Hazelnut",sap:.136,f:{p:8,s:3,o:75,l2:14},t:"قابض لطيف"},
+{id:"apr",n:"نواة المشمش",e:"Apricot Kernel",sap:.134,f:{p:5,s:1,o:62,l2:29},t:"خفيف للوجه"},
+{id:"wg",n:"جنين القمح",e:"Wheat Germ",sap:.131,f:{p:14,s:1,o:20,l2:55,l3:5},t:"غني بفيتامين E"},
+{id:"flax",n:"الكتان",e:"Flaxseed",sap:.136,f:{p:7,s:1,o:19,l2:17,l3:53},t:"أسرع تزنخ؛ نسب صغيرة"},
+{id:"cam",n:"الجميزة",e:"Camelina",sap:.132,f:{p:6,s:2,o:28,l2:18,l3:36},t:"أوميغا3 ثابت نسبيًا"},
+{id:"saff",n:"القرطم",e:"Safflower",sap:.136,f:{p:7,s:3,o:14,l2:75},t:"خفيف جدًا"},
+{id:"epo",n:"زهرة الربيع",e:"Evening Primrose",sap:.127,f:{p:6,s:1,o:9,l2:72,l3:9},t:"GLA؛ نسب صغيرة"},
+{id:"bor",n:"لسان الثور",e:"Borage",sap:.127,f:{p:10,s:2,o:16,l2:38,l3:22},t:"GLA عالٍ"},
+{id:"rh",n:"ورد المسك",e:"Rosehip",sap:.137,f:{p:4,s:1,o:15,l2:48,l3:30},t:"تجديد البشرة"},
+{id:"kuk",n:"الكوكوي",e:"Kukui Nut",sap:.135,f:{p:3,s:1,o:28,l2:41,l3:26},t:"بعد الشمس"},
+{id:"mead",n:"عشب الرغوة",e:"Meadowfoam",sap:.120,f:{p:1,o:80,l2:4},t:"يثبت الزيوت ضد التزنخ"},
+{id:"neem",n:"النيم",e:"Neem",sap:.139,f:{p:19,s:12,o:45,l2:19},t:"لحب الشباب؛ رائحة قوية"},
+{id:"tam",n:"التامانو",e:"Tamanu",sap:.135,f:{p:15,s:12,o:38,l2:30},t:"شفاء الجلد"},
+{id:"maru",n:"المارولا",e:"Marula",sap:.136,f:{p:13,s:5,o:72,l2:7},t:"ثابت وفاخر"},
+{id:"bao",n:"الباوباب",e:"Baobab",sap:.145,f:{p:26,s:4,o:33,l2:29},t:"مرونة البشرة"},
+{id:"morg",n:"المورينجا",e:"Moringa",sap:.136,f:{p:9,s:3,o:70,l2:8},t:"منقي للشعر"},
+{id:"pist",n:"الفستق",e:"Pistachio",sap:.135,f:{p:12,s:2,o:55,l2:25},t:"فاخر نادر"},
+{id:"pump",n:"بذور اليقطين",e:"Pumpkin Seed",sap:.133,f:{p:12,s:5,o:37,l2:47},t:"لفروة الرأس"},
+{id:"nig",n:"حبة البركة",e:"Black Seed",sap:.134,f:{p:14,s:2,o:22,l2:55},t:"تقليدي علاجي"},
+{id:"sb",n:"نبق البحر",e:"Sea Buckthorn",sap:.122,f:{p:30,s:1,o:38,l2:8,l3:3},t:"لون برتقالي؛ 1–5٪"},
+{id:"tal",n:"شحم البقر",e:"Beef Tallow",sap:.141,f:{m:3,p:27,s:21,o:42,l2:2},t:"كلاسيكي تجاري"},
+{id:"lard",n:"شحم الخنزير",e:"Lard",sap:.138,f:{m:2,p:26,s:13,o:44,l2:10},t:"كريمي تقليدي"},
+{id:"bees",n:"شمع النحل",e:"Beeswax",sap:.069,f:{p:1,s:1,o:1},t:"صلابة؛ >3٪ يخنق الرغوة"}
+];
+const O=id=>OILS.find(x=>x.id===id);
+const INSFA={l:248,m:250,p:155,s:150,r:150,o:109,l2:72,l3:57};
+const IVFA={l:1,m:4,p:0,s:0,r:86,o:89,l2:181,l3:273};
+const KOHF=1.4028;
+
+/* ═══════════════ الوصفات ═══════════════ */
+const REC_S=[
+{n:"قشتالي الأصيل 100٪",sf:5,oils:[["olive",100]],tip:"الملك الكلاسيكي. تعتيق 8–12 أسبوعًا. رغوة ناعمة وصابونة تدوم."},
+{n:"باستيل الفرنسي",sf:6,oils:[["olive",72],["coco",18],["shea",6],["cas",4]],tip:"75٪+ زيتون بلطف جوز الهند — أفضل توازن للمبتدئين."},
+{n:"جوز الهند 100٪ (استحمام)",sf:15,oils:[["coco",100]],tip:"سوبرفات 15٪ تلطف القسوة. للغسيل اجعلها 2٪ فقط."},
+{n:"التوازن اليومي (الأكثر بيعًا)",sf:5,oils:[["olive",35],["coco",25],["palm",25],["shea",10],["cas",5]],tip:"الوصفة التجارية الذهبية: رغوة + صلابة + ترطيب."},
+{n:"فاخر مرطب للوجه",sf:6,oils:[["olive",30],["shea",20],["avo",20],["alm",20],["cas",10]],tip:"للجلد الجاف؛ أضف 1٪ فيتامين E عند التتبع."},
+{n:"البشرة الحساسة والأطفال",sf:8,oils:[["olive",45],["alm",25],["shea",15],["avo",15]],tip:"بلا عطور؛ تنظيف منخفض 12٪ تقريبًا."},
+{n:"مكافح حب الشباب",sf:5,oils:[["olive",30],["coco",25],["palm",20],["neem",10],["cas",10],["tam",5]],tip:"أضف 1٪ زيت شجرة الشاي + طين أخضر عند التتبع."},
+{n:"شامبو صلب",sf:8,oils:[["coco",30],["olive",25],["cas",15],["arg",10],["gp",10],["shea",10]],tip:"الخروع 15٪ ضروري للرغوة على الشعر."},
+{n:"بار الغسيل",sf:2,oills:null,oils:[["coco",75],["palm",20],["cas",5]],tip:"قوي ومنظف؛ ابشره للمسحوق المنزلي."},
+{n:"التجاري الاقتصادي",sf:4,oils:[["palm",40],["tal",25],["coco",20],["olive",10],["cas",5]],tip:"أقل تكلفة بأفضل أداء — معادلة المصانع الكلاسيكية."},
+{n:"كريمي بالحليب والعسل",sf:6,oils:[["olive",30],["coco",25],["shea",20],["cb",15],["cas",10]],tip:"استبدل الماء بحليب مجمدًا + 1 ملعقة عسل/كغ."},
+{n:"الرجال (فحم وطين)",sf:6,oils:[["palm",30],["coco",25],["olive",25],["shea",10],["cas",10]],tip:"1 ملعقة فحم نشط + 2 ملعقة طين أخضر/كغ."},
+{n:"Salt Bar البحري",sf:10,oils:[["coco",90],["cas",10]],tip:"ملح بحري 100٪ من وزن الزيوت يُضاف عند التتبع — كريمي كالرخام!"},
+{n:"زبدة الشيا الفاخرة",sf:7,oils:[["shea",35],["olive",30],["coco",20],["cb",10],["cas",5]],tip:"35٪ زبدة = صابونة شتوية غنية."},
+{n:"الشوفان الهادئ",sf:7,oils:[["olive",40],["rice",20],["shea",15],["alm",15],["cas",10]],tip:"2 ملاعق شوفان مطحون/كغ — للأكزيما الخفيفة."}];
+const REC_K=[
+{n:"سائل جوز الهند 100٪",sf:1,oils:[["coco",100]],dil:"1:3",use:"غسيل عام وملابس"},
+{n:"يدين وجسم لطيف",sf:3,oils:[["coco",35],["olive",30],["cas",15],["arg",10],["shea",10]],dil:"1:2",use:"صابونة سائلة يومية"},
+{n:"شامبو سائل",sf:5,oils:[["coco",25],["olive",25],["cas",20],["gp",10],["arg",10],["shea",10]],dil:"1:2.5",use:"جميع أنواع الشعر"},
+{n:"غسيل أطباق قوي",sf:1,oils:[["coco",80],["pk",15],["cas",5]],dil:"1:1.5",use:"دهون ثقيلة"}];
+
+/* ═══════════════ المنظفات المنزلية ═══════════════ */
+const DET=[
+{n:"مسحوق الغسيل المنزلي",d:"لكل دفعة — بدّل البوراكس التجاري ببيركاربونات آمنة.",items:[["صابون غسيل مبشور","غ",20],["صودا كربونات","غ",40],["بيركاربونات الصوديوم","غ",35],["ملح خشن","غ",5]],fixed:["10 قطرات زيت عطري لكل كغ"],steps:["اخلط المسحوق جيدًا في وعاء جاف","خزّن في برطمان محكم","ملعقة كبيرة لكل حمل غسيل"]},
+{n:"سائل غسيل مركز",d:"يُحفظ أسبوعين في الثلاجة.",items:[["صابون مبشور","غ",5],["صودا كربونات","غ",6],["بيكربونات","غ",4],["ماء ساخن","مل",85]],fixed:[],steps:["ذبّ الصابون في ماء ساخن","أضف الكربونات والبيكربونات وحرّك","املأ بالماء حتى 2.5ل وانتظر التجل"]},
+{n:"منظف متعدد الأغراض (بخاخ)",d:"للأسطح والمطبخ.",items:[["صابون قشتالي سائل","مل",10],["ماء","مل",86],["صودا كربونات","غ",4]],fixed:["15 قطرة ليمون/500مل"],steps:["ذبّ الكربونات في قليل من الماء","أضف الصابون ثم أكمل الحجم","رجّ قبل كل استخدام"]},
+{n:"منظف الزجاج والمرايا",d:"بلا خطوط.",items:[["ماء مقطر","مل",55],["كحول محول","مل",25],["خل أبيض","مل",18],["نشا ذرة","غ",2]],fixed:[],steps:["ذبّ النشا في قليل من الماء الدافئ","اخلط الباقي ورجّ جيدًا","امسح بورق جريد أو ميكروفايبر"]},
+{n:"مزيل الدهون القوي",d:"للمواقد والشفاطات.",items:[["ماء ساخن","مل",70],["صابون قشتالي","مل",20],["صودا كربونات","غ",8],["كحول محول","مل",2]],fixed:[],steps:["ذبّ الكربونات أولًا","أضف الصابون والكحول","رشّ واتركه 5 دقائق ثم افرك"]},
+{n:"بودرة غسالات الصحون",d:"بديل تجاري كامل.",items:[["بيكربونات الصوديوم","غ",40],["بيركاربونات","غ",30],["ملح ناعم","غ",15],["حمض سيتريك","غ",15]],fixed:["3 قطرات ليمون/كغم"],steps:["اخلط في وعاء جاف تمامًا","خزّن محكمًا (يتكتل بالرطوبة)","ملعقة صغيرة لكل دورة"]},
+{n:"منظف الحمام والبلاط",d:"بودرة كاشطة + مطهر.",items:[["بيكربونات","غ",50],["ملح خشن","غ",30],["حمض سيتريك","غ",20]],fixed:["20 قطرة شجرة شاي/كغم"],steps:["اخلط البودرات جافًا","رُشّ على السطح المبلل واتركه 10 دقائق","افرك واشطف"]},
+{n:"معطر الأرضيات",d:"بدل المواد التجارية.",items:[["ماء","مل",90],["كحول محول","مل",8],["زيت عطري","مل",2]],fixed:[],steps:["اخلط الكحول مع الزيت أولًا","أضف الماء في بخاخة","نصف كوب لكل دلو ماء"]}];
+
+/* ═══════════════ منطق الحسابات ═══════════════ */
+const $=id=>document.getElementById(id);
+const state={s:{rows:[],unit:"g"},k:{rows:[],unit:"g"}};
+const fmt=x=>(Math.round(x*100)/100).toString();
+
+function opts(sel,cur){let h="";OILS.forEach(o=>h+=`<option value="${o.id}" ${o.id===cur?"selected":""}>${o.n} (${o.e})</option>`);return h;}
+function addRow(t,id="olive",w=100){
+ const st=state[t];st.rows.push({oil:id,w});
+ const d=document.createElement("div");d.className="row";d.dataset.t=t;d.dataset.i=st.rows.length-1;
+ d.innerHTML=`<select class="oilSel">${opts(null,id)}</select><input type="number" class="wt" min="0" step="1" value="${dispW(st,w)}"><span class="pct"></span><button class="b d" onclick="delRow(this)">✕</button>`;
+ $(t+"_rows").appendChild(d);
+ d.querySelector(".oilSel").addEventListener("change",e=>{st.rows[+d.dataset.i].oil=e.target.value;recalc(t);});
+ d.querySelector(".wt").addEventListener("input",e=>{st.rows[+d.dataset.i].w=readW(st,e.target.value);recalc(t,true);});
+ recalc(t);
+}
+function delRow(b){const d=b.parentElement,t=d.dataset.t;state[t].rows.splice(+d.dataset.i,1);d.remove();reIndex(t);recalc(t);}
+function reIndex(t){[...$(t+"_rows").children].forEach((c,i)=>c.dataset.i=i);}
+function dispW(st,g){return st.unit==="oz"?+(g/28.35).toFixed(2):Math.round(g);}
+function readW(st,v){v=parseFloat(v)||0;return st.unit==="oz"?v*28.35:v;}
+function totOils(t){return state[t].rows.reduce((a,r)=>a+r.w,0);}
+function recalc(t,skipPct){
+ const st=state[t];if(!skipPct)[...$(t+"_rows").children].forEach((c,i)=>{const to=totOils(t);c.querySelector(".pct").textContent=to>0?(st.rows[i].w/to*100).toFixed(1)+"٪":"0٪";});
+ t==="s"?calcSolid():calcLiquid();
+}
+
+function faAvg(t){const to=totOils(t);if(to<=0)return null;const a={l:0,m:0,p:0,s:0,r:0,o:0,l2:0,l3:0};
+ state[t].rows.forEach(r=>{const f=O(r.oil).f;for(const k in a)a[k]+=f[k]||0?((f[k]||0)*r.w/to):0;});return a;}
+
+function qualHTML(a){
+ const hard=a.l+a.m+a.p+a.s,clean=a.l+a.m,cond=a.o+a.l2+a.l3+a.r,bub=a.l+a.m,cream=a.p+s_r(a);
+ let ins=0,iod=0;for(const k in a){ins+=(a[k])*INSFA[k]/100;iod+=a[k]*IVFA[k];}
+ function s_r(a){return a.r;}
+ const bars=[["الصلابة Hardness",hard,[29,54],80],["التنظيف Cleansing",clean,[12,22],60],["العناية Conditioning",cond,[44,69],100],["رغوة هوائية Bubbly",bub,[14,46],60],["رغوة كريمية Creamy",cream,[12,38],60]];
+ let h=bars.map(([n,v,r,mx])=>`<div class="qbar"><div class="lbl"><span>${n}</span><span>${v.toFixed(1)}٪</span></div>
+ <div class="track"><div class="band" style="inset-inline-start:${r[0]/mx*100}%;width:${(r[1]-r[0])/mx*100}%"></div>
+ <div class="mark" style="inset-inline-start:min(${v/mx*100},99)%"></div></div></div>`).join("");
+ h+=`<div class="grid2" style="margin-top:10px">
+ <div class="kv"><span>مؤشر INS</span><b>${ins.toFixed(0)} ${ins>=150&&ins<=170?"✓ مثالي":""}</b></div>
+ <div class="kv"><span>قيمة اليود</span><b>${iod.toFixed(0)}</b></div>
+ <div class="kv"><span>أوليك+لينوليك</span><b>${(a.o+a.l2).toFixed(1)}٪</b></div>
+ <div class="kv"><span>لوريك (رغوة)</span><b>${a.l.toFixed(1)}٪</b></div></div>`;
+ return h;
+}
+function warns(a,t,to){
+ const w=[];
+ if(a.l+a.m>25)w.push("⚠️ التنظيف فوق 25٪ — مجهد للجلد؛ خفّف جوز الهند/نواة النخيل.");
+ if(a.l+a.m<8&&to>0)w.push("ℹ️ تنظيف ضعيف — قد لا يزيل الدهون جيدًا.");
+ if(a.l+a.m+a.p+a.s<26)w.push("⚠️ صلابة منخفضة — سيذوب سريعًا؛ أضف زبدة/نخيل أو طول التعتيق.");
+ if(a.l3>8)w.push("⚠️ لينولينيك مرتفع = خطر تزنخ (DOS). قلل الكتان/القنب/ورد المسك أو أضف عشب الرغوة + 1٪ فيتامينE.");
+ if(a.r>10)w.push("ℹ️ الخروع فوق 10٪ يعطي لزوجة وصعوبة فك.");
+ if(a.p+a.s>1&&state[t].rows.some(r=>r.oil==="bees")&&(()=>{const to=totOils(t);return to&&state[t].rows.find(r=>r.oil==="bees").w/to*100>3})())w.push("⚠️ شمع النحل فوق 3٪ يخنق الرغوة.");
+ return w;
+}
+function paramWarns(t,sf,wm,wv){
+ const w=[],to=totOils(t);
+ if(sf>10)w.push("⚠️ سوبرفات فوق 10٪ يقصر عمر الصابونة (تزنخ أبكر).");
+ if(to&&(state[t].rows.some(r=>["coco","pk"].includes(r.oil)&&r.w/to>.35))&&sf<8)w.push("⚠️ جوز هند/نواة >35٪ مع سوبرفات منخفضة = قسوة عالية (مناسب للغسيل فقط).");
+ if(wm==="conc"){if(wv>40)w.push("🚨 تركيز قلوي فوق 40٪ خطر — تتبّع فوري وحرارة.");if(wv<28)w.push("ℹ️ ماء زائد — جفاف أبطأ واحتمال تشقق.");}
+ if(state[t].rows.some(r=>r.oil==="palm"))w.push("🌱 فضّل زيت نخيل بشهادة استدامة RSPO.");
+ return w;
+}
+
+/* ── الصابون الصلب ── */
+function calcSolid(){
+ const box=$("s_res");const to=totOils("s");
+ if(to<=0){box.innerHTML="<p class='hint'>أضف زيوتًا لبدء الحساب.</p>";return;}
+ const sf=Math.min(Math.max(parseFloat($("s_sf").value)||0,0),20);
+ const pur=Math.min(Math.max(parseFloat($("s_pur").value)||100,50),100)/100;
+ const wm=$("s_wm").value,wv=parseFloat($("s_wv").value)||33,eo=Math.max(parseFloat($("s_eo").value)||0,0);
+ let naoh=0;state.s.rows.forEach(r=>naoh+=r.w*O(r.oil).sap);
+ const naohAct=naoh*(1-sf/100)/pur;
+ let water= wm==="pct"?to*wv/100 : wm==="conc"? naohAct*(100/wv-1) : naohAct*wv;
+ const batch=to+naohAct+water;
+ const a=faAvg("s");const pw=[...warns(a,"s",to),...paramWarns("s",sf,wm,wv)];
+ box.innerHTML=`<h2>📊 نتائج الصابون الصلب</h2>
+ <div class="grid2">
+ <div class="kv"><span>إجمالي الزيوت</span><b>${fmt(to)} غ (${fmt(to/28.35)} أوقية)</b></div>
+ <div class="kv"><span>هيدروكسيد الصوديوم NaOH</span><b class="warn">${fmt(naohAct)} غ</b></div>
+ <div class="kv"><span>الماء</span><b>${fmt(water)} غ (${fmt(water/naohAct*100)||0}٪ من القلوي)</b></div>
+ <div class="kv"><span>وزن الدفعة التقريبي</span><b>${fmt(batch)} غ</b></div>
+ <div class="kv"><span>زيت عطري مقترح (${eo}٪)</span><b>${fmt(to*eo/100)} غ ≈ ${(to*eo/100*0.91).toFixed(0)} مل</b></div>
+ <div class="kv"><span>سوبرفات فعليًا</span><b>${sf}٪ = ${fmt(naoh*sf/100)} غ دهون حرة</b></div></div>
+ <h3>خصائص الصابونة المتوقعة</h3>${qualHTML(a)}
+ ${pw.length?`<h3>تنبيهات المحرك الذكي</h3><ul class="warns">${pw.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}
+ <button class="b g noprint" onclick="copyRep('s')">📋 نسخ الملخص</button> <button class="b g noprint" onclick="window.print()">🖨️ طباعة</button>`;
+ box.dataset.data=JSON.stringify({to,naohAct,water,batch,sf});
+}
+
+/* ── الصابون السائل ── */
+function calcLiquid(){
+ const box=$("k_res");const to=totOils("k");
+ if(to<=0){box.innerHTML="<p class='hint'>أضف زيوتًا لبدء الحساب.</p>";return;}
+ const sf=Math.min(Math.max(parseFloat($("k_sf").value)||0,0),10);
+ const pur=Math.min(Math.max(parseFloat($("k_pur").value)||90,50),100)/100;
+ const conc=parseFloat($("k_conc").value)||30,fin=parseFloat($("k_final").value)||25;
+ let koh=0;state.k.rows.forEach(r=>koh+=r.w*O(r.oil).sap*KOHF);
+ const kohAct=koh*(1-sf/100)/pur;
+ const pw=kohAct*(100/conc-1);
+ const paste=to+kohAct+pw;
+ const solids=to*0.95;
+ const dw=Math.max(0,solids/(fin/100)-paste);
+ const a=faAvg("k");const w=warns(a,"k",to);
+ box.innerHTML=`<h2>📊 نتائج الصابون السائل</h2>
+ <div class="grid2">
+ <div class="kv"><span>إجمالي الزيوت</span><b>${fmt(to)} غ</b></div>
+ <div class="kv"><span>هيدروكسيد البوتاسيوم KOH</span><b class="warn">${fmt(kohAct)} غ</b></div>
+ <div class="kv"><span>ماء الطبخ (عجينة)</span><b>${fmt(pw)} غ</b></div>
+ <div class="kv"><span>وزن العجينة</span><b>${fmt(paste)} غ</b></div>
+ <div class="kv"><span>ماء التخفيف إلى ${fin}٪</span><b class="warn">${fmt(dw)} غ ≈ ${fmt(dw)} مل</b></div>
+ <div class="kv"><span>المنتج النهائي المتوقع</span><b>≈ ${fmt(paste+dw)} غ</b></div></div>
+ <h3>خصائص العجينة</h3>${qualHTML(a)}
+ <h3>خطوات التنفيذ المختصرة</h3><ol class="steps">
+ <li>ذوّب KOH في ماء الطبخ (تفاعل قوي وحرارة — بحذر شديد).</li>
+ <li>أضف الزيوت الدافئة وحرّك حتى التتبّع.</li>
+ <li>اطبخ على حمام مائي 3–4 ساعات مع التحريك كل نصف ساعة حتى مرحلة الجل الكامل.</li>
+ <li>اختبر الشفافية: قطرة في ماء يجب أن تذوب صافية (أو جمّد ثم أذب لتسريعها).</li>
+ <li>أضف ماء التخفيف تدريجيًا، ثم 10غ بوراكس مذاب/كغ للتثبيت، صفِّه بعد 24ساعة وعبّئه.</li></ol>
+ ${w.length?`<ul class="warns">${w.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}
+ <button class="b g noprint" onclick="copyRep('k')">📋 نسخ الملخص</button>`;
+ box.dataset.data=JSON.stringify({to,kohAct,pw,paste,dw});
+}
+
+/* ── الوصفات ── */
+function fillRecSel(){["s","k"].forEach(t=>{
+ const sel=$(t+"_recSel");sel.innerHTML=(t==="s"?REC_S:REC_K).map((r,i)=>`<option value="${i}">${r.n}</option>`).join("");});}
+function loadRec(t){
+ const i=+$(t+"_recSel").value;const R=(t==="s"?REC_S:REC_K)[i];
+ const cur=totOils(t)||1000;
+ $(t+"_rows").innerHTML="";state[t].rows=[];
+ R.oils.forEach(([id,p])=>addRow(t,id,+ (cur*p/100).toFixed(1)));
+ if(t==="s")$("s_sf").value=R.sf;else $("k_sf").value=R.sf;
+ recalc(t);
+ document.querySelector(`[data-t="${t==="s"?"solid":"liquid"}"]`).click();
+ alert("✅ تم تحميل: "+R.n+"\n"+(R.tip||""));
+}
+function renderRecipes(){
+ $("recList").innerHTML=`<div class="card"><h2>📜 مكتبة الوصفات المثبتة</h2><p class="hint">كل وصفة محسوبة بنسب مختبرة. اضغط "تحميل في الحاسبة" لتعبئتها فورًا.</p></div>`+
+ `<h3 style="color:#5eead4;margin:6px 4px">🧱 صابون صلب — ${REC_S.length} وصفة</h3>`+
+ REC_S.map(R=>`<div class="recipe"><h4>${R.n}</h4>
+ ${R.oils.map(([id,p])=>`<span class="oilpill">${O(id).n}: <b>${p}٪</b></span>`).join("")}
+ <span class="oilpill">سوبرفات: <b>${R.sf}٪</b></span>
+ <p class="hint">${R.tip}</p>
+ <button class="b g" onclick="quickLoad('${R.n}')">⚡ تحميل في الحاسبة</button></div>`).join("")+
+ `<h3 style="color:#5eead4;margin:6px 4px">💧 صابون سائل — ${REC_K.length} وصفة</h3>`+
+ REC_K.map((R,i)=>`<div class="recipe"><h4>${R.n}</h4>
+ ${R.oils.map(([id,p])=>`<span class="oilpill">${O(id).n}: <b>${p}٪</b></span>`).join("")}
+ <span class="oilpill">سوبرفات: <b>${R.sf}٪</b></span><span class="oilpill">تخفيف: <b>${R.dil}</b></span>
+ <p class="hint">${R.use}</p><button class="b g" onclick="switchTab('liquid');$('k_recSel').value=${i};loadRec('k')">⚡ تحميل في الحاسبة</button></div>`).join("");
+}
+function quickLoad(name){
+ const i=REC_S.findIndex(r=>r.n===name);switchTab("solid");$("s_recSel").value=i;loadRec("s");}
+/* ── المنظفات ── */
+function renderDet(){
+ $("detList").innerHTML=`<div class="card"><h2>🏠 المنظفات المنزلية القابلة للتحجيم</h2><p class="hint">غيّر "حجم الدفعة" فتُعاد حساب كل المكونات فورًا بالنسب الصحيحة.</p></div>`+
+ DET.map((D,i)=>`<div class="recipe"><h4>${D.n}</h4><p class="hint">${D.d}</p>
+ <div class="row"><label>حجم الدفعة:</label><input type="number" value="1000" min="10" style="width:100px" oninput="scaleDet(${i},this.value)"> <b>غ/مل</b></div>
+ <div class="grid2" id="det${i}"></div>
+ ${D.fixed.length?`<p class="hint" style="margin-top:6px">✚ ${D.fixed.join(" • ")}</p>`:""}
+ <h3>الطريقة</h3><ol class="steps">${D.steps.map(s=>`<li>${s}</li>`).join("")}</ol></div>`).join("");
+ DET.forEach((_,i)=>scaleDet(i,1000));
+}
+function scaleDet(i,total){
+ total=Math.max(parseFloat(total)||1000,0);
+ const D=DET[i];const sum=D.items.reduce((a,x)=>a+x[2],0);
+ $("det"+i).innerHTML=D.items.map(x=>`<div class="kv"><span>${x[0]} <small class="hint">(${(x[2]/sum*100).toFixed(0)}٪)</small></span><b>${fmt(total*x[2]/sum)} ${x[1]}</b></div>`).join("");
+}
+
+/* ── قاعدة البيانات ── */
+function renderDB(q=""){
+ const rows=OILS.filter(o=>!q||o.n.includes(q)||o.e.toLowerCase().includes(q.toLowerCase())||o.t.includes(q));
+ $("dbTable").innerHTML=`<tr><th>الزيت</th><th>SAP<br>NaOH</th><th>KOH</th><th>INS</th><th>التركيب الأحماضي</th><th>ملاحظات</th></tr>`+
+ rows.map(o=>{let ins=0;for(const k in o.f)ins+=o.f[k]*INSFA[k]/100;
+ const chips=Object.entries(o.f).filter(([k,v])=>v>=1).map(([k,v])=>`<span class="chip">${faName(k)} ${v}</span>`).join("");
+ return `<tr><td><b>${o.n}</b><br><small class="hint">${o.e}</small></td><td>${o.sap}</td><td>${(o.sap*KOHF).toFixed(3)}</td><td>${ins.toFixed(0)}</td><td>${chips}</td><td class="hint">${o.t}</td></tr>`;}).join("");
+}
+function faName(k){return{l:"لوريك",m:"ميريستيك",p:"بالمنتك",s:"ستياريك",r:"ريسينوليك",o:"أوليك",l2:"لينوليك",l3:"لينولينيك"}[k];}
+
+/* ── القالب ── */
+function moldCalc(){
+ const L=+$("m_L").value||0,W=+$("m_W").value||0,H=+$("m_H").value||0;
+ const v=L*W*H,o=v*0.7;
+ $("m_res").innerHTML=`<div class="grid2" style="margin-top:10px">
+ <div class="kv"><span>حجم القالب</span><b>${fmt(v)} سم³ (${fmt(v/16.387)} بوصة³)</b></div>
+ <div class="kv"><span>كمية الزيوت المطلوبة</span><b class="warn">${fmt(o)} غ ≈ ${fmt(o/28.35)} أونصة</b></div></div>
+ <button class="b noprint" style="margin-top:10px" onclick="applyMold(${o})">⚡ استخدمه كإجمالي الدفعة في حاسبة الصلب</button>`;
+}
+function applyMold(o){$("s_totIn").value=Math.round(o);rescale("s");switchTab("solid");}
+function rescale(t){
+ const target=parseFloat($(t+"_totIn").value)||0,cur=totOils(t);
+ if(cur<=0||target<=0)return;
+ const f=target/cur;state[t].rows.forEach(r=>r.w*=f);
+ [...$(t+"_rows").children].forEach((c,i)=>c.querySelector(".wt").value=dispW(state[t],state[t].rows[i].w));
+ recalc(t);
+}
+
+/* ── تبويبات ونظام ── */
+function switchTab(name){
+ document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===name));
+ document.querySelectorAll("section.tab").forEach(s=>s.classList.toggle("on",s.id==="tab-"+name));
+}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.t)));
+$("dbq").addEventListener("input",e=>renderDB(e.target.value.trim()));
+$("s_unit").addEventListener("change",e=>{
+ const st=state.s,nw=e.target.value;
+ st.rows.forEach((r,i)=>{if(nw==="oz")r.w=r.w; });
+ st.unit=nw;
+ [...$("s_rows").children].forEach((c,i)=>c.querySelector(".wt").value=dispW(st,st.rows[i].w));
+});
+function copyRep(t){
+ const src=$(t+"_res");if(!src.dataset.data)return;
+ const d=JSON.parse(src.dataset.data);const st=state[t];
+ let txt=`🧼 ملخص دفعة الصابون (${t==="s"?"صلب NaOH":"سائل KOH"})\n${"=".repeat(30)}\n`;
+ txt+=st.rows.map(r=>`• ${O(r.oil).n}: ${fmt(r.w)}غ (${(r.w/d.to*100).toFixed(1)}٪)`).join("\n");
+ txt+=`\n${"=".repeat(30)}\nإجمالي الزيوت: ${fmt(d.to)}غ\nالقلوي: ${fmt(t==="s"?d.naohAct:d.kohAct)}غ\nالماء: ${fmt(t==="s"?d.water:d.pw)}غ\nالدفعة: ${fmt(d.batch||d.paste)}غ\nسوبرفات: ${$(t+"_"+(t==="s"?"sf":"sf")).value}٪\n`;
+ navigator.clipboard.writeText(txt).then(()=>alert("✅ تم نسخ الملخص"));
+}
+/* ═ تشغيل أولي ═ */
+fillRecSel();renderRecipes();renderDet();renderDB();
+[["olive",500],["coco",300],["shea",200]].forEach(([id,w])=>addRow("s",id,w));
+[["coco",350],["olive",300],["cas",150],["shea",100],["arg",100]].forEach(([id,w])=>addRow("k",id,w));
+/* ══════════ وحدة التكلفة والتسعير — الجنيه السوداني ══════════ */
+const ARD={"٠":"0","١":"1","٢":"2","٣":"3","٤":"4","٥":"5","٦":"6","٧":"7","٨":"8","٩":"9"};
+
+// يحوّل أي صيغة إدخال إلى رقم: "15.000"→15000 ، "15 ألف"→15000 ، "500 الف"→500000 ، "2.5"→2.5
+function parseSDG(v){
+ if(v==null)return 0;let s=String(v).trim();if(!s)return 0;
+ for(const k in ARD)s=s.split(k).join(ARD[k]);
+ s=s.replace(/[٫,]/g,".").replace(/\s/g,"").replace(/جنيه|قرش/gi,"").toLowerCase();
+ let m=1;
+ if(s.includes("مليون")){m=1e6;s=s.split("مليون").join("");}
+ else if(s.includes("ألف")||s.includes("الف")){m=1e3;s=s.split("ألف").join("").split("الف").join("");}
+ s=s.replace(/[^0-9.]/g,"");
+ if(/^\d{1,3}(\.\d{3})+$/.test(s))return parseFloat(s.replace(/\./g,""))*m;
+ return(parseFloat(s)||0)*m;
+}
+// التنسيق بالنقاط: 5000 → "5.000 جنيه" ، 500000 → "500.000 جنيه"
+function fmtSDG(n){
+ n=Math.round(n);let s=Math.abs(n)+"",o="",c=0;
+ for(let i=s.length-1;i>=0;i--){o=s[i]+o;if(++c%3===0&&i>0)o="."+o;}
+ return(n<0?"−":"")+o+" جنيه";
+}
+// الصيغة المختصرة: "1.5 مليون" / "25 ألف"
+function shortSDG(n){
+ const f=x=>x.toFixed(x%1?1:0).replace(/\.0$/,"");
+ if(n>=1e6)return f(n/1e6)+" مليون";if(n>=1e3)return f(n/1e3)+" ألف";return ""+Math.round(n);
+}
+
+let cp_srcV="s";
+function setSrc(v){cp_srcV=v;buildOilPrices();calcCost();}
+
+function buildOilPrices(){
+ const st=state[cp_srcV],b=$("cp_oils");b.innerHTML="";
+ if(!st.rows.length){b.innerHTML="<p class='hint'>لا زيوت في هذا التبويب بعد.</p>";return;}
+ st.rows.forEach(function(r){
+  const d=document.createElement("div");d.className="row";
+  d.innerHTML='<span class="nm hint" style="flex:2;min-width:170px"></span>'+
+   '<input type="text" placeholder="سعر الكيلو" style="width:130px">'+
+   '<span class="cs pct">—</span>';
+  d.querySelector("input").addEventListener("input",calcCost);
+  b.appendChild(d);
+ });
+}
+function cpRowPrice(d){
+ const iv=d.querySelector("input").value.trim();
+ return iv?parseSDG(iv):parseSDG($("cp_oilG").value);
+}
+
+function calcCost(){
+ const st=state[cp_srcV],to=totOils(cp_srcV),res=$("cp_res"),pr=$("cp_price");
+ if(to<=0){res.innerHTML="<p class='hint'>أدخل زيوتًا في تبويب الحساب أو حمّل وصفة أولًا.</p>";pr.innerHTML="";return;}
+ // تحديث أسماء وأوزان الصفوف دون مسح الأسعار المكتوبة
+ const box=$("cp_oils");
+ [...box.children].forEach(function(d,i){const r=st.rows[i];if(!r)return;
+  d.querySelector(".nm").textContent=O(r.oil).n+" ("+(st.unit==="oz"?(r.w/28.35).toFixed(2)+" أوقية":Math.round(r.w)+" غ")+")";
+  const p=cpRowPrice(d);
+  d.querySelector(".cs").textContent=p?fmtSDG(r.w/1000*p):"—";});
+ // 1) تكلفة الزيوت
+ let oilsC=0;
+ [...box.children].forEach(function(d,i){const r=st.rows[i];if(r)oilsC+=r.w/1000*cpRowPrice(d);});
+ // 2) تكلفة القلوي
+ const sf=parseFloat($(cp_srcV+"_sf").value)||0;
+ const pur=(parseFloat($(cp_srcV+"_pur").value)||98)/100;
+ let lyG=0;st.rows.forEach(function(r){lyG+=r.w*O(r.oil).sap*(cp_srcV==="s"?1:KOHF);});
+ lyG*=(1-sf/100)/pur;
+ const lyC=lyG/1000*parseSDG($(cp_srcV==="s"?"cp_naoh":"cp_koh").value);
+ // 3) تكلفة الماء (بنفس وضعية الماء المختارة في تبويب الحساب)
+ let waG=0;
+ if(cp_srcV==="s"){const wm=$("s_wm").value,wv=parseFloat($("s_wv").value)||33;
+  waG=wm==="pct"?to*wv/100:(wm==="conc"?lyG*pur*(100/wv-1):lyG*pur*wv);}
+ else{waG=lyG*pur*(100/(parseFloat($("k_conc").value)||30)-1);}
+ const waC=waG/1000*parseSDG($("cp_water").value);
+ // 4) العطر والإضافات
+ const eo=cp_srcV==="s"?(parseFloat($("s_eo").value)||0):0;
+ const eoC=to*eo/100/1000*parseSDG($("cp_eo").value);
+ const adC=parseSDG($("cp_add").value);
+ // 5) عدد القطع والتعبئة
+ const bw=parseFloat($("cp_barW").value)||100;
+ const sug=Math.max(Math.round((to+lyG+waG)/bw),1);
+ let pcs=parseInt($("cp_pieces").value);if(!pcs||pcs<1)pcs=sug;
+ const paC=pcs*parseSDG($("cpp_piece").value);
+ const tot=oilsC+lyC+waC+eoC+adC+paC;
+ // ── العرض ──
+ const items=[["🫒 الزيوت",oilsC],["⚗️ القلوي "+(cp_srcV==="s"?"NaOH":"KOH")+" ≈"+Math.round(lyG)+"غ",lyC],
+  ["💧 الماء ≈"+Math.round(waG)+"غ",waC]];
+ if(eo>0)items.push(["🌸 العطر "+eo+"٪",eoC]);
+ if(adC>0)items.push(["✚ الإضافات",adC]);
+ if(paC>0)items.push(["📦 التعبئة ×"+pcs,paC]);
+ res.innerHTML="<h3>بنود التكلفة</h3>"+
+  items.map(function(x){return '<div class="kv"><span>'+x[0]+' <small class="hint">'+(x[1]/tot*100).toFixed(0)+'٪</small></span><b>'+fmtSDG(x[1])+"</b></div>";}).join("")+
+  '<div class="grid2" style="margin-top:10px">'+
+  '<div class="kv"><span>عدد القطع (وزن '+bw+'غ)</span><b>'+pcs+(pcs===sug?" (تلقائي)":"")+"</b></div>"+
+  '<div class="kv"><span>تكلفة القطعة الواحدة</span><b class="warn">'+fmtSDG(tot/pcs)+"</b></div>"+
+  '<div class="kv"><span>إجمالي الدفعة</span><b class="warn">'+fmtSDG(tot)+" ≈ "+shortSDG(tot)+"</b></div></div>"+
+  (oilsC<=0?'<ul class="warns" style="margin-top:8px"><li>ℹ️ لم تُدخل أسعار الزيوت بعد — أدخلها بالأعلى لتظهر التكلفة الحقيقية.</li></ul>':"");
+ // ── التسعير ──
+ const mg=parseFloat($("cp_margin").value)||0;
+ const sell=tot/pcs*(1+mg/100),rev=sell*pcs,pf=rev-tot;
+ const ws=Math.min(Math.max(parseFloat($("cp_ws").value)||0,0),90);
+ pr.innerHTML='<div class="kv" style="background:#134e4a;margin-bottom:10px">'+
+  '<span style="font-size:1.05rem"><b>🏷️ سعر بيع القطعة المقترح (+'+mg+'٪)</b></span>'+
+  '<b style="font-size:1.15rem;color:#99f6e4">'+fmtSDG(sell)+"</b></div>"+
+  '<div class="grid2">'+
+  '<div class="kv"><span>إيراد الدفعة ('+pcs+' قطعة)</span><b>'+fmtSDG(rev)+" ≈ "+shortSDG(rev)+"</b></div>"+
+  '<div class="kv"><span>الربح الصافي للدفعة</span><b class="warn">'+fmtSDG(pf)+" ≈ "+shortSDG(pf)+"</b></div>"+
+  '<div class="kv"><span>ربح القطعة</span><b>'+fmtSDG(sell-tot/pcs)+"</b></div>"+
+  '<div class="kv"><span>سعر الجملة (−'+ws+'٪)</span><b>'+fmtSDG(sell*(1-ws/100))+"</b></div></div>"+
+  '<p class="hint" style="margin-top:8px">💡 قاعدة السوق: التجزئة المعقولة عادة 2–3 أضعاف تكلفة القطعة. هامش '+mg+'٪ = مضاعفة التكلفة ×'+(1+mg/100).toFixed(2)+'.</p>';
+}
+// تحديث تلقائي عند تغيّر الدفعة (يعمل فقط إذا كان التبويب مفتوحًا)
+function refreshCost(){
+ try{
+  if(!$("tab-cost").classList.contains("on"))return;
+  if($("cp_oils").children.length!==state[cp_srcV].rows.length)buildOilPrices();
+  calcCost();
+ }catch(e){}
+}
+buildOilPrices();calcCost();
+
+/* ══════════ وحدة مولّد الملصقات — v2 مصححة ══════════ */
+const INCI={olive:"Olivate",oliveP:"Olivate",coco:"Cocoate",fcoco:"Cocoate",palm:"Palmate",
+pk:"Palm Kernelate",bab:"Babassuate",shea:"Shea Butterate",sho:"Shea Butterate",
+cb:"Cocoa Butterate",mb:"Mango Butterate",kok:"Kokum Butterate",cas:"Castorate",
+alm:"Almondate",avo:"Avocadoate",arg:"Arganiate",gp:"Grapeseedate",joba:"Jojoba Esters",
+sun:"Sunflowerseedate",sunho:"Sunflowerseedate",can:"Canolate",soy:"Soybeanate",
+rice:"Ricebranate",ses:"Sesamate",corn:"Cornate",pnut:"Peanutate",cot:"Cottonseedate",
+hemp:"Hemp Seedate",wal:"Walnutate",haz:"Hazelnutate",apr:"Apricot Kernelate",
+wg:"Wheat Germate",flax:"Flaxseedate",saff:"Safflowerate",neem:"Neem Seedate",
+tam:"Tamanuate",tal:"Tallowate",lard:"Lardate"};
+function inciOf(id,pfx){const o=O(id);return pfx+" "+(INCI[o.id]||(o.e.replace(/\s/g,"")+"ate"));}
+
+// أنماط الطباعة: تُطبع بطاقة الملصق فقط
+document.head.insertAdjacentHTML("beforeend","<style>@media print{body *{visibility:hidden!important}#lbl_card,#lbl_card *{visibility:visible!important}#lbl_card{position:absolute;inset:0;margin:auto;box-shadow:none}}</style>");
+
+function newBatch(){
+ const d=new Date(),p=x=>String(x).padStart(2,"0");
+ $("lb_batch").value="B"+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+"-"+(10+Math.floor(Math.random()*90));
+}
+function pullPrice(){
+ try{
+  const b=document.querySelector("#cp_price .kv b");
+  if(!b)throw 0;
+  $("lb_price").value=b.textContent.replace("جنيه","").trim();
+  alert("📥 تم سحب السعر المقترح: "+$("lb_price").value);
+ }catch(e){alert("⚠️ افتح تبويب 💰 واحسب التكلفة أولًا ثم اسحب السعر.");}
+}
+function fD(d){const p=x=>String(x).padStart(2,"0");return p(d.getDate())+"/"+p(d.getMonth()+1)+"/"+d.getFullYear();}
+
+function buildLabel(){
+ const t=$("lb_src").value,st=state[t],to=totOils(t);
+ if(to<=0){alert("⚠️ لا توجد زيوت في تبويب "+(t==="s"?"الصلب":"السائل")+" — حمّل وصفة أولًا.");return;}
+ const solid=t==="s",pfx=solid?"Sodium":"Potassium";
+ // المكونات مرتبة تنازليًا بالنسبة
+ const ing=[...st.rows].map(r=>({id:r.oil,p:r.w/to*100})).sort((a,b)=>b.p-a.p);
+ const ar=ing.map(x=>O(x.id).n+" ("+Math.round(x.p)+"٪)").join(" • ");
+ const en=ing.map(x=>inciOf(x.id,pfx)).join(", ")+", Glycerin"+(solid?"":", Aqua");
+ const sc=$("lb_scent").value.trim();
+ const wt=parseFloat($("lb_wt").value)||100;
+ const d=new Date($("lb_date").value||Date.now());
+ const shelf=parseInt($("lb_shelf").value)||12;
+ const ex=new Date(d);ex.setMonth(ex.getMonth()+shelf);
+ const price=parseSDG($("lb_price").value);
+ const typeName={hand:"صابون طبيعي مصنوع يدويًا",lux:"صابون فاخر بالزيوت النقية",wash:"صابون غسيل متعدد الاستخدام"}[$("lb_type").value];
+ const unit=solid?"قطعة":"زجاجة";
+ let h="";
+ h+='<div class="card noprint"><button class="b" onclick="window.print()">🖨️ طباعة الملصق</button> ';
+ h+='<span class="hint">ستُطبع بطاقة الملصق فقط — مقاس مناسب لـ A6/A5.</span></div>';
+ h+='<div class="card" id="lbl_card" style="background:#fff;color:#111;font-family:Tahoma">';
+  // الرأس
+ h+='<div style="text-align:center;border-bottom:3px double #111;padding-bottom:8px;margin-bottom:8px">';
+ h+='<div style="font-size:.95rem;color:#555">'+esc($("lb_brand").value)+'</div>';
+ h+='<div style="font-size:1.45rem;font-weight:bold">'+esc($("lb_name").value)+(sc?" — "+esc(sc):"")+'</div>';
+ h+='<div style="font-size:.9rem;color:#333">'+typeName+'</div></div>';
+ // الجسم
+ h+='<div style="display:flex;gap:14px;flex-wrap:wrap">';
+ h+='<div style="flex:2;min-width:230px">';
+ h+='<div style="font-weight:bold;color:#0f766e;margin-bottom:4px">المكونات:</div>';
+ h+='<div style="font-size:.85rem;line-height:1.8">'+ar+(sc?"، عطر "+esc(sc):"")+'</div>';
+ h+='<div dir="ltr" style="font-size:.72rem;color:#444;margin-top:5px;text-align:left">'+en+(sc?", Parfum":"")+'</div></div>';
+ h+='<div style="flex:1;min-width:150px;font-size:.85rem">';
+ h+='<div style="background:#f1f5f9;border-radius:8px;padding:6px 10px;margin-bottom:5px">مناسب لـ: '+esc($("lb_skin").value)+'</div>';
+ h+='<div style="background:#f1f5f9;border-radius:8px;padding:6px 10px;margin-bottom:5px">الوزن الصافي: <b>'+wt+' غ ±5٪</b></div>';
+ if(price>0)h+='<div style="background:#134e4a;color:#99f6e4;border-radius:8px;padding:6px 10px">السعر: <b>'+fmtSDG(price)+'</b></div>';
+ h+='</div></div>';
+ // التذييل
+ h+='<div style="border-top:1px solid #999;margin-top:8px;padding-top:6px;display:flex;justify-content:space-between;flex-wrap:wrap;font-size:.75rem;color:#444">';
+ h+='<span>🏭 '+esc($("lb_maker").value)+( $("lb_contact").value?" — "+esc($("lb_contact").value):"")+'</span>';
+ h+='<span>تشغيلة: '+esc($("lb_batch").value)+'</span></div>';
+ h+='<div style="display:flex;justify-content:space-between;font-size:.75rem;color:#444;margin-top:4px">';
+ h+='<span>📅 الإنتاج: '+fD(d)+'</span><span>⏳ ينتهي: '+fD(ex)+' ('+shelf+' شهرًا)</span></div>';
+ h+='<div style="text-align:center;font-size:.68rem;color:#777;margin-top:6px">صابون مصبوغ طبيعيًا — يحفظ بعيدًا عن الماء الراكد وبين الاستخدامات • '+unit+' واحدة</div>';
+ h+='</div>';
+ $("lbl_out").innerHTML=h;
+ document.querySelector("#lbl_card").scrollIntoView({behavior:"smooth"});
+}
+function esc(s){return String(s==null?"":s).replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+newBatch();
+$("lb_date").value=new Date().toISOString().slice(0,10);
+
+</script>
+</body>
+</html>
