@@ -755,6 +755,53 @@ function esc(s){return String(s==null?"":s).replace(/</g,"&lt;").replace(/>/g,"&
 newBatch();
 $("lb_date").value=new Date().toISOString().slice(0,10);
 
+ // 1. منع النقر بالزر الأيمن (قائمة السياق)
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    alert("معذرة، قائمة النقر الأيمن معطلة لحماية الكود.");
+});
+
+// 2. منع اختصارات لوحة المفاتيح الخطيرة
+document.addEventListener('keydown', function(e) {
+    // منع F12 (أداة المطور)
+    if (e.key === 'F12') {
+        e.preventDefault();
+        alert("أداة المطور معطلة.");
+        return false;
+    }
+    // منع Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U (عرض المصدر)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) {
+        e.preventDefault();
+        alert("هذا الاختصار معطل.");
+        return false;
+    }
+    if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+        alert("عرض المصدر معطل.");
+        return false;
+    }
+    // منع النسخ (Ctrl+C) واللصق (Ctrl+V) والقص (Ctrl+X)
+    if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'x')) {
+        e.preventDefault();
+        alert("عمليات النسخ واللصق معطلة في هذه الصفحة.");
+        return false;
+    }
+    // منع حفظ الصفحة (Ctrl+S)
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        alert("حفظ الصفحة معطل.");
+        return false;
+    }
+});
+
+// 3. منع تحديد النص (حتى لا يحدد النص وينسخه)
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+});
+
+// 4. منع سحب الملفات إلى الصفحة (لمنع محاولات الحقن)
+document.addEventListener('dragover', function(e) { e.preventDefault(); });
+document.addEventListener('drop', function(e) { e.preventDefault(); });
 </script>
 </body>
 </html>
