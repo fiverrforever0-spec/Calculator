@@ -4,58 +4,192 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حاسبة ضاعف ربحك – النظام المتكامل لإدارة إنتاج أكياس البلاستيك بالسودان</title>
+    <!-- خط القاهرة الاحترافي -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #1e3c72;
+            --primary-dark: #122548;
+            --secondary: #2a5298;
+            --accent: #f39c12;
+            --accent-hover: #e67e22;
+            --bg: #f4f7fb;
+            --surface: #ffffff;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 35px -10px rgba(30, 60, 114, 0.15);
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; color: #333; line-height: 1.7; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        body { font-family: 'Cairo', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 880px; margin: 0 auto; padding: 30px 20px; }
 
-        /* Header */
-        .hero { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; padding: 40px 25px; border-radius: 20px; text-align: center; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .hero img { max-width: 180px; margin-bottom: 20px; }
-        .hero h1 { font-size: 38px; margin-bottom: 10px; font-weight: 800; }
-        .hero .subtitle { font-size: 20px; opacity: 0.95; margin-bottom: 15px; font-weight: bold; }
-        .hero p { font-size: 17px; opacity: 0.95; margin-bottom: 20px; }
-        .btn-primary { background: #f39c12; color: #fff; padding: 14px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; display: inline-block; transition: 0.3s; box-shadow: 0 5px 15px rgba(243,156,18,0.4); }
-        .btn-primary:hover { background: #e67e22; transform: translateY(-2px); }
+        /* Hero Section */
+        .hero { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+            color: #fff; 
+            padding: 55px 30px; 
+            border-radius: 24px; 
+            text-align: center; 
+            margin-bottom: 35px; 
+            box-shadow: var(--shadow-lg); 
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero img { max-width: 160px; margin-bottom: 20px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2)); }
+        .hero h1 { font-size: 36px; margin-bottom: 12px; font-weight: 900; letter-spacing: -0.5px; }
+        .hero .subtitle { font-size: 20px; color: #e2e8f0; margin-bottom: 15px; font-weight: 700; }
+        .hero p { font-size: 16px; color: #cbd5e0; margin-bottom: 25px; max-width: 650px; margin-left: auto; margin-right: auto; }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); 
+            color: #fff; 
+            padding: 16px 36px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: 800; 
+            font-size: 18px; 
+            display: inline-flex; 
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease; 
+            box-shadow: 0 8px 20px rgba(243, 156, 18, 0.35); 
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(243, 156, 18, 0.45); }
 
-        /* Cards */
-        .section { background: #fff; border-radius: 16px; padding: 30px; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
-        h2 { color: #1e3c72; margin-bottom: 20px; font-size: 28px; border-bottom: 3px solid #f39c12; display: inline-block; padding-bottom: 5px; }
-        h3 { color: #2a5298; margin: 15px 0 10px; }
-        .profit-grid { display: flex; flex-wrap: wrap; gap: 20px; margin: 25px 0; }
-        .profit-item { flex: 1 1 150px; background: #eef2f9; border-radius: 12px; padding: 20px; text-align: center; }
-        .profit-item span { display: block; font-size: 14px; color: #555; }
-        .profit-item strong { font-size: 26px; color: #0b3d91; }
-        .highlight { color: #e67e22; font-weight: bold; }
-        .steps { list-style: none; padding-left: 0; }
-        .steps li { background: #f8f9fc; margin: 10px 0; padding: 15px; border-radius: 8px; border-right: 5px solid #f39c12; }
-        .steps li strong { color: #1e3c72; }
-        .vip-box { background: #fff9e6; border: 1px solid #f1c40f; border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .vip-badge { background: #f39c12; color: #fff; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 14px; }
-        .contact { background: #f0f4ff; border-radius: 12px; padding: 20px; text-align: center; }
-        .btn-whatsapp { background: #25d366; color: #fff; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin: 5px; }
-        .btn-tiktok { background: #000000; color: #fff; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin: 5px; }
-        .btn-facebook { background: #1877f2; color: #fff; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin: 5px; }
-        .footer { text-align: center; font-size: 13px; margin-top: 30px; color: #777; }
-        @media (max-width: 600px) { .hero h1 { font-size: 28px; } }
+        /* Sections & Cards */
+        .section { background: var(--surface); border-radius: 20px; padding: 35px; margin-bottom: 30px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
+        h2 { color: var(--primary); margin-bottom: 20px; font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #edf2f7; padding-bottom: 12px; }
+        h3 { color: var(--secondary); margin: 25px 0 15px; font-size: 19px; font-weight: 700; }
+
+        /* Profit Grid */
+        .profit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px; margin: 25px 0; }
+        .profit-item { 
+            background: #f8fafc; 
+            border: 1px solid #edf2f7; 
+            border-radius: 16px; 
+            padding: 20px 15px; 
+            text-align: center; 
+            transition: 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .profit-item::top-bar { content: ''; position: absolute; top:0; right:0; left:0; height: 4px; background: var(--secondary); }
+        .profit-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #cbd5e0; }
+        .profit-item span { display: block; font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; }
+        .profit-item strong { font-size: 22px; color: var(--primary); font-weight: 800; }
+        .highlight { color: #d97706; font-weight: 800; background: #fef3c7; padding: 2px 8px; border-radius: 6px; }
+
+        /* Modern Table */
+        .table-responsive { overflow-x: auto; margin: 20px 0; border-radius: 14px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; text-align: right; background: var(--surface); }
+        th { background: var(--primary); color: #fff; padding: 14px 16px; font-weight: 700; font-size: 15px; }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text-main); }
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+
+        /* Step List Styling */
+        ol.steps-list { list-style: none; counter-reset: step-counter; padding: 0; margin: 20px 0; }
+        ol.steps-list > li { 
+            position: relative; 
+            padding: 18px 20px 18px 20px; 
+            padding-right: 65px;
+            background: #f8fafc; 
+            border-radius: 14px; 
+            margin-bottom: 15px; 
+            border: 1px solid var(--border);
+            font-size: 15px;
+        }
+        ol.steps-list > li::before { 
+            counter-increment: step-counter; 
+            content: counter(step-counter); 
+            position: absolute; 
+            right: 18px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: var(--primary); 
+            color: white; 
+            font-weight: 800; 
+            width: 34px; 
+            height: 34px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 14px; 
+        }
+
+        /* VIP Box */
+        .vip-box { 
+            background: linear-gradient(135deg, #fffdfa 0%, #fef3c7 100%); 
+            border: 2px dashed #f59e0b; 
+            border-radius: 18px; 
+            padding: 25px; 
+            margin: 25px 0; 
+        }
+        .vip-badge { background: #f59e0b; color: #fff; padding: 4px 14px; border-radius: 20px; font-weight: 800; font-size: 13px; display: inline-block; margin-bottom: 10px; }
+        
+        .bullet-list { list-style: none; padding: 0; margin-top: 10px; }
+        .bullet-list li { padding: 6px 0; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+        .bullet-list li::before { content: '✓'; color: #d97706; font-weight: 900; }
+
+        .note-box { background: #eff6ff; border-right: 4px solid #3b82f6; padding: 16px; border-radius: 10px; margin-top: 20px; font-size: 14px; color: #1e40af; }
+
+        /* Contact Section */
+        .contact { background: linear-gradient(135deg, #f0f4ff 0%, #e6eeff 100%); border-radius: 20px; padding: 35px; text-align: center; border: 1px solid #d0e0ff; }
+        .social-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px; }
+        .btn-social { padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 15px; color: #fff; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--shadow-sm); }
+        .btn-whatsapp { background: #25d366; }
+        .btn-whatsapp:hover { background: #1da851; transform: translateY(-2px); }
+        .btn-tiktok { background: #111111; }
+        .btn-tiktok:hover { background: #333333; transform: translateY(-2px); }
+        .btn-facebook { background: #1877f2; }
+        .btn-facebook:hover { background: #0c63d4; transform: translateY(-2px); }
+
+        .footer { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 40px; padding-bottom: 20px; }
+
+        @media (max-width: 640px) {
+            .hero { padding: 40px 20px; }
+            .hero h1 { font-size: 26px; }
+            .hero .subtitle { font-size: 17px; }
+            .section { padding: 22px; }
+            ol.steps-list > li { padding-right: 55px; font-size: 14px; }
+            ol.steps-list > li::before { width: 28px; height: 28px; right: 14px; font-size: 12px; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
 
-    <!-- Hero -->
+    <!-- Hero Header -->
     <div class="hero">
         <img src="logo.png" alt="ضاعف ربحك">
         <h1>حاسبة ضاعف ربحك</h1>
         <p class="subtitle">النظام المتكامل لإدارة إنتاج أكياس البلاستيك بالسودان</p>
-        <p>أداة ذكية لحساب جدوى مشروع <strong>نصف خط إنتاج أكياس بلاستيك منزلي</strong></p>
-        <a href="https://fiverrforever0-spec.github.io/Calculator/bbcal.html" class="btn-primary" target="_blank">🚀 جرب الحاسبة الآن</a>
+        <p>أداة ذكية لحساب جدوى مشروع <strong>نصف خط إنتاج أكياس بلاستيك منزلي</strong> بدقة متناهية.</p>
+        <a href="https://fiverrforever0-spec.github.io/Calculator/bbcal.html" class="btn-primary" target="_blank">
+            <span>🚀 جرب الحاسبة الآن</span>
+        </a>
     </div>
 
     <!-- قسم لماذا المشروع ناجح -->
     <div class="section">
         <h2>🔍 ليه مشروع نص خط الأكياس بيكسب؟</h2>
         <p>كتير من الشباب وربات البيوت بدأوا المشروع ده من البيت وحققوا دخل ثابت. السر مش في الآلة فقط، السر في <strong>الأرقام</strong> اللي بتظبطها. الأرقام دي مشتهاش من السوق السوداني (مايو 2026):</p>
+        
         <div class="profit-grid">
             <div class="profit-item">
                 <span>📅 الربح اليومي</span>
@@ -74,7 +208,7 @@
                 <strong>4.6%</strong>
             </div>
         </div>
-        <p><em>الأرقام دي باستخدام الخام البيور، لكن مع <strong>نسخة VIP</strong>، بتكشف أسرار الخلطات فترتفع أرباحك لأكتر من <span class="highlight">390 ألف ج.س في اليوم</span>!</em></p>
+        <p><em>الأرقام دي باستخدام الخام البيور، لكن مع <strong class="highlight">نسخة VIP</strong>، بتكشف أسرار الخاطات فترتفع أرباحك لأكتر من <span class="highlight">390 ألف ج.س في اليوم</span>!</em></p>
     </div>
 
     <!-- دليل الاستخدام السريع -->
@@ -82,56 +216,63 @@
         <h2>📖 كيف تستخدم حاسبة "ضاعف ربحك"؟</h2>
         
         <h3>🆚 الفرق بين الوضع المجاني و VIP</h3>
-        <table style="width:100%; border-collapse: collapse; margin: 15px 0;">
-            <tr style="background:#1e3c72; color:#fff;">
-                <th style="padding:10px;">ما يمكنك فعله</th>
-                <th style="padding:10px;">مجاني</th>
-                <th style="padding:10px;">VIP</th>
-            </tr>
-            <tr style="background:#f8f9fc;">
-                <td style="padding:10px;">رؤية الأرباح التقديرية</td>
-                <td style="padding:10px; text-align:center;">✅</td>
-                <td style="padding:10px; text-align:center;">✅</td>
-            </tr>
-            <tr>
-                <td style="padding:10px;">تغيير نوع الخام</td>
-                <td style="padding:10px; text-align:center;">❌ (بيور فقط)</td>
-                <td style="padding:10px; text-align:center;">✅ (بيور/مخلوط)</td>
-            </tr>
-            <tr style="background:#f8f9fc;">
-                <td style="padding:10px;">تعديل الأسعار والتكاليف</td>
-                <td style="padding:10px; text-align:center;">❌</td>
-                <td style="padding:10px; text-align:center;">✅ جميع الحقول</td>
-            </tr>
-            <tr>
-                <td style="padding:10px;">توصيات الخبير</td>
-                <td style="padding:10px; text-align:center;">❌</td>
-                <td style="padding:10px; text-align:center;">✅ وصفات ربحية</td>
-            </tr>
-            <tr style="background:#f8f9fc;">
-                <td style="padding:10px;">حساب عائد السكراب</td>
-                <td style="padding:10px; text-align:center;">❌</td>
-                <td style="padding:10px; text-align:center;">✅</td>
-            </tr>
-        </table>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ما يمكنك فعله</th>
+                        <th style="text-align:center;">مجاني</th>
+                        <th style="text-align:center;">VIP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>رؤية الأرباح التقديرية</td>
+                        <td style="text-align:center;">✅</td>
+                        <td style="text-align:center;">✅</td>
+                    </tr>
+                    <tr>
+                        <td>تغيير نوع الخام</td>
+                        <td style="text-align:center; color:#e53e3e; font-size:13px;">❌ (بيور فقط)</td>
+                        <td style="text-align:center;">✅ (بيور/مخلوط)</td>
+                    </tr>
+                    <tr>
+                        <td>تعديل الأسعار والتكاليف</td>
+                        <td style="text-align:center; color:#e53e3e;">❌</td>
+                        <td style="text-align:center;">✅ جميع الحقول</td>
+                    </tr>
+                    <tr>
+                        <td>توصيات الخبير الذكية</td>
+                        <td style="text-align:center; color:#e53e3e;">❌</td>
+                        <td style="text-align:center;">✅ وصفات ربحية</td>
+                    </tr>
+                    <tr>
+                        <td>حساب عائد السكراب (الهالك)</td>
+                        <td style="text-align:center; color:#e53e3e;">❌</td>
+                        <td style="text-align:center;">✅</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <h3>🚶‍♂️ خطوات الاستخدام (للوضعين)</h3>
-        <ol class="steps">
+        <ol class="steps-list">
             <li><strong>🔗 افتح الحاسبة:</strong> اضغط على زر "جرب الحاسبة الآن" في أي مكان بالصفحة. ستفتح في نافذة جديدة.</li>
-            <li><strong>👀 استعرض النتائج:</strong> في الوضع المجاني، ستظهر الأرباح باللون الأزرق، مع إعدادات افتراضية. العب بالأرقام التي يمكنك تغييرها.</li>
+            <li><strong>👀 استعرض النتائج:</strong> في الوضع المجاني، ستظهر الأرباح باللون الأزرق مع إعدادات افتراضية. العب بالأرقام المتاحة.</li>
             <li><strong>🔐 للترقية إلى VIP:</strong>
-                <ul style="margin-top:8px; list-style: '○ '; padding-right: 20px;">
-                    <li>اضغط على زر <strong>"توليد بصمة جهازي"</strong> الموجود أعلى الحاسبة. سيظهر لك كود طويل – انسخه.</li>
-                    <li>قم بالدفع على حساب <strong>2597414</strong>.</li>
-                    <li>تواصل معنا بالإيصال والبصمة ورقم هاتفك، واستلم كود التفعيل.</li>
-                    <li>أدخل رقم هاتفك والكود ثم اضغط <strong>"تفعيل VIP"</strong> – ستنفتح جميع الحقول فورًا.</li>
+                <ul style="margin-top:10px; padding-right: 15px; color:#4a5568;">
+                    <li>اضغط على زر <strong>"توليد بصمة جهازي"</strong> الموجود أعلى الحاسبة. سيظهر لك كود فريد – قم بنسخه.</li>
+                    <li>قم بالدفع على حساب بنك الخرطوم: <strong>2597414</strong>.</li>
+                    <li>تواصل معنا بالإيصال والبصمة ورقم هاتفك، واستلم كود التفعيل الخاص بك.</li>
+                    <li>أدخل رقم هاتفك والكود ثم اضغط <strong>"تفعيل VIP"</strong> – ستنفتح جميع الحقول فوراً.</li>
                 </ul>
             </li>
-            <li><strong>🧪 جرّب سيناريوهاتك:</strong> بعد التفعيل، انتقل إلى قسم <span class="vip-badge">VIP</span> (يظهر تلقائيًا)، وغيّر نوع الخام، المصاريف، الإيجار... وشاهد كيف يتغير صافي ربحك.</li>
-            <li><strong>💡 استخدم توصيات الخبير:</strong> اختر من القائمة المنسدلة "توصية الخبير" وصفة جاهزة، وستمتلئ الحقول بأفضل الممارسات الربحية.</li>
+            <li><strong>🧪 جرّب سيناريوهاتك:</strong> بعد التفعيل، انتقل إلى قسم VIP، وغيّر نوع الخام، المصاريف، والإيجار وشاهد النتيجة المباشرة.</li>
+            <li><strong>💡 استخدم توصيات الخبير:</strong> اختر من القائمة المنسدلة "توصية الخبير" وصفة جاهزة لتوفير الوقت والجهد.</li>
         </ol>
-        <div style="background:#eaf2f8; padding:15px; border-radius:10px; margin-top:20px;">
-            ⚠️ <strong>تذكير:</strong> الأداة تعمل حتى بدون إنترنت بعد أول تحميل، وترخيص VIP يرتبط بجهازك فقط، مما يوفر لك الخصوصية والأمان.
+
+        <div class="note-box">
+            ⚠️ <strong>تذكير مهم:</strong> الأداة تعمل حتى بدون إنترنت بعد أول تحميل، وترخيص VIP مرتبط بجهازك لضمان الخصوصية والأمان.
         </div>
     </div>
 
@@ -139,42 +280,44 @@
     <div class="section">
         <h2>👑 VIP – اقلب الطاولة على الخسارة</h2>
         <div class="vip-box">
-            <span class="vip-badge">VIP</span> <strong>الميزات المدفوعة:</strong>
-            <ul style="margin-top:10px; list-style: '✓ '; padding-right: 20px;">
+            <span class="vip-badge">مميزات اشتراك VIP</span>
+            <ul class="bullet-list">
                 <li>اختيار نوع الخام (بيور / مخلوط) مع سعر مخصص.</li>
                 <li>تعديل وزن الجوال، سعر البيع، وطريقة البيع (جوالات أو كيلو).</li>
                 <li>التحكم في نسبة الهالك والتكاليف اليومية (عامل، كهرباء، تعبئة).</li>
-                <li>إدخال الإيجار الشهري وأيام العمل.</li>
-                <li>توصيات الخبير – وصفات ربحية جاهزة.</li>
-                <li>حساب عائد السكراب (الهالك).</li>
-                <li>مقارنة ربحية البيور والمخلوط مباشرة.</li>
-                <li>الترخيص مرتبط بجهازك فقط، ويعمل حتى بدون إنترنت بعد التفعيل.</li>
+                <li>إدخال الإيجار الشهري وأيام العمل المخصصة.</li>
+                <li>توصيات الخبير – وصفات ربحية واستراتيجيات سوق جاهزة.</li>
+                <li>حساب عائد السكراب (الهالك) والاستفادة منه.</li>
+                <li>مقارنة ربحية البيور والمخلوط جنبًا إلى جنب.</li>
+                <li>ترخيص دائم مرتبط بجهازك ويعمل أوفلاين.</li>
             </ul>
         </div>
+
         <h3>💳 كيف تحصل على VIP؟</h3>
-        <ol class="steps">
-            <li><strong>الخطوة ١:</strong> افتح <a href="https://fiverrforever0-spec.github.io/Calculator/bbcal.html" target="_blank">رابط الحاسبة</a> واضغط على زر <strong>"توليد بصمة جهازي"</strong> – ستظهر سلسلة أحرف خاصة بجهازك. انسخها.</li>
-            <li><strong>الخطوة ٢:</strong> قم بتحويل قيمة الاشتراك إلى الحساب البنكي: <strong>2597414</strong> (بنك السودان).</li>
-            <li><strong>الخطوة ٣:</strong> تواصل معنا عبر الواتساب أو التيك توك أو فيسبوك (الروابط أدناه) وأرسل: الإيصال + البصمة + رقم هاتفك الذي ستستخدمه في الحاسبة.</li>
-            <li><strong>الخطوة ٤:</strong> سيصلك كود تفعيل فريد. أدخله مع رقم هاتفك في الحاسبة، ثم اضغط "تفعيل VIP". ستنفتح لك جميع الميزات فورًا وإلى الأبد على جهازك.</li>
+        <ol class="steps-list">
+            <li><strong>الخطوة ١:</strong> افتح <a href="https://fiverrforever0-spec.github.io/Calculator/bbcal.html" target="_blank" style="color:var(--secondary); font-weight:700;">رابط الحاسبة</a> واضغط على زر <strong>"توليد بصمة جهازي"</strong> ثم انسخ الكود.</li>
+            <li><strong>الخطوة ٢:</strong> قم بتحويل قيمة الاشتراك إلى الحساب البنكي: <strong>2597414</strong> (بنك الخرطوم).</li>
+            <li><strong>الخطوة ٣:</strong> تواصل معنا عبر وسائل التواصل (الروابط أدناه) وأرسل: الإيصال + البصمة + رقم الهاتف.</li>
+            <li><strong>الخطوة ٤:</strong> سيصلك كود التفعيل. أدخله في الحاسبة لتفتح لك كافة الميزات فورًا على جهازك.</li>
         </ol>
-        <p><em>ملاحظة: الكود مرتبط بجهازك ورقم هاتفك، فلا يمكن استخدامه على أجهزة أخرى، مما يضمن أمان اشتراكك.</em></p>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:10px;"><em>ملاحظة: الكود مرتبط بجهازك ورقم هاتفك لضمان أمان اشتراكك.</em></p>
     </div>
 
     <!-- معلومات التواصل -->
     <div class="contact">
-        <h3>📞 تواصل معنا للدعم أو لطلب كود التفعيل</h3>
-        <p>بعد إتمام الدفع على حساب <strong>2597414</strong>، أرسل الإيصال والبصمة ورقم الهاتف إلى:</p>
-        <p>
-            <a href="https://wa.me/249962411479" class="btn-whatsapp" target="_blank">واتساب</a>
-            <a href="https://www.tiktok.com/@isamabbadi" class="btn-tiktok" target="_blank">تيك توك</a>
-            <a href="https://www.facebook.com/fiverrforever" class="btn-facebook" target="_blank">فيسبوك</a>
-        </p>
-        <p style="margin-top:15px;">أو ابحث عنا على فيسبوك: <strong>@fiverrforever</strong></p>
+        <h3 style="margin-top:0; color:var(--primary);">📞 تواصل معنا للدعم أو لطلب كود التفعيل</h3>
+        <p style="font-size:15px; color:#4a5568;">بعد إتمام الدفع على حساب <strong>2597414</strong>، أرسل البيانات عبر إحدى القنوات التالية:</p>
+        
+        <div class="social-buttons">
+            <a href="https://wa.me/249962411479" class="btn-social btn-whatsapp" target="_blank">📱 واتساب</a>
+            <a href="https://www.tiktok.com/@isamabbadi" class="btn-social btn-tiktok" target="_blank">🎵 تيك توك</a>
+            <a href="https://www.facebook.com/fiverrforever" class="btn-social btn-facebook" target="_blank">📘 فيسبوك</a>
+        </div>
+        <p style="margin-top:20px; font-size:14px; color:#4a5568;">أو ابحث عنا مباشرة على فيسبوك: <strong>@fiverrforever</strong></p>
     </div>
 
     <div class="footer">
-        © 2025 حاسبة ضاعف ربحك – النظام المتكامل لإدارة إنتاج أكياس البلاستيك بالسودان.
+        © 2026 حاسبة ضاعف ربحك – جميع الحقوق محفوظة لـ إستثمارك للحلول الذكية.
     </div>
 
 </div>
