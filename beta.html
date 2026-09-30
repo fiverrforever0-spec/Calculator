@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17324d">
+<meta name="description" content="شكراً لكل من شارك في تجربة حاسبة الصابون الذكية. تعرف على المرحلة القادمة ومزايا المنصة وتواصل مع إستثمارك.">
+<title>انتهت المرحلة التجريبية | حاسبة الصابون الذكية</title>
+<style>
+:root{--cream:#f9f3ea;--paper:#fffdf9;--teal:#208f8c;--teal2:#2a9d8f;--orange:#f4a261;--gold:#e9c46a;--navy:#17324d;--ink:#243447;--muted:#687586;--line:#eadfce;--shadow:0 16px 45px rgba(23,50,77,.10);--radius:24px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Tahoma,"Segoe UI",Arial,sans-serif;line-height:1.8}a{text-decoration:none;color:inherit}.wrap{width:min(1080px,calc(100% - 28px));margin:auto}.topbar{padding:14px 0}.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy)}.brandmark{width:42px;height:42px;border-radius:13px;background:var(--teal);display:grid;place-items:center;color:#fff;font-size:22px;box-shadow:0 8px 20px rgba(32,143,140,.22)}
+.hero{position:relative;overflow:hidden;padding:64px 0 50px;background:linear-gradient(135deg,#fffaf2 0%,#f8f0e5 55%,#eaf6f4 100%);border-bottom:1px solid var(--line)}.hero:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:rgba(42,157,143,.10);left:-120px;top:-130px}.hero:after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(244,162,97,.12);right:-80px;bottom:-110px}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;position:relative;z-index:1}.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#e4f4f1;color:#167572;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:800}.hero h1{font-size:clamp(34px,5vw,60px);line-height:1.16;margin:17px 0 16px;color:var(--navy);letter-spacing:-1.5px}.hero h1 span{color:var(--teal)}.hero .lead{font-size:19px;max-width:680px;color:#455568;margin:0 0 24px}.cta-row{display:flex;gap:10px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:11px 20px;border-radius:14px;font-weight:800;border:1px solid transparent}.btn-primary{background:var(--navy);color:#fff;box-shadow:0 10px 22px rgba(23,50,77,.18)}.btn-secondary{background:#fff;border-color:var(--line);color:var(--navy)}
+.card-note{background:rgba(255,253,249,.86);border:1px solid rgba(234,223,206,.95);border-radius:26px;padding:24px;box-shadow:var(--shadow)}.note-icon{font-size:42px}.card-note h3{margin:5px 0 8px;color:var(--navy);font-size:21px}.card-note p{margin:0;color:var(--muted);font-size:15px}.section{padding:62px 0}.section-head{text-align:center;max-width:760px;margin:0 auto 32px}.kicker{color:var(--teal);font-size:13px;font-weight:900;letter-spacing:.3px}.section h2{font-size:clamp(27px,4vw,40px);line-height:1.25;color:var(--navy);margin:8px 0 10px}.section-head p{margin:0;color:var(--muted);font-size:17px}.thank{background:var(--navy);color:#fff}.thank .section-head p{color:#dbe5ed}.thank .kicker{color:var(--gold)}.quote{max-width:850px;margin:26px auto 0;padding:24px 28px;border:1px solid rgba(255,255,255,.16);border-radius:20px;background:rgba(255,255,255,.06);text-align:center;font-size:20px}.quote b{color:var(--gold)}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.feature{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 8px 26px rgba(23,50,77,.06);min-height:190px}.feature .ico{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:#e8f5f3;font-size:22px;margin-bottom:12px}.feature:nth-child(3n) .ico{background:#fff0e4}.feature h3{font-size:18px;margin:0 0 6px;color:var(--navy)}.feature p{font-size:14px;color:var(--muted);margin:0}.flow{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:center;margin-top:28px}.flow-item{text-align:center}.flow-icon{height:52px;width:52px;margin:auto;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid var(--teal);font-size:22px}.flow b{display:block;font-size:12px;color:var(--navy);margin-top:7px}.arrow{text-align:center;color:var(--orange);font-size:24px;font-weight:900}
+.next{background:#f0e7d9}.next-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.next-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:25px}.next-card h3{margin:0 0 8px;color:var(--navy)}.next-card ul{margin:0;padding-right:20px;color:var(--muted)}.next-card li{margin:7px 0}.status{display:inline-block;background:#fff1df;color:#995a17;border:1px solid #f0d1aa;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800;margin-bottom:12px}
+.contact{background:linear-gradient(135deg,var(--teal),#176d78);color:#fff;border-radius:30px;padding:42px;box-shadow:var(--shadow);text-align:center}.contact h2{color:#fff;margin-top:0}.contact p{color:#e3f4f2;max-width:650px;margin:0 auto 22px}.wa{background:#fff;color:#176d78}.small{font-size:12px;color:#d7eceb;margin-top:14px}.footer{padding:28px 0 38px;text-align:center;color:#74808d;font-size:13px}.footer strong{color:var(--navy)}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.features{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:repeat(4,1fr)}.arrow{display:none}.next-grid{grid-template-columns:1fr}.hero{padding-top:44px}}
+@media(max-width:560px){.wrap{width:min(100% - 20px,1080px)}.hero h1{font-size:36px}.hero .lead{font-size:16px}.section{padding:45px 0}.features{grid-template-columns:1fr}.feature{min-height:auto}.flow{grid-template-columns:repeat(2,1fr);gap:14px}.quote{font-size:17px;padding:19px}.contact{padding:30px 20px}.btn{width:100%}.cta-row{display:grid}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap"><div class="brand"><div class="brandmark">🧼</div><div>إستثمارك للحلول الاستثمارية الذكية</div></div></div></header>
+
+<main>
+<section class="hero">
+<div class="wrap hero-grid">
+<div>
+<div class="eyebrow">✓ انتهت المرحلة التجريبية</div>
+<h1>شكراً لأنك كنت جزءاً من <span>تجربة الحاسبة</span>.</h1>
+<p class="lead">خلال الفترة التجريبية، جربتوا الحاسبة معانا، وشوفنا طريقة الاستخدام، والملاحظات، والحاجات البتحتاج تطوير. التجربة انتهت… لكن الشغل الحقيقي بدأ.</p>
+<div class="cta-row"><a class="btn btn-primary" href="#next">شوف المرحلة الجاية ↓</a><a class="btn btn-secondary" href="#contact">عايز تكمل؟ تواصل معانا</a></div>
+</div>
+<div class="card-note"><div class="note-icon">🧪 → 🧼 → 📊</div><h3>البيتا كانت للتجربة… ما كانت النهاية</h3><p>الهدف كان نختبر الفكرة في الاستخدام الحقيقي، ونشوف هل الأداة فعلاً بتساعد صاحب مشروع الصابون ولا مجرد حاسبة وصفات.</p></div>
+</div>
+</section>
+
+<section class="section thank">
+<div class="wrap">
+<div class="section-head"><div class="kicker">رسالة للمجربين</div><h2>إنتو ما كنتوا مستخدمين وبس.</h2><p>إنتو ساعدتونا نشوف الحاسبة وهي بتُستخدم في الواقع، وده الفرق بين برنامج معمول على الورق وأداة بتتبني من احتياج أصحاب المشاريع.</p></div>
+<div class="quote">كل ملاحظة، كل تجربة، وكل حاجة ظهرت أثناء الاستخدام ساعدتنا نفهم سؤال أهم: <b>كيف نخلي صناعة الصابون تمشي كنظام… ما كحسابات متفرقة؟</b></div>
+</div>
+</section>
+
+<section class="section" id="features">
+<div class="wrap">
+<div class="section-head"><div class="kicker">شنو بقت عليه الحاسبة؟</div><h2>من «احسب الخلطة» إلى «أدير الدفعة»</h2><p>الخدمات التي كانت ضمن التجربة وما تبني عليها النظام الآن، في مسار واحد.</p></div>
+<div class="features">
+<div class="feature"><div class="ico">🧼</div><h3>الصابون الصلب</h3><p>حساب وزن الدفعة، الزيوت، الصودا والماء، Superfat، وقراءة بصمة الجودة والتنبيهات.</p></div>
+<div class="feature"><div class="ico">🧴</div><h3>السائل والمعجون</h3><p>حسابات للمنتجات المختلفة، مع أدوات مساعدة مثل التعادل والتحقق من pH قبل التعبئة.</p></div>
+<div class="feature"><div class="ico">💰</div><h3>التكلفة والتسعير</h3><p>ربط تكلفة المواد بالعبوة والعمالة والمصروفات، مع مراجعة أسعار التجزئة والجملة.</p></div>
+<div class="feature"><div class="ico">📒</div><h3>سجل الدفعات</h3><p>كل دفعة عندها سجل يحفظ التركيبة والإعدادات والملاحظات عشان تعرف شنو حصل فعلاً.</p></div>
+<div class="feature"><div class="ico">🔬</div><h3>ضبط الجودة</h3><p>ربط الدفعة بنتائج الفحص الفعلية قبل انتقالها للبيع، بدل الاعتماد على الحساب وحده.</p></div>
+<div class="feature"><div class="ico">🏭</div><h3>تنظيم الإنتاج</h3><p>تحويل الوصفة إلى خطوات تشغيل واضحة ومؤقتات تساعدك تقلل الاعتماد على الذاكرة.</p></div>
+<div class="feature"><div class="ico">📦</div><h3>متابعة الخامات</h3><p>معرفة الموجود في المخزون والناقص قبل بدء الخلطة، بدل اكتشاف النقص أثناء الإنتاج.</p></div>
+<div class="feature"><div class="ico">🧾</div><h3>المبيعات والعملاء</h3><p>الفاتورة مرتبطة بالدفعة المعتمدة، مع متابعة المدفوع والمتبقي والوحدات المتاحة.</p></div>
+<div class="feature"><div class="ico">🧯</div><h3>السلامة والمساعدة</h3><p>بطاقات للمواد، مرجع للمصطلحات، ومساعد أعطال يشرح المشكلة وخطوات التصحيح المقترحة.</p></div>
+<div class="feature"><div class="ico">🛍️</div><h3>سوق الوصفات</h3><p>استلام وصفات موثقة والتحقق منها ثم تطبيقها داخل الحاسبة مع مراجعة ملاءمتها لخاماتك.</p></div>
+<div class="feature"><div class="ico">🎓</div><h3>الأكاديمية والورشة</h3><p>مسار تدريبي داخل المنصة مع دروس ومهام واختبارات وتقدم قابل للمتابعة.</p></div>
+<div class="feature"><div class="ico">🔐</div><h3>النسخ والخزنة</h3><p>أدوات للتفعيل والنسخ وحماية البيانات، مع الانتباه لعدم مشاركة بيانات العملاء أو الترخيص.</p></div>
+</div>
+
+<div class="flow" aria-label="مسار الحاسبة">
+<div class="flow-item"><div class="flow-icon">🧪</div><b>الخلطة</b></div><div class="arrow">←</div>
+<div class="flow-item"><div class="flow-icon">💰</div><b>التكلفة</b></div><div class="arrow">←</div>
+<div class="flow-item"><div class="flow-icon">📒</div><b>الدفعة</b></div><div class="arrow">←</div>
+<div class="flow-item"><div class="flow-icon">🔬</div><b>الجودة</b></div>
+<div class="flow-item"><div class="flow-icon">🏭</div><b>الإنتاج</b></div><div class="arrow">←</div>
+<div class="flow-item"><div class="flow-icon">🧾</div><b>البيع</b></div>
+</div>
+</div>
+</section>
+
+<section class="section next" id="next">
+<div class="wrap">
+<div class="section-head"><div class="kicker">بعد البيتا</div><h2>شنو الحاصل الآن؟</h2><p>نقفل مرحلة الاختبار المفتوح، وننتقل لمرحلة أكثر تنظيمًا حول المنتج والخدمة.</p></div>
+<div class="next-grid">
+<div class="next-card"><span class="status">انتهت</span><h3>المرحلة التجريبية</h3><ul><li>تجربة الاستخدام الحقيقي.</li><li>اكتشاف الأخطاء ومناطق التحسين.</li><li>جمع الملاحظات من المستخدمين.</li><li>اختبار رحلة الدفعة من الحساب إلى الجودة والبيع.</li></ul></div>
+<div class="next-card"><span class="status">المرحلة التالية</span><h3>نسخة أكثر نضجاً</h3><ul><li>تنظيم الخدمات داخل منصة واحدة.</li><li>تحسين تجربة الاستخدام والدعم.</li><li>توسيع أدوات إدارة الإنتاج والدفعات.</li><li>التواصل مع المهتمين بالاستمرار أو التفعيل حسب النظام المتاح.</li></ul></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="contact">
+<div class="wrap">
+<div class="contact">
+<h2>جربت الحاسبة وعايز تكمل؟</h2>
+<p>لو كنت من الناس الجربوا النسخة التجريبية وعايز تعرف الخطوة الجاية، أو عايز تعرف تفاصيل التفعيل والخدمات المتاحة، تواصل معانا مباشرة.</p>
+<a class="btn wa" href="https://wa.me/249962411479" target="_blank" rel="noopener">💬 تواصل معنا عبر واتساب</a>
+<div class="small">اكتب في الرسالة: «جربت الحاسبة وعايز أكمل»</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="footer"><div class="wrap"><strong>إستثمارك للحلول الاستثمارية الذكية</strong><br>نحوّل أفكارك إلى مشاريع ناجحة · estithmark.com</div></footer>
+</body>
+</html>
