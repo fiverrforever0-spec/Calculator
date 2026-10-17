@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حاسبة الطاقة الشمسية الذكية</title>
+<style>
+  :root{
+    --bg:#0d1420; --bg2:#131d2e; --card:#18263c; --card2:#1f3050;
+    --amber:#f5a623; --amber2:#ffcf6b; --green:#2ecc71; --blue:#3fa7ff;
+    --purple:#b678ff; --text:#eef4ff; --muted:#9db0cc; --line:#2a3c5c;
+    --danger:#ff6b6b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Arial,sans-serif;}
+  body{background:linear-gradient(160deg,#0a101c,#0d1420 40%,#101b2d);color:var(--text);min-height:100vh;}
+  .wrap{max-width:820px;margin:0 auto;padding:20px 16px 60px;}
+  header{text-align:center;padding:26px 0 18px;}
+  .logo{font-size:44px;}
+  header h1{font-size:26px;background:linear-gradient(90deg,var(--amber2),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  header p{color:var(--muted);margin-top:6px;font-size:15px;}
+  .badge{display:inline-block;margin-top:10px;background:rgba(46,204,113,.12);border:1px solid rgba(46,204,113,.4);color:var(--green);padding:5px 14px;border-radius:30px;font-size:13px;}
+
+  /* Tabs */
+  .tabs{display:flex;gap:10px;margin:22px 0 18px;}
+  .tab{flex:1;padding:14px;border-radius:14px;background:var(--card);border:2px solid var(--line);cursor:pointer;text-align:center;transition:.25s;font-size:16px;font-weight:700;color:var(--muted);}
+  .tab.active{background:linear-gradient(135deg,var(--amber),#e88f0c);color:#161006;border-color:var(--amber);box-shadow:0 6px 20px rgba(245,166,35,.3);}
+  .tab small{display:block;font-weight:400;font-size:12px;margin-top:3px;}
+
+  .section-title{font-size:17px;margin:16px 2px 12px;color:var(--amber2);font-weight:700;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+  .card{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;transition:.25s;position:relative;}
+  .card:hover{transform:translateY(-3px);border-color:var(--amber);}
+  .card.selected{border-color:var(--amber);background:var(--card2);box-shadow:0 0 0 3px rgba(245,166,35,.18);}
+  .card .emoji{font-size:34px;}
+  .card h3{font-size:16px;margin:8px 0 6px;}
+  .card p{font-size:13px;color:var(--muted);line-height:1.7;}
+  .tag{position:absolute;top:10px;left:10px;background:var(--amber);color:#161006;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .kw{display:inline-block;margin-top:8px;background:rgba(63,167,255,.12);border:1px solid rgba(63,167,255,.35);color:var(--blue);font-size:12px;padding:3px 10px;border-radius:20px;}
+
+  /* Custom device builder */
+  .builder{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px;margin-top:14px;}
+  .dev{display:flex;align-items:center;justify-content:space-between;padding:10px 4px;border-bottom:1px dashed var(--line);}
+  .dev:last-child{border-bottom:none;}
+  .dev .name{font-size:14px;}
+  .dev .name small{color:var(--muted);display:block;font-size:11px;}
+  .stepper{display:flex;align-items:center;gap:10px;}
+  .stepper button{width:30px;height:30px;border-radius:8px;border:none;background:var(--card2);color:var(--text);font-size:18px;cursor:pointer;border:1px solid var(--line);}
+  .stepper button:hover{background:var(--amber);color:#161006;}
+  .stepper span{min-width:24px;text-align:center;font-weight:700;}
+
+  .btn{display:block;width:100%;margin-top:22px;padding:16px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--amber),#e8890c);color:#161006;font-size:18px;font-weight:800;cursor:pointer;transition:.25s;box-shadow:0 8px 24px rgba(245,166,35,.28);}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(245,166,35,.4);}
+  .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+
+  /* Report */
+  #report{display:none;margin-top:28px;animation:fadeUp .5s ease;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  .report-box{background:var(--card);border:2px solid var(--amber);border-radius:20px;overflow:hidden;}
+  .report-head{background:linear-gradient(135deg,var(--amber),#e8890c);color:#161006;padding:14px 18px;font-weight:800;font-size:17px;}
+  .report-body{padding:18px;}
+  .rline{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px;line-height:1.7;}
+  .rline:last-child{border-bottom:none;}
+  .rline .ic{font-size:20px;}
+  .rline b{color:var(--amber2);}
+  .golden{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.4);border-radius:12px;padding:12px;margin:10px 0;font-size:14px;line-height:1.8;}
+  .golden b{color:var(--amber);}
+  .eco{background:rgba(63,167,255,.07);border:1px solid rgba(63,167,255,.3);border-radius:12px;padding:12px;margin:6px 0;font-size:13.5px;color:var(--muted);line-height:1.8;}
+  .lead{margin-top:16px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;}
+  .lead h4{color:var(--amber2);margin-bottom:10px;font-size:15px;}
+  .lead input{width:100%;padding:13px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:15px;text-align:center;direction:ltr;margin-bottom:10px;}
+  .lead .btn{margin-top:0;font-size:16px;padding:13px;}
+  .note{text-align:center;color:var(--muted);font-size:12px;margin-top:10px;}
+  .hp-row{display:flex;gap:8px;margin-top:10px;}
+  .hp{flex:1;padding:8px;border-radius:10px;background:var(--bg2);border:1px solid var(--line);color:var(--muted);cursor:pointer;text-align:center;font-size:13px;font-weight:700;}
+  .hp.selected{background:rgba(63,167,255,.15);border-color:var(--blue);color:var(--blue);}
+  .err{color:var(--danger);text-align:center;font-size:13px;margin-top:8px;display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">☀️</div>
+    <h1>حاسبة الطاقة الشمسية الذكية</h1>
+    <p>بدون معادلات وبدون تعقيد — اختر وضع حياتك ودع الحاسبة تجهّز لك المنظومة</p>
+    <span class="badge">✔ حسابات هندسية دقيقة — النتائج استرشادية ومجانية</span>
+  </header>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab active" id="tabHome" onclick="switchTab('home')">🏠 طاقة منزلية<small>راحة البيت وكسر حر الصيف</small></div>
+    <div class="tab" id="tabBiz" onclick="onclickBiz(event)">🏢 طاقة تجارية واستثمارية<small>مشاريع ونشاط تجاري</small></div>
+  </div>
+
+  <!-- ====== RESIDENTIAL ====== -->
+  <div id="homeSection">
+    <div class="section-title">اختر السيناريو الأقرب لحياتك (ضغطة واحدة 👇)</div>
+    <div class="grid">
+      <div class="card" data-sc="essential" onclick="pickScenario(this,'essential')">
+        <div class="emoji">🟢</div>
+        <h3>الطوارئ والأساسيات</h3>
+        <p>إنارة البيت كاملة + مراوح + ثلاجة + شاشة تلفزيون.<br>هدفك: تجنّب الحر وانقطاع الثلاجة بأقل تكلفة.</p>
+        <span class="kw">منظومة 1.5 – 2 كيلوواط</span>
+      </div>
+      <div class="card" data-sc="full" onclick="pickScenario(this,'full')">
+        <span class="tag">الأكثر طلباً 🔥</span>
+        <div class="emoji">🔵</div>
+        <h3>البيت المتكامل</h3>
+        <p>إنارة + مراوح + ثلاجة/ديب فريزر + مكيف واحد + موتور مياه.<br>هدفك: استغناء كبير عن الشبكة والعيش براحة.</p>
+        <span class="kw">منظومة 5 كيلوواط</span>
+      </div>
+      <div class="card" data-sc="lux" onclick="pickScenario(this,'lux')">
+        <div class="emoji">🟣</div>
+        <h3>الرفاهية والاستقلالية التامة</h3>
+        <p>مكيفان + ثلاجة + موتور مياه + غسالة + إنارة ومراوح كاملة.<br>هدفك: طاقة مستمرة 24 ساعة بدون أي انقطاع.</p>
+        <span class="kw">منظومة 8 – 10 كيلوواط</span>
+      </div>
+    </div>
+
+    <div class="section-title">أو خصّص أجهزتك بنفسك 🛠️</div>
+    <div class="builder" id="builder"></div>
+    <div class="err" id="errMsg">⚠️ اختر سيناريو جاهز أو أضف جهازاً واحداً على الأقل من القائمة أعلاه</div>
+  </div>
+
+  <!-- ====== COMMERCIAL ====== -->
+  <div id="bizSection" style="display:none">
+    <div class="section-title">اختر نوع نشاطك التجاري 👇</div>
+    <div class="grid">
+      <div class="card" data-biz="shop" onclick="pickBiz(this,'shop')">
+        <div class="emoji">🏪</div>
+        <h3>محلات ومكاتب</h3>
+        <p>إضاءة تجارية + كمبيوترات وشاشات عرض + مكيف.<br>ضمان استمرار البيع والعمل دون توقف.</p>
+        <span class="kw">منظومة 4 كيلوواط تقريباً</span>
+      </div>
+      <div class="card" data-biz="farm" onclick="pickBiz(this,'farm')">
+        <div class="emoji">🚜</div>
+        <h3>مزارع ومضخات مياه</h3>
+        <p>ضخ مياه مباشر بالطاقة الشمسية أثناء ساعات الشمس — بدون بطاريات مكلفة وبدون ديزل.</p>
+        <span class="kw">حسب قدرة الموتور</span>
+      </div>
+      <div class="card" data-biz="factory" onclick="pickBiz(this,'factory')">
+        <div class="emoji">🏭</div>
+        <h3>مصانع / مستشفيات / مستودعات</h3>
+        <p>أحمال ثقيلة وخطوط إنتاج — حلول هجينة لتخفيض فاتورة الكهرباء والديزل حتى 70%.</p>
+        <span class="kw">عرض B2B خاص</span>
+      </div>
+    </div>
+
+    <div id="hpBox" style="display:none;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px;margin-top:14px;">
+      <div class="section-title" style="margin-top:0">اختر قدرة موتور الغاطس (الحصان):</div>
+      <div class="hp-row">
+        <div class="hp selected" data-hp="3" onclick="pickHp(this,'3')">3 حصان<br><small>≈ 2.2 كيلوواط</small></div>
+        <div class="hp" data-hp="5" onclick="pickHp(this,'5')">5 حصان<br><small>≈ 3.7 كيلوواط</small></div>
+        <div class="hp" data-hp="7.5" onclick="pickHp(this,'7.5')">7.5 حصان<br><small>≈ 5.5 كيلوواط</small></div>
+        <div class="hp" data-hp="10" onclick="pickHp(this,'10')">10 حصان<br><small>≈ 7.5 كيلوواط</small></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn" id="calcBtn" onclick="calculate()" disabled>🚀 احسب منظومتي الآن</button>
+
+  <!-- ====== REPORT ====== -->
+  <div id="report"></div>
+</div>
+
+<script>
+/* ============ عقل الحاسبة (Engine) ============ */
+const PANEL_W = 550;                 // قدرة اللوح المتوفرة في الستوك
+const INV_SIZES = [1.5,2,3,4,5,6,8,10,12,15,20,25,30];
+const LITHIUM_KWH = [2.5,5,7.5,10,15,20,30];
+
+// استهلاك الأجهزة المبيّت (واط)
+const DEVICES = [
+  {id:'lamp',   name:'إضاءة أساسية',    sub:'لمبات البيت كاملة', w:100},
+  {id:'fan',    name:'مروحة',           sub:'لكل مروحة',         w:75},
+  {id:'fridge', name:'ثلاجة / ديب فريزر', sub:'مع مراعاة قوة البدء', w:200},
+  {id:'ac',     name:'مكيف سبليت 1.5 طن', sub:'الإنفرتر الأوفر',  w:1600},
+  {id:'pump',   name:'موتور مياه / غسالة', sub:'أحمال موتور',     w:900},
+  {id:'ac4k',   name:'مكيف 4000 وحدة',   sub:'نافذة صغير — موفر', w:450},
+  {id:'tv',     name:'شاشة تلفزيون',    sub:'+ شواحن',           w:100},
+];
+
+// السيناريوهات المنزلية الجاهزة
+const SCENARIOS = {
+  essential:{label:'الطوارئ والأساسيات', counts:{lamp:1,fan:2,fridge:1,ac:0,pump:0,tv:1}, backupH:5},
+  full:{label:'البيت المتكامل', counts:{lamp:1,fan:3,fridge:1,ac:1,pump:1,tv:1}, backupH:4},
+  lux:{label:'الرفاهية والاستقلالية التامة', counts:{lamp:1,fan:4,fridge:1,ac:1,ac4k:1,pump:1,tv:1}, backupH:4},
+};
+
+const BIZ = {
+  shop:  {label:'محلات ومكاتب', w:2600, backupH:4, note:'إضاءة تجارية + 2 كمبيوتر وشاشات عرض + مكيف'},
+  farm:  {label:'مضخة مياه شمسية مباشرة', backupH:0, pump:true},
+  factory:{label:'مشروع هجين (B2B)', w:22000, hybrid:true, note:'خطوط إنتاج + تبريد مركزي + مكيفات مركزية'},
+};
+const HP_W = {'3':2200,'5':3700,'7.5':5500,'10':7500};
+
+/* ============ State ============ */
+let state = {tab:'home', scenario:null, biz:null, hp:'3', custom:{}};
+DEVICES.forEach(d=>state.custom[d.id]=0);
+
+/* ============ UI builders ============ */
+function buildBuilder(){
+  const b = document.getElementById('builder');
+  b.innerHTML = DEVICES.map(d=>`
+    <div class="dev">
+      <div class="name">${d.name}<small>${d.sub} — ≈ ${d.w} واط</small></div>
+      <div class="stepper">
+        <button onclick="stepDev('${d.id}',-1)">−</button>
+        <span id="cnt-${d.id}">0</span>
+        <button onclick="stepDev('${d.id}',1)">+</button>
+      </div>
+    </div>`).join('');
+}
+function stepDev(id,delta){
+  state.custom[id]=Math.max(0,Math.min(12,state.custom[id]+delta));
+  document.getElementById('cnt-'+id).textContent=state.custom[id];
+  if(state.custom[id]>0){ state.scenario=null; clearCards(); }
+  validate();
+}
+function clearCards(){
+  document.querySelectorAll('#homeSection .card').forEach(c=>c.classList.remove('selected'));
+}
+function switchTab(t){
+  state.tab=t;
+  document.getElementById('tabHome').classList.toggle('active',t==='home');
+  document.getElementById('tabBiz').classList.toggle('active',t==='biz');
+  document.getElementById('homeSection').style.display=t==='home'?'block':'none';
+  document.getElementById('bizSection').style.display=t==='biz'?'block':'none';
+  resetResult(); validate();
+}
+function onclickBiz(e){ switchTab('biz'); }
+function pickScenario(el,key){
+  state.scenario=key; state.custom={}; DEVICES.forEach(d=>{state.custom[d.id]=0; document.getElementById('cnt-'+d.id).textContent=0;});
+  clearCards(); el.classList.add('selected'); resetResult(); validate();
+}
+function pickBiz(el,key){
+  state.biz=key;
+  document.querySelectorAll('#bizSection .card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('hpBox').style.display=key==='farm'?'block':'none';
+  resetResult(); validate();
+}
+function pickHp(el,hp){ state.hp=hp;
+  document.querySelectorAll('.hp').forEach(h=>h.classList.remove('selected')); el.classList.add('selected');
+}
+function validate(){
+  let ok=false;
+  if(state.tab==='home') ok = !!state.scenario || Object.values(state.custom).some(v=>v>0);
+  else ok = !!state.biz;
+  document.getElementById('calcBtn').disabled=!ok;
+  document.getElementById('errMsg').style.display='none';
+}
+function resetResult(){ document.getElementById('report').style.display='none'; }
+
+/* ============ Engine ============ */
+function countsTotalW(counts){
+  let w=0, hasSurge=false;
+  DEVICES.forEach(d=>{ w += d.w*(counts[d.id]||0);
+    if((d.id==='fridge'||d.id==='pump') && counts[d.id]>0) hasSurge=true; });
+  return {w, hasSurge};
+}
+function nextSize(arr, val){ return arr.find(s=>s>=val) || arr[arr.length-1]; }
+
+function buildReport(o){
+  document.getElementById('report').innerHTML = `
+  <div class="report-box">
+    <div class="report-head">📊 التقرير المبدئي لمنظومتك</div>
+    <div class="report-body">
+      <div class="rline"><span class="ic">🏷️</span><div>نوع الاستخدام: <b>${o.typeLabel}</b><br>الخيار المختار: <b>${o.scLabel}</b>${o.note?`<br><span style="color:var(--muted);font-size:12.5px">${o.note}</span>`:''}</div></div>
+      <div class="rline"><span class="ic">⚡</span><div>إجمالي القدرة المطلوبة: <b>≈ ${o.w.toLocaleString('ar-EG')} واط</b> (مع هامش أمان 25%)</div></div>
+      <div class="rline"><span class="ic">☀️</span><div>قدرة الألواح: <b>${o.panels} لوح شمسي</b> عالي الجودة (${PANEL_W} واط)</div></div>
+      <div class="rline"><span class="ic">🔌</span><div>المحول (الإنفرتر): إنفرتر ذكي قدرة <b>${o.inv} كيلوواط</b>${o.hasSurge?' — يتحمّل قوة بدء الثلاجة والموتور بأمان':''}</div></div>
+      ${o.storage?`
+      <div class="golden">🔋 <b>الخيار الذهبي (الموصى به):</b> بطارية ليثيوم متقدمة سعة <b>${o.lith} كيلوواط.ساعة</b> — تعيش أكثر من 10 سنوات، بدون صيانة، حجم صغير، وضمان حقيقي ✔</div>
+      <div class="eco">💰 الخيار الاقتصادي: بنك بطاريات جافة — نحو <b>${o.dryCount} بطارية</b> 12V/200Ah اقتصادية التكلفة الأولية لكنها تحتاج مساحة أكبر وصيانة دورية.</div>`:''}
+      ${o.farmNote?`<div class="rline"><span class="ic">🚜</span><div>${o.farmNote}</div></div>`:''}
+      ${o.b2b?`<div class="golden">🤝 <b>عميل ثقيل / B2B:</b> يحق لك عرض سعر خاص بكميات الجملة وتسييل مخزون — سيتواصل معك مدير المبيعات مباشرة بعرض مُفصّل.</div>`:''}
+      <div class="rline"><span class="ic">🎯</span><div><b>الخلاصة:</b> ${o.summary}</div></div>
+      <div class="lead">
+        <h4>📱 هل تريد معرفة التكلفة الإجمالية وحجز معاينة مجانية؟</h4>
+        <input type="tel" id="phone" placeholder="اكتب رقم هاتفك هنا" maxlength="15">
+        <button class="btn" id="waBtn" onclick="sendLead()">📞 تواصل مع مهندس الطاقة عبر واتساب</button>
+        <div class="note" id="leadMsg">سيصلك التقرير والتسعير خلال دقائق — المعاينة مجانية بدون التزام</div>
+      </div>
+    </div>
+  </div>`;
+  lastReport = '📋 '+o.typeLabel+' — '+o.scLabel+' | القدرة: ≈'+o.w.toLocaleString('ar-EG')+' واط | الألواح: '+o.panels+' | الإنفرتر: '+o.inv+' كيلوواط'+(o.lith?(' | بطارية ليثيوم: '+o.lith+' kWh'):'');
+  document.getElementById('report').style.display='block';
+  document.getElementById('report').scrollIntoView({behavior:'smooth'});
+}
+
+let lastReport = '';
+function sendLead(){
+  const p=document.getElementById('phone').value.trim();
+  const m=document.getElementById('leadMsg');
+  const txt = 'مرحباً، أريد معرفة التكلفة الإجمالية وحجز معاينة مجانية لمنظومة طاقة شمسية.\n' + lastReport + (p ? '\nرقمي: '+p : '');
+  window.open('https://wa.me/249962411479?text='+encodeURIComponent(txt),'_blank');
+  m.textContent='✔ تم فتح واتساب — أكمل الإرسال وسيرد عليك مهندس الطاقة'; m.style.color='var(--green)';
+}
+
+function calculate(){
+  if(state.tab==='home') calcHome(); else calcBiz();
+}
+function calcHome(){
+  let counts, backupH, scLabel;
+  if(state.scenario){ const s=SCENARIOS[state.scenario]; counts=s.counts; backupH=s.backupH; scLabel=s.label; }
+  else{
+    counts=state.custom; scLabel='اختيار مخصّص';
+    const totalW=countsTotalW(counts).w;
+    if(totalW===0){ document.getElementById('errMsg').style.display='block'; return; }
+    backupH = totalW<=1500 ? 5 : 4;
+  }
+  const {w,hasSurge}=countsTotalW(counts);
+  const wSafe = w*1.25;
+  const panels = Math.max(2, Math.ceil(wSafe/PANEL_W));
+  const inv = nextSize(INV_SIZES, Math.max(1.5,wSafe/1000));
+  const needKwh = w*backupH/1000*1.3;
+  const lith = nextSize(LITHIUM_KWH, needKwh);
+  const dryCount = Math.ceil(needKwh/2.4);
+  buildReport({
+    typeLabel:'منزلي 🏠', scLabel, note: hasSurge?'تم مراعاة قوة تشغيل الثلاجة/الموتور (Surge) تلقائياً':'',
+    w: Math.round(wSafe), panels, inv, hasSurge, storage:true, lith, dryCount,
+    summary:'هذا النظام يوفر لك كهرباء مستقرة طوال اليوم، ويحمي الثلاجة والأجهزة التلفزيونية من تذبذب التيار ⚡'
+  });
+}
+function calcBiz(){
+  const b=BIZ[state.biz];
+  if(state.biz==='farm'){
+    const w=HP_W[state.hp];
+    const panels=Math.ceil(w/PANEL_W)+1;
+    buildReport({
+      typeLabel:'تجاري / استثماري 🏢', scLabel:`مضخة غاطس ${state.hp} حصان`,
+      note:`قدرة الموتور ≈ ${w.toLocaleString('ar-EG')} واط`,
+      w, panels, inv: nextSize(INV_SIZES, w/1000), hasSurge:true, storage:false,
+      farmNote:`نظام <b>ضخ مباشر بالطاقة الشمسية</b> يعمل نهاراً بدون بطاريات مكلفة وبدون ديزل — أوفر حل للري وتعبئة الخزانات ☀️`,
+      summary:'استغنِ نهائياً عن تكاليف الديزل وصيانة المولدات — الشمس تضخ لك مجاناً كل يوم 💧'
+    });
+    return;
+  }
+  const w=b.w*1.25;
+  const panels=Math.ceil(w/PANEL_W);
+  const inv=nextSize(INV_SIZES, w/1000);
+  const needKwh=b.w*b.backupH/1000*1.3;
+  buildReport({
+    typeLabel:'تجاري / استثماري 🏢', scLabel:b.label, note:b.note,
+    w:Math.round(w), panels, inv, hasSurge:true, storage:!b.hybrid,
+    lith:nextSize(LITHIUM_KWH,needKwh), dryCount:Math.ceil(needKwh/2.4), b2b:!!b.hybrid,
+    summary: b.hybrid
+      ? 'الحل الهجين يخفّض فاتورة الكهرباء والديزل بنسبة قد تصل إلى 70% مع استمرار الإنتاج دون توقف 🏭'
+      : 'منظومة تجارية خفيفة تضمن عدم توقف البيع والعمل أثناء انقطاع الكهرباء — راحة بال لنشاطك 🏪'
+  });
+}
+
+buildBuilder();
+</script>
+</body>
+</html>
